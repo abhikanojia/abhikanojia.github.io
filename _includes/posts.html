@@ -1,14 +1,10 @@
 {% for post in include.posts %}
-  {% if post.tags contains 'ruby' %}
-    {%- assign class_name = 'ruby-post' -%}
-  {% endif %}
-
   <div class="col-md-6">
-    <div class="panel panel-default {{ class_name | default: 'general-post' }}">
+    <div class="panel panel-default">
       <div class="panel-body">
         {% include elements/_tags.html tags=post.tags %}
         <hr/>
-        
+
         <h2>
           <a href="{{ post.url | prepend: site.baseurl }}" class="truncate post-title">
             {{ post.title }}

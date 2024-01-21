@@ -1,3 +1,6 @@
 {% for tag in include.tags %}
-  <span class="label label-primary">{{ tag }}</span>
+  {% if tag contains 'ruby' %}
+    {%- assign class_name = 'label-ruby' -%}
+  {% endif %}
+  <span class="label label-primary {{ class_name | default: 'label-ruby' }}">{{ tag }}</span>
 {% endfor %}
