@@ -1,0 +1,26 @@
+{% assign count = 0 %}
+
+{% for post in include.posts %}
+  {% if count == site.max_related_posts %}
+    {% break %}
+  {% endif %}
+
+  {% if page.title != post.title %}
+
+    <div class="col-md-4">
+      <div class="panel panel-default fixed-height-panel">
+        <div class="panel-body">
+          <a href="{{ post.url | prepend: site.baseurl }}" class="suggested-post-heading truncate">
+            {{ post.title }}
+          </a>
+          <div>
+            {{ post.content | markdownify |strip_html | truncatewords: 15 }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% assign count = count | plus: 1 %}
+
+  {% endif %}
+{% endfor %}

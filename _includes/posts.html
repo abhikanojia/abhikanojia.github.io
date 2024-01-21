@@ -6,13 +6,14 @@
   <div class="col-md-6">
     <div class="panel panel-default {{ class_name | default: 'general-post' }}">
       <div class="panel-body">
+        {% include elements/_tags.html tags=post.tags %}
+        <hr/>
+        
         <h2>
           <a href="{{ post.url | prepend: site.baseurl }}" class="truncate post-title">
             {{ post.title }}
           </a>
         </h2>
-
-        {% include elements/_tags.html tags=post.tags %}
 
         <hr/>
         <p class="post-date">{{ post.date | date_to_long_string }}</p>
