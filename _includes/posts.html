@@ -1,0 +1,24 @@
+{% for post in include.posts %}
+  {% if post.tags contains 'ruby' %}
+    {%- assign class_name = 'ruby-post' -%}
+  {% endif %}
+
+  <div class="col-md-6">
+    <div class="panel panel-default post-panel {{ class_name | default: 'general-post' }}">
+      <div class="panel-body">
+        <h2>
+          <a href="{{ post.url | prepend: site.baseurl }}" class="truncate">
+            {{ post.title }}
+          </a>
+        </h2>
+
+        {% include elements/_tags.html tags=post.tags %}
+
+        <p class="post-date">{{ post.date | date_to_long_string }}</p>
+        <p>
+          {{ post.content | strip_html | truncatewords: 20 }}
+        </p>
+      </div>
+    </div>
+  </div>
+{% endfor %}

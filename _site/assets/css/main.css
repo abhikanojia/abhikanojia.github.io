@@ -1,10 +1,13 @@
 @charset "UTF-8";
 /* =Base *//*************************************************************/
   body {
-    font-family: 'Quicksand', sans-serif;  
+    font-family: 'Quicksand', sans-serif !important;  
     font-size: 100%;
     color: #012;
     background-color: #FFF; }
+  div.para {
+    font-size: 20px !important;
+  }
 
   a {
     color: #57A;

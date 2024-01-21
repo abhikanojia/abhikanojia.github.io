@@ -1,0 +1,36 @@
+---
+layout: page
+title: Blog
+description: "Ruby on Rails blog"
+keywords:
+  - articles on ruby &amp; ruby on rails
+  - posts on ruby on rails
+  - updates in ruby on rails
+  - blogs on ruby on rails
+  - blogs on Flutter
+  - articles on Flutter
+---
+
+<div class="container m-t-50">
+  <div class="row">
+    <div class="col-md-12">
+      <span class="label label-primary">Learning</span>
+      <h3>Blog &amp; Tutorials</h3>
+      <p class="intro">
+        Keep yourself up to date with our articles on Ruby on Rails, Ruby, Dart &amp; Flutter.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container m-t-20">
+  {% include posts.html posts=paginator.posts %}
+</div>
+
+{% if paginator.total_pages > 1 %}
+  <div class="container">
+    <div class="col-md-12">
+      {% include elements/_pagination_links.html %}
+    </div>
+  </div>
+{% endif %}
