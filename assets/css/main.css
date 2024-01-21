@@ -9,10 +9,24 @@
     font-size: 20px !important;
   }
 
-  a {
-    color: #57A;
+  a.post-title {
+    color: #16a085;
     font-weight: bold;
     text-decoration: none; }
+
+  a {
+    color: #16a085;
+    font-weight: bold;
+    text-decoration: none; }
+
+  a:hover {
+    color: #57A;
+    text-decoration: none;
+  }
+  a.post-title:hover {
+    color: #57A;
+    text-decoration: none;
+  }
 
   p, ul, ol, dl {
     font-size: 100%;
