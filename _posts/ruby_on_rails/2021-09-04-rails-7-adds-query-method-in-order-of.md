@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rails 7 adds ActiveRecord::QueryMethods#in_order_of"
+title: "Rails 7: New in_order_of Method in ActiveRecord"
 meta: "Rails-7 ruby-on-rails sapidlabs"
 categories: "rails"
 tags: rails-7 ruby-on-rails
