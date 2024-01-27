@@ -6,16 +6,18 @@
   {% endif %}
 
   {% if page.title != post.title %}
-
     <div class="col-md-4">
       <div class="panel panel-default fixed-height-panel">
         <div class="panel-body">
-          <a href="{{ post.url | prepend: site.baseurl }}" class="suggested-post-heading truncate">
-            {{ post.title }}
-          </a>
-          <div>
-            {{ post.content | markdownify |strip_html | truncatewords: 15 }}
-          </div>
+          <h2>
+            <a href="{{ post.url | prepend: site.baseurl }}" class="truncate post-title truncate">
+              {{ post.title }}
+            </a>
+          </h2>
+          <hr/>
+
+          {% include elements/_tags.html tags=post.tags %}
+          
         </div>
       </div>
     </div>
