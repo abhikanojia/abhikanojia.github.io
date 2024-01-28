@@ -1,4 +1,7 @@
 <h1 class="page-title">
 <div class="page-title__text">{{ page.title }}</div>
+{% if page.home == true %}
+<img src="{{ '/assets/img/spark+rails.png' | prepend: site.baseurl }}" id="logo-img">
+{% endif %}
 <div class="page-title__subtitle">{{ page.subtitle }}</div>
 </h1>

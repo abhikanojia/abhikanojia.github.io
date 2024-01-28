@@ -1,11 +1,12 @@
 ---
 layout: page
-title: 
-home: true
-subtitle: "Empowering Businesses with Expert Rails Solutions: Your Premier Rails Consulting Partner"
+title: Hello
+subtitle: My name is Abhishek Kanojia
 sitemap:
   priority: 0.9
 ---
+
+<img src="{{ '/assets/img/avatar.jpg' | prepend: site.baseurl }}" id="about-img">
 
 <div id="describe-text">
 	<div class='justify'>
