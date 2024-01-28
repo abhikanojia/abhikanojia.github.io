@@ -59,7 +59,7 @@
       font-weight: 400; }
 
   strong {
-    color: #16a085; }
+    color: #873D48; }
 
   .wrapper {
     max-width: 90%;
@@ -93,13 +93,19 @@
       margin-right: 0px; }
 
   .menu__entry a {
-    font-weight: 400; }
+    font-weight: 400;
+    color: #071013;
+  }
 
   .social-links {
     float: right;
     font-size: 150%;
-    color: #828282;
+    color: #071013;
     list-style-type: none; }
+
+  .social-links a {
+    color: #071013;
+    }
 
   .social-links__entry {
     display: inline-block;
