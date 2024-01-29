@@ -4,7 +4,7 @@ description: >
   Ruby On Rails Expert  
 
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "https://abhikanojia.github.io" # the base hostname & protocol for your site
+url: "https://sparkrails.com" # the base hostname & protocol for your site
 permalink: 'date'
 paginate: 6
 paginate_path: "/blog/:num"
