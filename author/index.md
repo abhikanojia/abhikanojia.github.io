@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Hello
+description: "Meet the minds behind SparkRails. Explore our team's expertise and insights. Discover a passion \for excellence in Ruby on Rails development. Learn more now!"
 subtitle: My name is Abhishek Kanojia
 sitemap:
   priority: 0.9
