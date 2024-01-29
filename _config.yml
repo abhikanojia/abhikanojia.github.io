@@ -9,6 +9,7 @@ permalink: 'date'
 paginate: 6
 paginate_path: "/blog/:num"
 max_related_posts: 3
+ga_tracking_id: "G-F992D9LEPJ"
 
 author:
   fullname: Abhishek Kanojia

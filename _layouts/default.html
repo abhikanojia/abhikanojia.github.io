@@ -5,6 +5,10 @@
   {% include externals/styling.html %}
   {% seo %}
 </head>
+{% if site.ga_tracking_id and jekyll.environment == 'production' %}
+  {% include gtag.html %}
+{% endif %}
+
 <body>
 <div class="wrapper">
   {% include header.html %}
