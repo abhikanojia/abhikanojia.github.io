@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rails 6.1 Unveiled: Simplifying Queries with 'invert_where"
+title: "Rails 6.1 Unveiled: Simplifying Queries with 'invert_where'"
 categories: "rails"
 tags: rails-6 rails
 ---
