@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Rails 7 adds ActiveRecord::Base#previously_persisted?"
-meta: "Rails-7 ruby-on-rails sapidlabs"
 categories: "rails"
 tags: rails-7 ruby-on-rails
 ---

@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Including and Excluding in Rails-6"
-meta: "including excluding rails-6 sapidlabs rails"
 categories: "rails"
 tags: rails-6 ruby-on-rails
 description: "#including and #excluding in rails 6, This method has actually been renamed from `without` to `excluding` keeping `without` as an alias to excluding."
