@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "How to install Rails 7"
-meta: "Rails-7 ruby-on-rails sapidlabs"
 categories: "rails"
 tags: rails-7 ruby-on-rails
 ---

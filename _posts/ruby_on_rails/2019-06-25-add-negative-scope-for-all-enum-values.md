@@ -1,12 +1,11 @@
 ---
 layout: post
 title: "Negative Scope in Rails 6"
-meta: "negative scope rails-6 sapidlabs"
 categories: "rails"
 tags: rails-6 ruby-on-rails
 ---
 
-![Rails 6 Tutorials - SapidLabs][rails]
+![Rails 6 Tutorials][rails]
 
 # Rails 6 Adds negative scope for all enum values
 
