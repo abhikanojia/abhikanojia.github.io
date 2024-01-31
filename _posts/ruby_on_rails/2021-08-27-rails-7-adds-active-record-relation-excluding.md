@@ -6,8 +6,6 @@ categories: "rails"
 tags: rails-7 ruby-on-rails
 ---
 
-<img src="/assets/images/shared/rails-7.png" alt="default-enum-in-rails">
-
 If you have not installed Rails 7 yet, please follow our other article on [How to install rails 7](https://sapidlabs.com/rails/2021/06/12/how-to-install-rails-7.html) to do it in 10 seconds.
 
 Rails 7 adds method `excluding` in ActiveRecord::Relation, which means you can now re-write the following code in

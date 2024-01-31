@@ -5,8 +5,6 @@ categories: "rails"
 tags: rails-7 ruby-on-rails
 ---
 
-<img src="/assets/images/shared/rails-7.png" alt="default-enum-in-rails">
-
 Rails 7 adds method `in_order_of` in QueryMethods, this allows you to specify an explicit order for the records.
 
 ### Example usage of `in_order_of`

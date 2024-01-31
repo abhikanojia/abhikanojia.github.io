@@ -6,8 +6,6 @@ categories: "rails"
 tags: rails-6 ruby-on-rails
 ---
 
-<img src="{{ site.base_url }}{{ site.default_rails_image }}" alt="{{ page.title }}">
-
 
 Rails 6 adds another helpful, shortcut which provides an easier way to write the following active model callback for model.
 

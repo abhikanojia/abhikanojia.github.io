@@ -152,8 +152,3 @@ What leads to fragmented memory?
 
 Multi-threaded programs in ruby can cause these fragmentation in memory, which leads to high memory usage and degraded speed. So to overcome this `GC.compact` method is introduced in order to defrag the memory space.
 
-An Illustration describing issue and solution:
-
-![Updates in ruby 2.7][ruby_compaction]
-
-[ruby_compaction]: /assets/images/updates-in-ruby-2-7-0-preview1/ruby-2-7-0-gc-compaction.png

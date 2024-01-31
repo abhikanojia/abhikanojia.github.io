@@ -6,8 +6,6 @@ categories: "rails"
 tags: rails-6 ruby-on-rails
 ---
 
-![Rails 6 Tutorials - SapidLabs][rails]
-
 # Rails 6 adds delete_by &amp; destroy_by
 
 Rails 6 provide with some extra stuffs added to it lately which simplifies the daily tasks. In this post we will be discussing two methods delete_by and destroy_by provided in Rails 6.
@@ -51,4 +49,3 @@ Few Things worth noting about both of the methods:
 
 See [Pull Request](https://github.com/rails/rails/pull/35316) for more info.
 
-[rails]: /assets/images/shared/rails-6.jpg

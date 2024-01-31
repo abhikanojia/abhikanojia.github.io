@@ -3,6 +3,8 @@ layout: post
 title: "Rails 6.1 Unveiled: Simplifying Queries with 'invert_where'"
 categories: "rails"
 tags: rails-6 rails
+keywords:
+  - rails rails-6 invert_where rails
 ---
 
 In the dynamic landscape of Rails 6.1, the introduction of 'invert_where' emerges as a powerful tool, revolutionizing how developers handle queries. This method allows a seamless inversion of query conditions, offering a more intuitive approach to express intricate search criteria.
