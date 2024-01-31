@@ -6,7 +6,6 @@ categories: "rails"
 tags: rails-6 ruby-on-rails
 ---
 
-![Ruby On Rails - SapidLabs][rails]
 
 # Rails `rename_column` 
 Rails provides a simple method `rename_column` which can be used in a migration.
@@ -34,4 +33,3 @@ Verify from the `schema.rb` to see if the field actually changed.
 
 <br />
 
-[rails]: /assets/images/shared/rails-6.jpg

@@ -8,7 +8,6 @@ tags: Ruby
 Ruby 3.1 adds `Class#subclasses` method, which returns an array of subclasses directly inheriting from the
 receiver, not including singleton classes.
 
-<img src="/assets/images/ruby-3-1-adds-subclasses-method/ruby-3-1-subclasses.png" alt="ruby-subclasses" class="img-center img-50-imp">
 <br />
 
 ```ruby
