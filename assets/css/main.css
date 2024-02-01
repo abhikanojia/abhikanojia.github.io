@@ -13,9 +13,19 @@
     color: #071013;
     font-weight: bold;
     text-decoration: none; }
+  
+  a.simple {
+    color: #873D48;
+    text-decoration: none;
+  }
+
+  a.simple:hover {
+    color: #071013;
+    text-decoration: none;
+  }
 
   a {
-    color: #16a085;
+    color: #873D48;
     font-weight: bold;
     text-decoration: none; }
 

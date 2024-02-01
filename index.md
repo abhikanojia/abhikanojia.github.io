@@ -9,12 +9,15 @@ sitemap:
 ---
 
 <div class="row mt-20">
-	<div class="col-md-12">
+	<div class="col-md-12 ">
 		<h1 class='text-center'>Blogs &amp; Publications</h1>
 		<br/>
 		<div>
 			{% include elements/_suggested_posts.html posts=site.posts %}
 		</div>
+	</div>
+	<div class="col-md-12">
+		<a href="/blog" class="btn btn-link simple" style="font-size: 20px">View All</a>
 	</div>
 </div>
 
