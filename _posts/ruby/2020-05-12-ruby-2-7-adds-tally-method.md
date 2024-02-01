@@ -1,14 +1,14 @@
 ---
 layout: post
 title: "Ruby 2.7 adds Enumerable#tally"
-meta: "ruby enumerable tally sapidlabs"
+meta: "ruby enumerable tally sparkrails"
 categories: "ruby"
 tags: 'Ruby'
 description: 'Ruby 2.7 adds Enumerable#tally'
 ---
 
 <br />
-After introducing the Enumerable#tally method in [Ruby 2.7-preview](https://sapidlabs.com/ruby/2019/06/16/updates-in-ruby-2-7-0-preview1.html) updates.
+After introducing the Enumerable#tally method in [Ruby 2.7-preview](https://sparkrails.com/ruby/2019/06/16/updates-in-ruby-2-7-0-preview1.html) updates.
 
 `#tally` as the name suggests gives out the number of occurrences of elements.
 
@@ -34,4 +34,4 @@ After introducing the Enumerable#tally method in [Ruby 2.7-preview](https://sapi
   # => { 2 => 2, 3 => 1, 4 => 1, 1 => 1 }
 ```
 
-Evolution of `#tally` is `#tally_by` that we discussed earlier in our [Ruby 2.7 Preview](https://sapidlabs.com/ruby/2019/06/16/updates-in-ruby-2-7-0-preview1.html) blog.
+Evolution of `#tally` is `#tally_by` that we discussed earlier in our [Ruby 2.7 Preview](https://sparkrails.com/ruby/2019/06/16/updates-in-ruby-2-7-0-preview1.html) blog.

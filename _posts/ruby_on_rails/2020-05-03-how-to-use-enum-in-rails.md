@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "How to use Enum in Rails"
-meta: "enum rails-6 sapidlabs ruby on rails"
 categories: "rails"
 tags: rails-6 ruby-on-rails enum
+keywords:
+  - enum rails-6 ruby on rails
 ---
 
-![Enum in Rails - SapidLabs][rails]
 
 # Enum in Rails
 
@@ -122,10 +122,8 @@ post.comments_draft?
 ```
 
 # Bonus: Negative Scopes in Rails 6
-Read about [Negative scopes in Rails](https://sapidlabs.com/rails/2019/06/25/add-negative-scope-for-all-enum-values.html). 
+Read about [Negative scopes in Rails](https://sparkrails.com/rails/2019/06/25/add-negative-scope-for-all-enum-values.html). 
 
 <br />
 
 [Official Ruby Enum Guide](https://api.rubyonrails.org/v5.2.3/classes/ActiveRecord/Enum.html)
-
-[rails]: /assets/images/shared/rails-6.jpg

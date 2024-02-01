@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Extract! method in Rails - 6"
-meta: "extract! rails rails-6 sapidlabs"
 categories: "rails"
 tags: rails-6 ruby-on-rails
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "After save commit callback in Rails-6"
-meta: "Rails-6 ruby-on-rails sapidlabs after-save-commit"
+meta: "Rails-6 ruby-on-rails sparkrails after-save-commit"
 categories: "rails"
 tags: rails-6 ruby-on-rails
 ---

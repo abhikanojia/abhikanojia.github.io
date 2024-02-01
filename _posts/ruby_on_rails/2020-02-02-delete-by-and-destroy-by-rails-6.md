@@ -1,9 +1,14 @@
 ---
 layout: post
 title: "delete_by destroy_by rails 6"
-meta: "delete_by destroy_by rails-6 sapidlabs"
+meta: "delete_by destroy_by rails-6 sparkrails"
 categories: "rails"
 tags: rails-6 ruby-on-rails
+keywords:
+  - rails-6 rubyonrails
+  - rails
+  - destroy_by
+  - delete_by
 ---
 
 # Rails 6 adds delete_by &amp; destroy_by
