@@ -4,9 +4,8 @@
       <div class="panel-body">
         {% include elements/_tags.html tags=post.tags %}
         <hr/>
-
         <h2>
-          <a href="{{ post.url | prepend: site.baseurl }}" class="truncate post-title">
+          <a href="{{ post.url | prepend: site.baseurl }}" class="post-title truncate">
             {{ post.title }}
           </a>
         </h2>
