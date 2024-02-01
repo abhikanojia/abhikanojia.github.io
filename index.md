@@ -26,7 +26,7 @@ sitemap:
 	<div id="describe-text">
 		<div class='justify para'>
 			<div class='text-center'>
-			<strong>#RubyOnRails</strong> <strong>#WebDevelopment</strong> <strong>#CodingHelp</strong> <strong>#RoR</strong> <strong>#TechSupport</strong>
+			<strong>#RubyOnRails</strong> <strong>#WebDevelopment</strong> <strong>#CodingHelp</strong> <strong>#RoR</strong> <strong>#TechSupport</strong> <strong>#SparkRails</strong>
 			</div>
 		</div>
 	</div>
