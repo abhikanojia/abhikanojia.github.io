@@ -16,8 +16,8 @@ sitemap:
 			{% include elements/_suggested_posts.html posts=site.posts %}
 		</div>
 	</div>
-	<div class="col-md-12">
-		<a href="/blog" class="btn btn-link simple" style="font-size: 20px">View All</a>
+	<div class="col-md-12 text-right">
+		<a href="/blog" class="btn btn-link simple" style="font-size: 20px"><i class="fa fa-arrow-right"></i>View All</a>
 	</div>
 </div>
 
