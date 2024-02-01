@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Rails 7 adds ActiveRecord::FinderMethods#sole"
-meta: "Rails-7 ruby-on-rails sapidlabs"
 categories: "rails"
 tags: rails-7 ruby-on-rails
+keywords:
+  - Rails-7 ruby-on-rails sparkrails
 ---
 
 Rails 7 adds method `sole` and `find_sole_by` in `ActiveRecord::FinderMethods`, which enables you to get sole or single record by the attributes defined, and also asserts that there aren't multiple rows matching the condition.

@@ -5,7 +5,7 @@ categories: "rails"
 tags: rails-7 ruby-on-rails
 ---
 
-If you have not installed Rails 7 yet, please follow our other article on [How to install rails 7](https://sapidlabs.com/rails/2021/06/12/how-to-install-rails-7.html) to do it in 10 seconds.
+If you have not installed Rails 7 yet, please follow our other article on [How to install rails 7](https://sparkrails.com/rails/2021/06/12/how-to-install-rails-7.html) to do it in 10 seconds.
 
 Rails 7 adds method `previously_persisted?` in `ActiveRecord::Base`, which enables you to check if the object was existed previously and now is destroyed or deleted.
 

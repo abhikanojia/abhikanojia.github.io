@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "How to rename column name in Rails"
-meta: "rename_column rails-6 sapidlabs"
 categories: "rails"
 tags: rails-6 ruby-on-rails
+keywords:
+  - rename_column rails-6 sparkrails
 ---
 
 
