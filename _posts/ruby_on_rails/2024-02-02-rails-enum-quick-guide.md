@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mastering Enums in Rails: A Quick Guide to Simplify Data Handling"
+title: "Mastering Enums in Rails A Quick Guide to Simplify Data Handling"
 categories: "rails"
 tags: rails enums
 keywords:
