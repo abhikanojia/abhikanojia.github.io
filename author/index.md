@@ -62,7 +62,7 @@ sitemap:
 	</div>
 	<br/>
 	<div class='justify para'>
-		<h3>📧 Email: <strong>abhishek.kanojia3193@gmail.com</strong></h3>
+		<h3>📧 Email: <strong>ak@sparkrails.com</strong></h3>
 		<div>Let's turn your Ruby on Rails projects into seamless success stories together!</div>
 		<br/>
 		<div class='text-center'>
