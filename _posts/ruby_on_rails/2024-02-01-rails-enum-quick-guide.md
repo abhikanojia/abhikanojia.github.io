@@ -67,7 +67,7 @@ Enums provide automatic validation, ensuring only valid values are assigned.
 ### See It In Action
 
 <div class="text-center">
-  <iframe width="600" height="600" src="https://www.youtube.com/embed/xLk_-dnQ6yU" title="Mastering Rails Enums in 60 Seconds: Clean Code Magic! ✨🚀 #RubyOnRails #CodingTips" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="100%" height="600" src="https://www.youtube.com/embed/xLk_-dnQ6yU" title="Mastering Rails Enums in 60 Seconds: Clean Code Magic! ✨🚀 #RubyOnRails #CodingTips" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 <br/>
 <hr/>
