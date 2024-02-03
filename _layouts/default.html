@@ -4,6 +4,7 @@
   {% include meta_tags/base.html %}
   {% include externals/styling.html %}
   {% seo %}
+  {% include externals/mailerlite_script.html %}
 </head>
 {% if site.ga_tracking_id and jekyll.environment == 'production' %}
   {% include gtag.html %}
