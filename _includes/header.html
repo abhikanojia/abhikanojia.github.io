@@ -7,14 +7,25 @@
 </ul>
 </div>
 <ul class="social-links">
+  <p>Follow Us On:</p>
 {% if site.author.email %}
 <a href="mailto:{{ site.author.email }}" class="social-links__entry" target="_blank">
 <i class="fa fa-envelope-square"></i>
 </a>
 {% endif %}
-{% if site.author.github %}
-<a href="https://github.com/{{ site.author.github }}" class="social-links__entry" target="_blank">
-<i class="fa fa-github"></i>
+{% if site.author.youtube %}
+<a href="https://youtube.com/{{ site.author.youtube }}" class="social-links__entry" target="_blank">
+<i class="fa fa-youtube"></i>
+</a>
+{% endif %}
+{% if site.author.twitter %}
+<a href="https://x.com/{{ site.author.twitter }}" class="social-links__entry" target="_blank">
+<i class="fa fa-twitter"></i>
+</a>
+{% endif %}
+{% if site.author.facebook %}
+<a href="https://facebook.com/{{ site.author.facebook }}" class="social-links__entry" target="_blank">
+<i class="fa fa-facebook"></i>
 </a>
 {% endif %}
 {% if site.author.linkedin %}
@@ -22,10 +33,6 @@
 <i class="fa fa-linkedin"></i>
 </a>
 {% endif %}
-{% if site.author.medium %}
-<a href="https://medium.com/{{ site.author.medium }}" class="social-links__entry" target="_blank">
-<i class="fa fa-medium"></i>
-</a>
-{% endif %}
+
 </ul>
 </header>
