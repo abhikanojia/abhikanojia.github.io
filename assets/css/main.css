@@ -19,6 +19,11 @@
     text-decoration: none;
   }
 
+  h2.simple {
+    color: #873D48;
+    text-decoration: none;
+  }
+
   a.simple:hover {
     color: #071013;
     text-decoration: none;

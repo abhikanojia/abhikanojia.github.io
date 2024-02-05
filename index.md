@@ -21,6 +21,15 @@ sitemap:
 	</div>
 </div>
 
+<div class="row mt-20">
+	<div class="col-md-12 ">
+		<h1 class='text-center'>Our Mantra</h1>
+		<div>
+			<h2 class="text-center simple mantra">E<span class="medium-font-size black">l</span>evate<span class="medium-font-size black">.</span> Inn<span class='medium-font-size black'>ov</span>ate<span class="medium-font-size black">.</span> Cod<span class='black'>e.</span></h2>
+		</div>
+	</div>
+</div>
+
 <br/>
 <footer>
 	<div id="describe-text">
