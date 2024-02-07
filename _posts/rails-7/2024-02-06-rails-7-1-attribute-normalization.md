@@ -5,11 +5,10 @@ categories: "rails"
 description: "Discover the power of attribute normalization in Rails 7.1! Learn how to efficiently sanitize user input, ensure consistent formatting, and clean up data from external sources using the new normalizes method. Dive into our article for a quick guide on implementation and harness the full potential of data management in your Rails applications."
 tags: rails normalizes rails-7
 keywords:
-  - Rails 7 Enums Syntax, Rails Enum Handling
-  - ActiveRecord Model Validation, Code Readability, Enum Methods, Rails Development Updates
-  - Enum Validation, Ruby on Rails Tips
-  - Enum Best Practices, Rails 7 Features
-  - Ruby on Rails Enhancements, instance_methods rails enum
+  - Rails 7, Attribute normalization
+  - Ruby on Rails Enhancements, Normalizes method
+  - Developer tools, Coding Tips, Programming techniques
+  - Web development, Software Engineering
 ---
 
 In the dynamic world of Ruby on Rails, efficiency and data integrity are paramount. With the introduction of Rails 7.1, managing attribute values just got a whole lot easier, thanks to the new `normalizes` method in Active Record.
