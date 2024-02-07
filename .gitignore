@@ -3,4 +3,4 @@
 .sass-cache
 Gemfile.lock
 _site
-vendor
+vendor/font-awesome/
