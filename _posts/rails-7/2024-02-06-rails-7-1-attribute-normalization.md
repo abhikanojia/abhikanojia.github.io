@@ -61,3 +61,10 @@ user.reload.email => # admin@example.com
 ## Conclusion
 
 With the `normalizes` method in Rails 7.1, managing attribute values has never been easier. Whether you're sanitizing user input, ensuring consistency in formatting, or cleaning up data from external sources, this powerful new feature empowers you to streamline your code and maintain data integrity with ease. Embrace the future of data management in Rails – upgrade to Rails 7.1 and unlock the full potential of attribute normalization in your applications.
+
+### See It In Action
+<div class="text-center">
+<iframe width="100%" height="600" src="https://www.youtube.com/embed/Eple92IWcj8" title="Mastering Rails 7 1: Streamlining Data Management with Attribute Normalization" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+<br/>
+<hr/>
