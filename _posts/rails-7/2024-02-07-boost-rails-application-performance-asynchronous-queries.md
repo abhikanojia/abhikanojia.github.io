@@ -3,7 +3,7 @@ layout: post
 title: "Boost Your Rails Application Performance with Asynchronous Queries"
 categories: "rails"
 description: "Learn how to turbocharge your Rails application with asynchronous queries. Discover the benefits, best practices, and native support in Rails 7.1 for improved performance, responsiveness, and memory usage."
-tags: rails normalizes rails-7
+tags: rails async-queries rails-7
 keywords:
   - Rails 7, Rails application performance
   - Ruby on Rails Enhancements, Asynchronous queries
