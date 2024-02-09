@@ -11,62 +11,37 @@ sitemap:
 
 <div id="describe-text">
 	<div class='justify'>
-		<h2>🚀 Expert Ruby on Rails Assistance at Your Fingertips! 🚀</h2>
-		<div class='para'> Are you facing challenges with your Ruby on Rails projects? Worry not! I'm here to help you navigate through the coding maze and optimize your RoR projects for success.</div>
+		<div class='para'> Welcome to my corner of the web! I'm Abhishek, a seasoned Ruby on Rails developer with over six years of professional expertise and a solid background spanning more than seven years in the dynamic realm of web development. My journey in the tech industry has been fueled by a passion for crafting robust and innovative solutions.</div>
 	</div>
 	<br/>
 	<div class='justify'>
-		<h3>✨ Why Choose Me?</h3>
-		<br/>
-		<div class='para'><strong>Proven Expertise:</strong> <div>With years of hands-on experience in Ruby on Rails development, I bring a wealth of knowledge to the table.</div>
-		</div>
-		<br/>
-		<div class='para'><strong>Tailored Solutions:</strong>
-		<div >Whether you're troubleshooting issues, optimizing performance, or starting a project from scratch, I craft solutions to fit your unique needs.</div>
-		<br/>
-		</div>
-		<div class='para'><strong>Responsive Support:</strong> <div >Timely responses and effective communication ensure that you're never left in the dark.</div>
-		</div>
-		<br/>
-	</div>
-	<div class='justify para'>
-		<h3>🔧 Services Offered:</h3>
-		<div>
-			- Ruby On Rails Troubleshooting
-		</div>
-		<br/>
-		<div>
-			- Project Optimization
-		</div>
-		<br/>
-		<div>
-			- Code Review and Refactoring
-		</div>
-		<br/>
-		<div>
-			- New Project Development
-		</div>
-		<br/>
-    <div>
-			- Consultation and Guidance
-		</div>
-		<br/>
-		<div>
-			- MVP Development
-		</div>
-		<br/>
-	</div>
-	<div class='justify para'>
-		<h3>💬 Contact Me Today!</h3>
-		<div>Don't let roadblocks hinder your project's success. Reach out for expert assistance tailored to your Ruby on Rails needs. Your solution is just an email away!</div>
+		<h3><b>✨ Vision Statement:</b></h3>
+		<div class="para">At Sparkrails, my vision is to seamlessly merge years of hands-on experience with a relentless commitment to excellence in Ruby on Rails consulting. My mission is to empower businesses with cutting-edge web solutions that not only meet but exceed industry standards.</div>
 	</div>
 	<br/>
 	<div class='justify para'>
-		<h3>📧 Email: <strong>ak@sparkrails.com</strong></h3>
+		<h3><b>What Sets Me Apart:</b></h3>
+		<hr/>
+		<div class="para"><strong>Extensive Expertise:</strong> With over six years in Ruby on Rails development, I bring a wealth of knowledge to the table, ensuring that every project is backed by industry best practices.</div>
+		<br/>
+		<strong>Versatility in Technologies:</strong>
+		<div class="para">Beyond Ruby on Rails, my proficiency extends to a diverse tech stack, including JavaScript, React, Vue.js, and database technologies. This versatility allows me to create holistic solutions tailored to the unique needs of each project.</div>
+		<br/>
+		<strong>Innovation-Driven Approach:</strong> I am not just a developer; I am a problem solver. My approach revolves around innovative thinking, pushing boundaries to deliver solutions that stand out in the ever-evolving digital landscape.
+	</div>
+	<br/>
+	<div class='justify para'>
+		<h3><b>📈 Collaborate for Success:</b></h3>
+		<hr/>
+		<div>Join me on a journey where experience meets innovation. Whether it's optimizing your existing Ruby on Rails infrastructure, integrating cutting-edge technologies, or architecting from scratch, let's collaborate for success. Together, we can transform ideas into impactful digital experiences.</div>
+	</div>
+	<br/>
+	<div class='justify para'>
+		<h3>Contact: <strong>ak@sparkrails.com</strong></h3>
 		<div>Let's turn your Ruby on Rails projects into seamless success stories together!</div>
 		<br/>
 		<div class='text-center'>
-		<strong>#RubyOnRails</strong> <strong>#WebDevelopment</strong> <strong>#CodingHelp</strong> <strong>#RoR</strong> <strong>#TechSupport</strong>
+		<strong>#Elevate</strong> <strong>#Innovate</strong> <strong>#Code</strong>	
 		</div>
 	</div>
 
