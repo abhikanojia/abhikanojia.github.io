@@ -1,14 +1,13 @@
 ---
 layout: post
-title: "Streamlining Browser Compatibility in Rails 8.0: Introducing allow_browser"
+title: "Rails 8.0: adds allow_browser to control browser compatiblity"
 categories: "rails-8"
-description: "Discover the power of allow_browser in Rails 8.0. Learn how this new feature simplifies browser version control, ensuring seamless user experiences while enhancing application security."
+description: "Setting browser compatiblity with Rails 8 using allow_version option"
 tags: rails rails-8
 keywords:
-  - Rails 8, allow_browser method,
+  - Rails 8, allow_browser method, browser version controler rails
   - Browser version control, Web development, Modern web technologies
   - Minimum browser versions, Enhancing application security in Rails,
-  - Improving user experience with browser version control, Upgrade prompt for outdated browsers
 ---
 
 In the dynamic world of web development, ensuring consistent performance across different browsers and versions is paramount. With Rails 8.0, developers gain a powerful tool to manage browser compatibility effortlessly: the allow_browser method. Let's explore how this feature simplifies browser version control and elevates application security.
