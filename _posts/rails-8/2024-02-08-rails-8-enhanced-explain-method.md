@@ -15,8 +15,7 @@ Are you a Rails developer seeking to turbocharge your database queries? Dive int
 In previous versions, ActiveRecord's Explain method had limitations, especially with methods like count, last, and pluck. But with Rails 8.0, a new dawn arises. Now, you can seamlessly analyze queries returned by methods like count or pluck without encountering errors.
 
 ```ruby
-# Pre-Rails 8.0
-# You'd hit a roadblock when trying to explain queries like count or pluck
+# Prior to rails 8
 Post.where(published: true).count.explain
 # Would raise an error
 
@@ -24,7 +23,6 @@ Post.where(published: true).count.explain
 # Smooth sailing with the enhanced Explain method
 Post.where(published: true).count.explain.inspect
 # No errors here!
-
 ```
 
 With Rails 8.0, the Explain method supports a range of methods including count, first, last, and pluck, offering invaluable insights into query execution. Now, optimizing your ActiveRecord queries is simpler than ever.
