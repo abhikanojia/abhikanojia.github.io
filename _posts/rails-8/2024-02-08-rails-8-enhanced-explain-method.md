@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mastering ActiveRecord: Harnessing Rails 8.0's Enhanced Explain Method"
+title: "Rails 8.0's Enhanced Explain Method"
 categories: "rails-8"
 description: "Discover the power of Rails 8.0's enhanced Explain method for optimizing ActiveRecord queries. Uncover invaluable insights into query execution with seamless support for count, pluck, and more. Streamline your application's performance today!"
 tags: rails rails-8
