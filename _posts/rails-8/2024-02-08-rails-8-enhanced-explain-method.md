@@ -2,7 +2,7 @@
 layout: post
 title: "Rails 8.0's Enhanced Explain Method"
 categories: "rails-8"
-description: "Discover the power of Rails 8.0's enhanced Explain method for optimizing ActiveRecord queries. Uncover invaluable insights into query execution with seamless support for count, pluck, and more. Streamline your application's performance today!"
+description: "Explain method now works with aggregate methods like sum, count, maximum and minimum in Rails 8"
 tags: rails rails-8
 keywords:
   - Rails 8, Explain method, Query optimization

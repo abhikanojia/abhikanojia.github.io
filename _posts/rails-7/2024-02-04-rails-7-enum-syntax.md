@@ -2,7 +2,7 @@
 layout: post
 title: "Rails 7 Introduces New Syntax for Enums"
 categories: "rails"
-description: "Discover the streamlined world of Rails 7 Enums! Learn about the new syntax, separate enum names and values, and embrace key-value pairs for enhanced code clarity. Dive into the article for a quick tour of these changes and unlock the power of simplified Ruby on Rails development."
+description: "Rails 7 introduces a breath of fresh air with revamped Enum syntax, promising a cleaner and more intuitive coding experience."
 tags: rails enums
 keywords:
   - Rails 7 Enums Syntax, Rails Enum Handling

@@ -3,6 +3,7 @@ layout: post
 title: "Mastering Enums in Rails: A Quick Guide to Simplify Data Handling"
 categories: "rails"
 tags: rails enums
+description: "A complete guide for using enums in rails, including generated methods"
 keywords:
   - Rails Enums, Ruby on Rails Development, Model Attributes
   - Data Handling, Code Readability, Enum Methods, Database Optimization, Ruby on Rails Best Practices Code

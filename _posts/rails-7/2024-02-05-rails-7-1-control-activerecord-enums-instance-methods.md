@@ -2,7 +2,7 @@
 layout: post
 title: "Rails 7.1 Unleashes Control: Disabling Auto-Generated ActiveRecord Enum Methods"
 categories: "rails"
-description: "Discover the power of control in Rails 7.1! Learn about the new option introduced to disable auto-generated methods for ActiveRecord enums. Dive into the article for a quick guide on how to implement this feature, avoiding conflicts and streamlining your code."
+description: "Rails 7 provides a seamless way to disable autogenerate instance methods by Enums."
 tags: rails enums
 keywords:
   - Rails 7 Enums Syntax, Rails Enum Handling

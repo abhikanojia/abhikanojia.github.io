@@ -2,7 +2,7 @@
 layout: post
 title: "Streamline Data Management in Rails 7.1 with Attribute Normalization"
 categories: "rails"
-description: "Discover the power of attribute normalization in Rails 7.1! Learn how to efficiently sanitize user input, ensure consistent formatting, and clean up data from external sources using the new normalizes method. Dive into our article for a quick guide on implementation and harness the full potential of data management in your Rails applications."
+description: "Rails 7 introduces a way to seamlessly clear off data with Attribute Normalisation within the Model directly."
 tags: rails normalizes rails-7
 keywords:
   - Rails 7, Attribute normalization

@@ -2,7 +2,7 @@
 layout: post
 title: "Boost Your Rails Application Performance with Asynchronous Queries"
 categories: "rails"
-description: "Learn how to turbocharge your Rails application with asynchronous queries. Discover the benefits, best practices, and native support in Rails 7.1 for improved performance, responsiveness, and memory usage."
+description: "Rails 7 provides a way to call aggreegate methods asynchronously, with active record promise"
 tags: rails async-queries rails-7
 keywords:
   - Rails 7, Rails application performance
