@@ -2,7 +2,6 @@
 layout: post
 title: "Rails 8.0: adds allow_browser to control browser compatiblity"
 categories: "rails-8"
-description: "Setting browser compatiblity with Rails 8 using allow_version option"
 tags: rails rails-8
 keywords:
   - Rails 8, allow_browser method, browser version controler rails
