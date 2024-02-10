@@ -1,7 +1,7 @@
 # Site settings
 title: SparkRails
 description: >
-  Enhance web journey with SparkRails: expert Rails consulting for tailored solutions & support. Let's build!
+  Rails consulting for solutions & support. Let's build!
 
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://sparkrails.com" # the base hostname & protocol for your site
