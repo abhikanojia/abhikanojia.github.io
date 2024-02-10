@@ -1,7 +1,7 @@
 # Site settings
 title: SparkRails
 description: >
-  Transform your web development journey with expert Ruby on Rails consulting from SparkRails. Our seasoned consultants provide tailored solutions, from project inception to optimization. Elevate your Rails applications with proven expertise and customized strategies. Get reliable support and unlock the full potential of your web projects. Let's build something extraordinary together!
+  Enhance web journey with SparkRails: expert Rails consulting for tailored solutions & support. Let's build!
 
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://sparkrails.com" # the base hostname & protocol for your site
@@ -10,6 +10,12 @@ paginate: 10
 paginate_path: "/blog/:num"
 max_related_posts: 3
 ga_tracking_id: "G-F992D9LEPJ"
+logo: '/assets/img/spark-rails-logo.png'
+social:
+  name: SparkRails
+  links:
+    - https://twitter.com/spark_rails
+    - https://www.facebook.com/sparkrails
 
 author:
   fullname: Abhishek Kanojia
