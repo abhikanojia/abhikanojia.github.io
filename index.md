@@ -3,7 +3,7 @@ layout: page
 title: SparkRails
 home: true
 subtitle: "Empowering Businesses with Expert Rails Solutions: Your Premier Rails Consulting Partner"
-description: "Optimize your projects with our leading Ruby on Rails consulting services. Elevate development with tailored solutions. Contact us for expert Rails support."
+description: "Elevate projects with our Ruby on Rails consulting. Tailored solutions. Expert Rails support. Contact us."
 sitemap:
   priority: 0.9
 ---
