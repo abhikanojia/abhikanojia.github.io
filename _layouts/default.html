@@ -3,9 +3,9 @@
 <head>
   {% include meta_tags/base.html %}
   {% include externals/styling.html %}
+  {% include meta_tags/twitter_tags.html %}
   {% seo %}
   {% include externals/mailerlite_script.html %}
-  {% include meta_tags/twitter_tags.html %}
 </head>
 {% if site.ga_tracking_id and jekyll.environment == 'production' %}
   {% include gtag.html %}
