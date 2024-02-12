@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rails 7 Introduces New Syntax for Enums"
+title: "Rails 7 Introduces a New Syntax for Enum"
 categories: "rails"
 description: "Rails 7 new introduces a new syntax to define enum, lets see what has changed since older versions of rails"
 tags: rails enums
