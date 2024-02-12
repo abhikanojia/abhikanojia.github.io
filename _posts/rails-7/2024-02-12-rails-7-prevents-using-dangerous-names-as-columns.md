@@ -53,3 +53,8 @@ rails g migration create_users name:string email:string attributes:jsonb
 
 => Could not generate field 'attributes', as it is already defined by Active Record.
 ```
+<br/>
+
+>
+> ### Bonus: Did You Know?
+> <base target="_blank"> [Rails 7 Introduces a new syntax for Enum](/rails/2024/02/04/rails-7-adds-new-enum-syntax.html)
