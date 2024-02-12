@@ -6,7 +6,7 @@ description: "Rails 7 new introduces a new syntax to define enum, lets see what 
 tags: rails enums
 keywords:
   - Rails 7 Enums Syntax, Ruby on Rails Tips
-  - Rail 7 new enum syntax
+  - Rail 7 new enum syntax, whats new in rails 7
 ---
 
 Rails 7 introduces a new syntax for defining enum. Lets take a look what has changed.
