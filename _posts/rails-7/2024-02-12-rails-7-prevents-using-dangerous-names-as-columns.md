@@ -3,7 +3,7 @@ layout: post
 title: "Rails 7 prevents use of reserved names as model attributes"
 categories: "rails-7"
 tags: rails rails-7
-description: "Rails 7 prevents use of reserved names by raising an error while running migration. This is helpful to prevent mistakes like using names which are already available in rails"
+description: "Rails 7 raises errors for reserved names in migrations, preventing conflicts and promoting safer development practices."
 keywords:
   - rails 7, ruby on rails, model attributes
   - rails migrations, rails reserved method names
