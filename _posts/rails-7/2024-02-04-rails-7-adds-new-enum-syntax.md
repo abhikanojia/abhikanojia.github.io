@@ -65,7 +65,3 @@ post = Post.new
 #
 # => `raise_conflict_error`: You tried to define an enum named "status" on the model "Post", but this will generate a instance method "draft?", which is already defined by another enum. (ArgumentError)
 ```
-
-
-
-
