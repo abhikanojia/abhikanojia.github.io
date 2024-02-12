@@ -3,7 +3,10 @@ layout: null
 sitemap:
   exclude: 'yes'
 ---
-User-agent: *
-Disallow:
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
 
 Sitemap: {{ site.url }}/sitemap.xml
