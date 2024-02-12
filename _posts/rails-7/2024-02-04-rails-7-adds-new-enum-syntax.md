@@ -14,7 +14,7 @@ Rails 7 introduces a new syntax for defining enum. Lets take a look what has cha
 ## What is enum in Rails?
 Enum ( Enumeration ) is a datatype available in Rails, which can be used to map values to integral values in the database, which means it takes less space and provides the efficiency requires. It allows the flexiblity to query it by name, makes it even better candidate to use where you want to define multiple values of same attribute. For example, post status can be `draft` or `published`.
 
-# Old vs. New: A Quick Look
+## Old vs. New: A Quick Look
 
 In the old days, defining enum involved a key-value pair, but not anymore! Rails 7 separates enum names and values, making your code more straightforward:
 
