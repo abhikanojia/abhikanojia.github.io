@@ -9,7 +9,9 @@ keywords:
   - improvements in rails 8, security enhancement in rails
 ---
 
-Rails 8 Boosts Security with Brakeman Integration!, a powerful static analysis security tool, by default. Let's delve into what this integration means for Rails developers and how it enhances the security landscape of Ruby on Rails applications.
+Rails 8 Boosts Security with Brakeman Integration!
+
+Brakeman, a powerful static analysis security tool, by default. Let's delve into what this integration means for Rails developers and how it enhances the security landscape of Ruby on Rails applications.
 
 ## # Understanding Brakeman:
 
