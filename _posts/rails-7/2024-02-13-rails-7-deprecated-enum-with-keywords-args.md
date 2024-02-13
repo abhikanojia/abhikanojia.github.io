@@ -1,15 +1,15 @@
 ---
 layout: post
-title: "Rails 7 deprecate defining enum with keyword args"
+title: "Rails 7 deprecate defining enum with keyword arguments"
 categories: "rails-7"
 tags: rails rails-7
-description: "Rails 7 deprecate enum definition by keyword args, From Rails 7.3 this old syntax will not be available."
+description: "Rails 7 deprecate enum definition by keyword arguments, From Rails 7.3 this old syntax will not be available."
 keywords:
   - rails 7, ruby on rails, deprecated enum syntax
   - improvements in rails 7
 ---
 
-Rails 7 deprecate enum definition by keyword args, From Rails 7.3 this old syntax will not be available.This is important for those who are willing to upgrade their rails version and already using the older syntax for defining Enum. In case you are wondering what is the new Rails syntax for defining rails, checkout this [article](/rails/2024/02/04/rails-7-adds-new-enum-syntax.html).
+Rails 7 deprecate enum definition by keyword arguments, From Rails 7.3 this old syntax will not be available.This is important for those who are willing to upgrade their rails version and already using the older syntax for defining Enum. In case you are wondering what is the new Rails syntax for defining rails, checkout this [article](/rails/2024/02/04/rails-7-adds-new-enum-syntax.html).
 
 ## # Before Rails 7.3
 
