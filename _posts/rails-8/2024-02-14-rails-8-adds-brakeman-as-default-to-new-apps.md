@@ -5,11 +5,13 @@ categories: "rails-8"
 tags: rails rails-8
 description: "Rails 8 includes Brakeman by default, enhancing security."
 keywords:
-  - rails 7, ruby on rails, deprecated enum syntax
-  - improvements in rails 7
+  - rails 8, ruby on rails, brakeman
+  - improvements in rails 8, security enhancement in rails
 ---
 
-Rails 8 adds Brakeman, a powerful static analysis security tool, by default. Let's delve into what this integration means for Rails developers and how it enhances the security landscape of Ruby on Rails applications.
+Rails 8 Boosts Security with Brakeman Integration!
+
+Brakeman, a powerful static analysis security tool, by default. Let's delve into what this integration means for Rails developers and how it enhances the security landscape of Ruby on Rails applications.
 
 ## # Understanding Brakeman:
 
