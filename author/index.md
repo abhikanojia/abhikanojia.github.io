@@ -7,7 +7,7 @@ sitemap:
   priority: 0.9
 ---
 
-<img src="{{ '/assets/img/avatar.jpg' | prepend: site.baseurl }}" id="about-img">
+<img src="{{ '/assets/img/avatar.jpg' | prepend: site.baseurl }}" alt="Abhishek Kanojia - Image" id="about-img">
 
 <div id="describe-text">
 	<div class='justify'>
