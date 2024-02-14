@@ -17,7 +17,7 @@ Have you ever found yourself in a situation where the default methods generated 
 
 ## ActiveRecord Enums in a Nutshell
 
-These attributes map values to integers in the database, generating handy methods for easy querying and manipulation. By the way, as of Rails 7 the syntax of defining has changed. <base target="_blank">[Rails-7 New Syntax For Enum](/rails/2024/02/04/rails-7-enum-syntax.html)
+These attributes map values to integers in the database, generating handy methods for easy querying and manipulation. By the way, as of Rails 7 the syntax of defining has changed. [Rails-7 New Syntax For Enum](/rails/2024/02/04/rails-7-enum-syntax.html){:target="_blank"}
 
 
 ## The Scenario Before

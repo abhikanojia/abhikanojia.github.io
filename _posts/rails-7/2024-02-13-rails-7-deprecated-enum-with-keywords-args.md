@@ -36,9 +36,9 @@ class User < ApplicationRecord
 end
 ```
 
-Refer to this <base target="_blank"> [Commit](https://github.com/rails/rails/commit/8c5425197c7969ff50f675e9792fce1998fb9bc2) for more details.
+Refer to this [Commit](https://github.com/rails/rails/commit/8c5425197c7969ff50f675e9792fce1998fb9bc2){:target="_blank"} for more details.
 
 >
 > ### 💡 Did You Know?
-> <base target="_blank"> [Rails 7 Introduces validations for Enum](/rails/2024/02/03/rails-7.1-enum-validation.html)
+> [Rails 7 Introduces validations for Enum](/rails/2024/02/03/rails-7.1-enum-validation.html){:target="_blank"}
 >

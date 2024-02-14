@@ -57,4 +57,4 @@ rails g migration create_users name:string email:string attributes:jsonb
 
 >
 > ### 💡 Did You Know?
-> <base target="_blank"> [Rails 7 Introduces a new syntax for Enum](/rails/2024/02/04/rails-7-adds-new-enum-syntax.html)
+> [Rails 7 Introduces a new syntax for Enum](/rails/2024/02/04/rails-7-adds-new-enum-syntax.html){:target="_blank"}
