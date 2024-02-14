@@ -17,7 +17,7 @@ Welcome to the Future of Rails Enums in Version 7!
 
 Rails 7 introduces a breath of fresh air with revamped Enum syntax, promising a cleaner and more intuitive coding experience.
 
-# Old vs. New: A Quick Look
+## Old vs. New: A Quick Look
 
 In the old days, defining Enums involved a key-value pair jumble, but not anymore! Rails 7 separates enum names and values, making your code more straightforward:
 

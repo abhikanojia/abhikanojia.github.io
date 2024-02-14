@@ -8,7 +8,7 @@ keywords:
 ---
 
 
-# Rails `rename_column` 
+## Rails `rename_column` 
 Rails provides a simple method `rename_column` which can be used in a migration.
 
 <br />

@@ -12,7 +12,7 @@ If no block is given an Enumerator is returned instead.
 
 Now, you may be wondering we can use `reject!` or `select!` similar to what we thought of earlier. This might seem tricky at the first look but lets have a look at some examples which clears your doubt.
 
-<h1 class="light">Array#select! method in Ruby</h1>
+<h2 class="light">Array#select! method in Ruby</h2>
 
 ---
 ```ruby
@@ -28,7 +28,7 @@ numbers
   => [2, 4, 6, 8, 10]
 ```
 
-<h1 class="light">Array#reject! method in Ruby</h1>
+<h2 class="light">Array#reject! method in Ruby</h2>
 
 ---
 ```ruby

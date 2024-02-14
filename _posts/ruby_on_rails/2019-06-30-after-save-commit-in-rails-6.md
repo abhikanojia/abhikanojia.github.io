@@ -21,8 +21,6 @@ Now we can simply write it as:
 
 Following is the very basic example of its usage:
 
-<img src="/assets/images/after-save-commit-in-rails-6/after-save-commit-rails-6.png" alt="after-save-commit-rails-6" class="img-50-imp">
-
 Please note that `after_save_commit` is different from `after_save`
 
 **`after_save`** - calls the defined hook method just after saving the model instance but before the commit sequence of saving transaction. That means you get a drawback here if some error occured during saving sequence of the model object, the callback is going to call hook method anyways.

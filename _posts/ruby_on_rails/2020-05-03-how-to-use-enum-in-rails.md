@@ -8,7 +8,7 @@ keywords:
 ---
 
 
-# Enum in Rails
+## Enum in Rails
 
 "Enum" for short for the word "Enumerator" is widely used in different programming languages to define different values that can be a constant. When it comes to Rails, enum plays an important role. How?
 
@@ -26,9 +26,9 @@ You can define a state field as integer and map that to an `enum` state.
 
 <br />
 
-By using in our Post model, we get scopes based on the values we provided in enum.
 
-# Scopes provided by enum in Rails
+## Scopes provided by enum in Rails
+By using in our Post model, we get scopes based on the values we provided in enum.
 For example: Here we get the following scopes:
 
 ```ruby
@@ -41,7 +41,7 @@ For example: Here we get the following scopes:
 
 <br />
 
-# Predicate methods provided by enum in Rails
+## Predicate methods provided by enum in Rails
 
 Here, are the predicate methods that each `Post` instance will have:
 
@@ -56,7 +56,7 @@ Here, are the predicate methods that each `Post` instance will have:
 ```
 <br />
 
-# Good practice to declare enum in Rails
+## Good practice to declare enum in Rails
 
 A good practice to follow while declaring enum in Rails is by creating it as a Hash. You will thank yourself later when it comes to changing those enums i.e adding and removing values. Something like the following:
 
@@ -72,7 +72,7 @@ class Post < ApplicationRecord
 end
 ```
 
-# Multiple enums with same value in rails
+## Multiple enums with same value in rails
 
 Say in our `Post` model we have another enum defined as `comment_state` which has all the three values we used for `state` i.e `:draft`, `:published` and `:trashed`.
 
@@ -120,10 +120,5 @@ Post.comments_trashed
 post = Post.new
 post.comments_draft?
 ```
-
-# Bonus: Negative Scopes in Rails 6
-Read about [Negative scopes in Rails](https://sparkrails.com/rails/2019/06/25/add-negative-scope-for-all-enum-values.html). 
-
-<br />
 
 [Official Ruby Enum Guide](https://api.rubyonrails.org/v5.2.3/classes/ActiveRecord/Enum.html)

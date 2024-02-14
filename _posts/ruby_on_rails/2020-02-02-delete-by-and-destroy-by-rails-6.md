@@ -11,7 +11,7 @@ keywords:
   - delete_by
 ---
 
-# Rails 6 adds delete_by &amp; destroy_by
+## Rails 6 adds delete_by &amp; destroy_by
 
 Rails 6 provide with some extra stuffs added to it lately which simplifies the daily tasks. In this post we will be discussing two methods delete_by and destroy_by provided in Rails 6.
 
