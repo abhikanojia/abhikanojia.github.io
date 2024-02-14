@@ -41,5 +41,5 @@ Rails 8's integration of Brakeman by default marks a significant step forward in
 <br/>
 >
 > ### 💡 Did You Know?
-> <base target="_blank"> [Rails 8.0 adds `allow_browser` to control browser compatiblity](/rails-8/2024/02/09/rails-8-adds-allow-browser-to-control-browser-compatiblity.html)
+> [Rails 8.0 adds `allow_browser` to control browser compatiblity](/rails-8/2024/02/09/rails-8-adds-allow-browser-to-control-browser-compatiblity.html){:target="_blank"}
 >
