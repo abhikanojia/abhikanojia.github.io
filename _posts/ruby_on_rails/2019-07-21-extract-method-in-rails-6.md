@@ -5,9 +5,6 @@ categories: "rails"
 tags: rails-6 ruby-on-rails
 ---
 
-<img src="{{ site.base_url }}{{ site.default_rails_image }}" alt="{{ page.title }}">
-
----
 Rails - 6 adds `extract!` method for array.
 
 `extract!` method removes and return the elements for which the block returns a true value.
