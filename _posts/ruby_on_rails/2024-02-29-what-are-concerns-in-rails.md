@@ -107,3 +107,7 @@ end
 
 ```
 
+>
+> ### 💡 Did You Know?
+> [Rails 7 Introduces validations for Enum](/rails/2024/02/03/rails-7.1-enum-validation.html){:target="_blank"}
+>
