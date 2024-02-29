@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "What are Concerns in Rails?"
-categories: "rails-8"
-tags: rails rails-8
+categories: "rails ruby"
+tags: rails ruby
 description: "Learn about rails concerns their uses and benefits under 2 minutes. Lets get started then."
 keywords:
   - rails ruby concerns modules-in-rails
