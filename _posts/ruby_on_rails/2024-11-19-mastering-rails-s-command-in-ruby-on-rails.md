@@ -37,3 +37,7 @@ Set the Environment: Run rails s -e production to start the server in production
 
 The `rails s` command is an essential tool for any Rails developer. Mastering its options and troubleshooting techniques ensures smooth app development!
 
+>
+> ### 💡 Did You Know?
+> [Rails 7 Introduces validations for Enum](/rails/2024/02/03/rails-7.1-enum-validation.html){:target="_blank"}
+>
