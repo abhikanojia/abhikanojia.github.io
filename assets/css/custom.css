@@ -160,6 +160,26 @@
   color: #45454f;
   margin: 0;
 }
+.card-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #873d48;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+}
+.card-link:hover {
+  color: #6d2f39;
+  text-decoration: none;
+}
+.card-link i {
+  margin-left: 4px;
+  transition: transform .15s ease;
+}
+.card-link:hover i {
+  transform: translateX(3px);
+}
 
 /* Service detailed (services page) */
 .services-stack {
