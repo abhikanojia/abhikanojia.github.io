@@ -48,21 +48,25 @@ sitemap:
       <span class="service-num">01 — Upgrades</span>
       <h3>Rails Upgrade Support</h3>
       <p>Move from Rails 4.x, 5.x, or 6.x to Rails 7 with a clear, incremental plan. Gem audits, deprecation cleanup, and the painful edge cases that block upgrades in real production apps.</p>
+      <a href="/rails-upgrade-consultant/" class="card-link">Learn more <i class="fa fa-arrow-right"></i></a>
     </div>
     <div class="service-card">
       <span class="service-num">02 — Rescue</span>
       <h3>Legacy Rails App Rescue</h3>
       <p>For apps that have grown messy — limited tests, outdated patterns, unclear ownership. I stabilize the codebase, document the critical paths, and make day-to-day changes safe again.</p>
+      <a href="/legacy-rails-maintenance/" class="card-link">Learn more <i class="fa fa-arrow-right"></i></a>
     </div>
     <div class="service-card">
       <span class="service-num">03 — Debugging</span>
       <h3>Performance, Caching &amp; Sidekiq Debugging</h3>
       <p>Slow endpoints, ballooning Redis memory, stuck Sidekiq queues, cache stampedes. Investigation with profiling, logs, and metrics — then targeted fixes, not rewrites.</p>
+      <a href="/services/index.html" class="card-link">Learn more <i class="fa fa-arrow-right"></i></a>
     </div>
     <div class="service-card">
       <span class="service-num">04 — Ongoing</span>
       <h3>Fractional Rails Backend Support</h3>
       <p>Ongoing senior Rails capacity for teams without a dedicated backend lead. Code review, architecture input, on-call backup, and steady progress on the backlog you keep deprioritizing.</p>
+      <a href="/services/index.html" class="card-link">Learn more <i class="fa fa-arrow-right"></i></a>
     </div>
   </div>
 </section>

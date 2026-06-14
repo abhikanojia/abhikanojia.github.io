@@ -1,3 +1,4 @@
+{% unless page.hide_page_title %}
 <h1 class="page-title">
 <div class="page-title__text">{{ page.title }}</div>
 {% if page.home == true %}
@@ -5,3 +6,4 @@
 {% endif %}
 <div class="page-title__subtitle">{{ page.subtitle }}</div>
 </h1>
+{% endunless %}
