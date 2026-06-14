@@ -1,0 +1,32 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap:
+  exclude: 'yes'
+---
+# SparkRails
+
+> Senior Ruby on Rails consulting for SaaS teams running production apps. SparkRails (run by Abhishek Kanojia) helps remote SaaS teams upgrade, debug, stabilize, and maintain legacy Ruby on Rails applications — especially older Rails apps with performance, Sidekiq, Redis, caching, or upgrade problems.
+
+Available for US, UK, Europe, Canada, Singapore, and remote-first teams.
+
+Primary contact: abhishekka3193@gmail.com
+
+## Services
+
+- [Rails Upgrade Consultant](https://sparkrails.com/rails-upgrade-consultant/): Rails 6.x and 7.x upgrade planning and execution for legacy SaaS apps. Covers `new_framework_defaults` review, gem and dependency audit, config changes, ActiveStorage and image processing checks, Sidekiq/Redis compatibility, deployment risk, and rollback planning.
+- [Legacy Rails Maintenance](https://sparkrails.com/legacy-rails-maintenance/): Ongoing maintenance and stabilization for older production Rails apps. Bug fixes, production debugging, dependency updates, code review, performance work, Sidekiq and Redis support, and steady technical-backlog execution.
+- [All Rails Consulting Services](https://sparkrails.com/services/): Full overview of engagement types — Rails Upgrade Support, Production Debugging & App Rescue, Performance/Caching/Sidekiq, and Fractional Rails Backend Support. Engagement formats: one-time audit, focused project, monthly fractional support.
+
+## Site
+
+- [Homepage](https://sparkrails.com/): Positioning, pain points, services preview, recent Rails writing.
+- [About / Contact](https://sparkrails.com/author/): About Abhishek Kanojia, the consultant behind SparkRails.
+
+## Blog
+
+- [Rails & Ruby blog](https://sparkrails.com/blog/): Tactical posts on Ruby on Rails covering enums, ActiveRecord, Sidekiq, query methods, Rails 7, Rails 8, and Ruby language features.
+
+## Positioning
+
+SparkRails is one experienced Rails consultant — not an agency. Engagements are direct, senior, and production-focused. Typical clients are SaaS founders, CTOs, product teams, and agencies that have an existing Rails app in production and need help upgrading, debugging, stabilizing, or maintaining it without a full rewrite.
