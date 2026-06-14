@@ -1,77 +1,211 @@
 ---
 layout: page
-title: Services
-description: "Discover unmatched Ruby on Rails consulting services at SparkRails. From development to optimization, we empower your projects for success. Contact us today!"
+title: Rails Consulting Services for Legacy SaaS Apps
+description: "Ruby on Rails consulting services — Rails upgrades, production debugging, performance and Sidekiq work, and fractional senior Rails support for SaaS teams running production apps."
 sitemap:
   priority: 0.9
 keywords:
   - Ruby on Rails consulting
-  - Rails development
-  - Ruby on Rails experts
-  - web application consulting
-  - code optimization
-  - project rescue
-  - scalability planning
-  - performance tuning
-  - Rails training
-  - web development consultancy
-  - code audits
-  - custom Rails solutions
-  - expert Rails developers
-  - web application scalability
-  - Rails consulting agency
-  - Rails Freelancer
+  - Rails upgrade
+  - legacy Rails rescue
+  - Rails performance
+  - Sidekiq debugging
+  - Redis debugging
+  - Rails caching
+  - fractional Rails developer
+  - senior Rails consultant
+  - Rails 6 upgrade
+  - Rails 7 upgrade
+  - production Rails support
 ---
 
-<div class="container m-t-50">
-  <div class="row">
-    <div class="col-md-12 para center-text">
-      <h3>
-        Welcome to SparkRails, where we bring unparalleled expertise to revolutionize your web development experience. Our comprehensive range of Ruby on Rails consulting services is designed to empower your projects, ensuring they not only meet but exceed your expectations.
-      </h3>
+<p class="intro-lead">
+  This page covers the specific work I take on, what's included in each engagement, and how projects typically start. If you've already read the homepage, this is the operational detail.
+</p>
+
+<section class="section">
+  <h2>Services</h2>
+  <p class="section-lead">
+    Four engagement types. Most projects map cleanly to one of these — and many start as a short audit before turning into focused work or ongoing support.
+  </p>
+
+  <div class="services-stack">
+
+    <div class="service-detail">
+      <span class="service-num">01 — Upgrades</span>
+      <h3>Rails Upgrade Support</h3>
+
+      <div class="service-row">
+        <span class="service-subhead">What this is for</span>
+        <p>
+          Help with Rails 6.x and 7.x upgrade planning and execution — including upgrades that have stalled on a long-running branch, feel risky to ship, or need a clear path through framework defaults and gem changes.
+        </p>
+      </div>
+
+      <div class="service-row">
+        <span class="service-subhead">What I check or work on</span>
+        <ul class="check-list">
+          <li>Current Rails and Ruby version, target version, staged path</li>
+          <li><code>new_framework_defaults</code> review and incremental enablement</li>
+          <li>Gem compatibility audit and replacements for unmaintained gems</li>
+          <li>Config and initializer changes — <code>load_defaults</code>, Zeitwerk, autoloading</li>
+          <li>ActiveStorage and image processing (variants, vips, mini_magick)</li>
+          <li>Mailers, ActiveJob, and Sidekiq compatibility with the target version</li>
+          <li>Caching behavior under the new defaults</li>
+          <li>Deployment and rollback flow during the upgrade window</li>
+        </ul>
+      </div>
+
+      <div class="service-row">
+        <span class="service-subhead">Typical outcome</span>
+        <p>
+          A staged upgrade plan where each step is independently shippable, and the upgrade actually executed against your production environment — not a long-running branch that never merges.
+        </p>
+      </div>
+    </div>
+
+    <div class="service-detail">
+      <span class="service-num">02 — Rescue</span>
+      <h3>Production Debugging &amp; App Rescue</h3>
+
+      <div class="service-row">
+        <span class="service-subhead">What this is for</span>
+        <p>
+          Stabilizing Rails apps that are running in production but have become hard to maintain — fragile workflows, recurring incidents, legacy patterns, and bugs that are hard to reproduce locally.
+        </p>
+      </div>
+
+      <div class="service-row">
+        <span class="service-subhead">What I check or work on</span>
+        <ul class="check-list">
+          <li>Production logs and error tracker data (Sentry, Honeybadger, Rollbar)</li>
+          <li>Hard-to-reproduce bugs and intermittent failures</li>
+          <li>Risky areas in the code and fragile workflows</li>
+          <li>Legacy apps with limited test coverage on the critical paths</li>
+          <li>Deployment flow and rollback risk</li>
+          <li>Tribal knowledge gaps and unclear ownership</li>
+          <li>Targeted tests added around the changes most likely to break</li>
+        </ul>
+      </div>
+
+      <div class="service-row">
+        <span class="service-subhead">Typical outcome</span>
+        <p>
+          Specific production issues resolved, the riskiest workflows documented with tests around them, and a short list of follow-up fixes the team can keep working on without me.
+        </p>
+      </div>
+    </div>
+
+    <div class="service-detail">
+      <span class="service-num">03 — Debugging</span>
+      <h3>Performance, Caching &amp; Sidekiq</h3>
+
+      <div class="service-row">
+        <span class="service-subhead">What this is for</span>
+        <p>
+          Investigating and fixing performance, caching, and background-job issues in production — slow endpoints, ballooning Redis memory, stuck queues, duplicate jobs, and the kind of issue where the symptom is obvious but the root cause is not.
+        </p>
+      </div>
+
+      <div class="service-row">
+        <span class="service-subhead">What I check or work on</span>
+        <ul class="check-list">
+          <li>Slow requests, N+1 queries, and APM data</li>
+          <li>Database bottlenecks, indexes, and query plans</li>
+          <li>Cache memory pressure, evictions, and stampedes</li>
+          <li>Sidekiq queues, retries, duplicate or stuck jobs</li>
+          <li>Redis usage patterns and memory growth</li>
+          <li>Background-job reliability and idempotency</li>
+          <li>Production logs and metrics — and the gaps in them</li>
+          <li>Deployment risk for any change touching the hot path</li>
+        </ul>
+      </div>
+
+      <div class="service-row">
+        <span class="service-subhead">Typical outcome</span>
+        <p>
+          Worst offenders addressed with measurable improvement, background-job reliability restored, and instrumentation in place so the next regression is caught early — not in production.
+        </p>
+      </div>
+    </div>
+
+    <div class="service-detail">
+      <span class="service-num">04 — Ongoing</span>
+      <h3>Fractional Rails Backend Support</h3>
+
+      <div class="service-row">
+        <span class="service-subhead">What this is for</span>
+        <p>
+          Senior Rails capacity, month to month, for teams that don't need a full-time backend hire but do need someone reliable to lean on — founders, CTOs, and agencies who want continuity without the overhead.
+        </p>
+      </div>
+
+      <div class="service-row">
+        <span class="service-subhead">What I check or work on</span>
+        <ul class="check-list">
+          <li>Code review and PR feedback</li>
+          <li>Bug fixes and production debugging as issues come up</li>
+          <li>Upgrade and refactor work executed steadily over time</li>
+          <li>Architecture decisions and second opinions on tricky changes</li>
+          <li>Technical backlog execution at a predictable pace</li>
+          <li>On-call backup for production issues that need senior eyes</li>
+        </ul>
+      </div>
+
+      <div class="service-row">
+        <span class="service-subhead">Typical outcome</span>
+        <p>
+          A reliable senior pair of hands, predictable monthly capacity, and steady progress on the backend work that usually slips when the team is busy shipping features.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section section-tinted">
+  <h2>How engagements usually start</h2>
+  <div class="process-block">
+    <p style="margin: 0;">
+      Most projects start with a short technical review. I look at the Rails and Ruby version, gems, deployment flow, background jobs, caching, logs, and the main production risk. After that, I suggest one of three paths: a focused fix, a written upgrade or debugging plan, or ongoing support — depending on what the app actually needs.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Engagement formats</h2>
+  <p class="section-lead">
+    Three ways to work together. Pick the one that fits, or start with an audit and decide from there.
+  </p>
+  <div class="formats-grid">
+    <div class="format-card">
+      <span class="format-tag">Audit</span>
+      <h3>One-time Rails audit</h3>
+      <p>
+        A focused review of your Rails app — versions, gems, deployment, background jobs, caching, and production risk. Delivered as a written report with prioritized findings and recommended next steps. Useful before an upgrade, after a handover, or when you want a clear-eyed second opinion.
+      </p>
+    </div>
+    <div class="format-card">
+      <span class="format-tag">Project</span>
+      <h3>Focused debugging or upgrade project</h3>
+      <p>
+        A defined piece of work with a clear scope — a Rails upgrade to a target version, a specific performance issue resolved, or a reliability problem investigated and fixed. Defined timeline, written outcome, fixed price or capped budget.
+      </p>
+    </div>
+    <div class="format-card">
+      <span class="format-tag">Ongoing</span>
+      <h3>Monthly fractional support</h3>
+      <p>
+        Ongoing senior Rails support, billed monthly. A predictable number of hours per week for code review, bug fixes, upgrades, debugging, and steady backlog progress. Useful when you need continuity without hiring full-time.
+      </p>
     </div>
   </div>
-</div>
+</section>
 
-<br/>
-<hr/>
-
-<div class="container m-t-20">
-  <h2>💪 Empowering Your Web Vision: Expert Ruby on Rails Consulting</h1>
-  <p class="post-container">Embark on a development journey that combines innovation and efficiency. Our experienced team of Ruby on Rails developers crafts robust, scalable, and high-performance web applications tailored to your unique requirements</p>
-</div>
-
-<br/>
-
-<div class="container m-t-20">
-  <h2>✅ Code Audits and Optimization</h1>
-  <p class="post-container">Is your existing codebase in need of a health check? Our seasoned consultants conduct thorough code audits, identifying areas for improvement and optimization to enhance the overall efficiency and maintainability of your Rails projects.</p>
-</div>
-
-<br/>
-<hr/>
-
-<div class="container m-t-20">
-  <h2>⛑️ Project Rescue and Troubleshooting</h1>
-  <p class="post-container">Facing challenges with an ongoing Rails project? Our experts specialize in project rescue missions. We analyze, troubleshoot, and implement strategic solutions to get your project back on track, ensuring deadlines are met and quality is not compromised.</p>
-</div>
-
-<br/>
-
-<div class="container m-t-20">
-  <h2>📈 Performance Tuning</h1>
-  <p class="post-container">Optimize the performance of your Ruby on Rails applications for enhanced user experience. From database queries to frontend responsiveness, we fine-tune every aspect to ensure your applications deliver top-notch performance.</p>
-</div>
-
-<br/>
-<hr/>
-
-
-<div class="container m-t-20">
-  <h1>📝 Consultation and Training</h1>
-  <p class="post-container">
-    Empower your team with in-depth knowledge and best practices. 
-    Our consultancy services include one-on-one consultations and training sessions, equipping your developers with the skills needed to excel in Ruby on Rails development.
-    At SparkRails, we're not just consultants; we're your strategic partners in web development success. Contact us today to discuss how our Ruby on Rails consulting services can elevate your projects to new heights.
+<div class="cta-band">
+  <h2>Not sure which service fits?</h2>
+  <p>
+    Send me a short description of your Rails issue. I'll reply with possible next steps.
   </p>
+  <a href="mailto:abhishekka3193@gmail.com?subject=Rails%20consultation%20request" class="btn-primary-sr">Book a Rails consultation</a>
 </div>

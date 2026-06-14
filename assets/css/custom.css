@@ -161,6 +161,137 @@
   margin: 0;
 }
 
+/* Service detailed (services page) */
+.services-stack {
+  max-width: 920px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+.service-detail {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  padding: 34px 36px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.service-detail:hover {
+  border-color: #e0d4d6;
+  box-shadow: 0 10px 24px rgba(10,10,20,0.05);
+}
+.service-detail h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0a0a14;
+  margin: 0 0 22px;
+}
+.service-row { margin-top: 22px; }
+.service-row:first-of-type { margin-top: 0; }
+.service-subhead {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #873d48;
+  margin-bottom: 10px;
+}
+.service-row p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #2a2a35;
+  margin: 0;
+}
+.check-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+}
+.check-list li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #2a2a35;
+}
+.check-list li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #873d48;
+  font-weight: 700;
+}
+
+/* Engagement formats grid */
+.formats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.format-card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  padding: 26px 24px;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.format-card:hover {
+  transform: translateY(-2px);
+  border-color: #e0d4d6;
+  box-shadow: 0 10px 24px rgba(10,10,20,0.05);
+}
+.format-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0a0a14;
+  margin: 0 0 12px;
+}
+.format-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #45454f;
+  margin: 0;
+}
+.format-card .format-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #873d48;
+  margin-bottom: 8px;
+}
+
+/* Intro lead block (services page) */
+.intro-lead {
+  max-width: 820px;
+  margin: 10px auto 30px;
+  text-align: center;
+  font-size: 19px;
+  line-height: 1.7;
+  color: #2a2a35;
+}
+
+/* Process / engagement block */
+.process-block {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  padding: 32px 34px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #2a2a35;
+}
+
 /* Experience */
 .experience {
   max-width: 820px;
@@ -236,7 +367,10 @@
   .section h2 { font-size: 24px; }
   .problem-grid,
   .services-grid,
-  .experience-list { grid-template-columns: 1fr; }
+  .experience-list,
+  .check-list,
+  .formats-grid { grid-template-columns: 1fr; }
+  .service-detail { padding: 26px 22px; }
   .cta-band { padding: 44px 18px; }
   .cta-band h2 { font-size: 24px; }
   .btn-primary-sr, .btn-secondary-sr { padding: 12px 20px; font-size: 16px; }
