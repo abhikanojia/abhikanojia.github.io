@@ -1,0 +1,137 @@
+{%- comment -%}
+Site-wide structured data: Person (Abhishek Kanojia) + ProfessionalService (SparkRails).
+Per-page Service schema is emitted when the page front matter sets `service_name`.
+This complements the basic JSON-LD already emitted by jekyll-seo-tag.
+{%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "{{ site.url }}/#abhishek",
+  "name": "Abhishek Kanojia",
+  "url": "{{ site.url }}/author/",
+  "email": "abhishekka3193@gmail.com",
+  "image": "{{ site.url }}/assets/img/avatar.jpg",
+  "jobTitle": "Senior Ruby on Rails Consultant",
+  "description": "Senior Ruby on Rails consultant helping SaaS teams upgrade, debug, stabilize, and maintain legacy production Rails applications.",
+  "knowsAbout": [
+    "Ruby on Rails",
+    "Rails upgrades",
+    "Rails 6 to Rails 7 upgrades",
+    "Sidekiq",
+    "Redis",
+    "Rails caching",
+    "ActiveStorage",
+    "Production Rails debugging",
+    "Performance optimization",
+    "Background jobs",
+    "Legacy Rails applications"
+  ],
+  "sameAs": [
+    "https://x.com/spark_rails",
+    "https://www.facebook.com/sparkrails"
+  ],
+  "worksFor": {
+    "@id": "{{ site.url }}/#sparkrails"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "{{ site.url }}/#sparkrails",
+  "name": "SparkRails",
+  "url": "{{ site.url }}/",
+  "image": "{{ site.url }}/assets/img/spark-rails-logo.png",
+  "logo": "{{ site.url }}/assets/img/spark-rails-logo.png",
+  "email": "abhishekka3193@gmail.com",
+  "description": "Senior Ruby on Rails consulting for SaaS teams running production apps. Rails upgrades, legacy app maintenance, production debugging, Sidekiq/Redis/cache work, and fractional senior Rails support.",
+  "founder": { "@id": "{{ site.url }}/#abhishek" },
+  "areaServed": [
+    { "@type": "Country", "name": "United States" },
+    { "@type": "Country", "name": "United Kingdom" },
+    { "@type": "Country", "name": "Canada" },
+    { "@type": "Country", "name": "Singapore" },
+    { "@type": "Place", "name": "European Union" }
+  ],
+  "serviceType": [
+    "Ruby on Rails consulting",
+    "Rails upgrade consulting",
+    "Legacy Rails maintenance",
+    "Production Rails debugging",
+    "Fractional Rails backend support"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Rails Consulting Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Rails Upgrade Support",
+          "url": "{{ site.url }}/rails-upgrade-consultant/",
+          "description": "Rails 6.x and 7.x upgrade planning and execution for legacy SaaS apps — framework defaults review, gem audit, Sidekiq/Redis compatibility, deployment risk, rollback planning."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Legacy Rails Maintenance",
+          "url": "{{ site.url }}/legacy-rails-maintenance/",
+          "description": "Ongoing maintenance and stabilization for older production Rails apps — bug fixes, dependency updates, code review, performance work, and fractional senior backend support."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Production Debugging & App Rescue",
+          "url": "{{ site.url }}/services/",
+          "description": "Stabilize Rails apps that are running in production but have become hard to maintain — recurring incidents, fragile workflows, and bugs that are hard to reproduce locally."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Performance, Caching & Sidekiq Debugging",
+          "url": "{{ site.url }}/services/",
+          "description": "Investigate and fix slow endpoints, database bottlenecks, cache memory pressure, Sidekiq queues, and Redis usage issues in production."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Fractional Rails Backend Support",
+          "url": "{{ site.url }}/services/",
+          "description": "Ongoing part-time senior Rails support — code review, bug fixes, upgrade work, architecture decisions, production debugging, and backlog execution."
+        }
+      }
+    ]
+  }
+}
+</script>
+{%- if page.service_name -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "{{ page.service_name }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "serviceType": "{{ page.service_type | default: page.service_name }}",
+  "description": {{ page.service_description | default: page.description | jsonify }},
+  "provider": { "@id": "{{ site.url }}/#sparkrails" },
+  "areaServed": [
+    { "@type": "Country", "name": "United States" },
+    { "@type": "Country", "name": "United Kingdom" },
+    { "@type": "Country", "name": "Canada" },
+    { "@type": "Country", "name": "Singapore" },
+    { "@type": "Place", "name": "European Union" }
+  ]
+}
+</script>
+{%- endif -%}
