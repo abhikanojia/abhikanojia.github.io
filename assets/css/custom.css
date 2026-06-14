@@ -211,6 +211,9 @@
   grid-template-columns: 1fr 1fr;
   gap: 8px 24px;
 }
+.check-list--single {
+  grid-template-columns: 1fr;
+}
 .check-list li {
   position: relative;
   padding-left: 22px;
@@ -225,6 +228,42 @@
   top: 0;
   color: #873d48;
   font-weight: 700;
+}
+
+/* Help-with grid (upgrade page) — 2x2 cards each with a check-list */
+.help-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.help-card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  padding: 28px 26px;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.help-card:hover {
+  transform: translateY(-2px);
+  border-color: #e0d4d6;
+  box-shadow: 0 10px 24px rgba(10,10,20,0.05);
+}
+.help-card .help-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #873d48;
+  margin-bottom: 10px;
+}
+.help-card h3 {
+  font-size: 19px;
+  font-weight: 700;
+  color: #0a0a14;
+  margin: 0 0 16px;
 }
 
 /* Engagement formats grid */
@@ -300,7 +339,8 @@
 .experience-list {
   list-style: none;
   padding: 0;
-  margin: 30px 0 0;
+  margin: 30px auto 0;
+  max-width: 820px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px 32px;
@@ -369,7 +409,8 @@
   .services-grid,
   .experience-list,
   .check-list,
-  .formats-grid { grid-template-columns: 1fr; }
+  .formats-grid,
+  .help-grid { grid-template-columns: 1fr; }
   .service-detail { padding: 26px 22px; }
   .cta-band { padding: 44px 18px; }
   .cta-band h2 { font-size: 24px; }
