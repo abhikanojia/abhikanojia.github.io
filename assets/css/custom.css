@@ -436,3 +436,175 @@
   .cta-band h2 { font-size: 24px; }
   .btn-primary-sr, .btn-secondary-sr { padding: 12px 20px; font-size: 16px; }
 }
+
+/* ===================================
+   Blog post layout — scoped to .post
+   =================================== */
+
+.post #intro { padding-top: 20px; }
+.post .block { max-width: 760px; margin: 0 auto; }
+
+.post h1 {
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 1.25;
+  color: #1a1a1a;
+  margin: 30px 0 12px;
+}
+
+.post-info-wrapper { margin-bottom: 18px; }
+.post-info-wrapper p.italic {
+  font-size: 14px;
+  color: #888;
+  font-style: normal;
+  margin: 0;
+}
+.post-info-wrapper p.italic a,
+.post-info-wrapper p.italic a:hover,
+.post-info-wrapper p.italic a:visited {
+  color: #873d48;
+  text-decoration: none;
+  border-bottom: none;
+}
+.post-info-wrapper p.italic .bold,
+.post-info-wrapper p.italic b { font-weight: 600; color: #888; }
+
+.post #intro hr {
+  border: 0;
+  border-top: 1px solid #ececec;
+  margin: 18px 0 32px;
+}
+
+.post-container {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #2a2a2a;
+}
+.post-container p { margin: 0 0 20px; }
+
+.post-container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 48px 0 16px;
+  line-height: 1.3;
+}
+.post-container h3 {
+  font-size: 19px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 32px 0 12px;
+}
+
+.post-container strong { color: inherit; font-weight: 600; }
+.post-container .accent,
+.post-container strong.accent { color: #873d48; font-weight: 600; }
+
+.post-container a {
+  color: #873d48;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(135, 61, 72, 0.25);
+  transition: border-color 0.15s ease;
+}
+.post-container a:hover { color: #873d48; border-bottom-color: #873d48; }
+
+.post-container code,
+.post-container :not(pre) > code {
+  font-family: 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace !important;
+  font-size: 0.88em;
+  background: #f4eef0;
+  color: #5a2a33;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.post-container pre {
+  background: #23272e;
+  border: 1px solid #23272e;
+  border-radius: 6px;
+  padding: 16px 18px;
+  overflow-x: auto;
+  margin: 0 0 24px;
+}
+.post-container pre code,
+.post-container pre code.hljs {
+  font-family: 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace !important;
+  background: transparent;
+  color: #e6e6e6;
+  font-size: 14px;
+  padding: 0;
+  border-radius: 0;
+  white-space: pre;
+}
+.post-container pre .hljs-comment,
+.post-container pre .hljs-quote { color: #8a8a8a; }
+.post-container pre .hljs-string,
+.post-container pre .hljs-number,
+.post-container pre .hljs-literal,
+.post-container pre .hljs-symbol,
+.post-container pre .hljs-regexp { color: #98c379; }
+.post-container pre .hljs-keyword,
+.post-container pre .hljs-selector-tag,
+.post-container pre .hljs-built_in,
+.post-container pre .hljs-name,
+.post-container pre .hljs-tag { color: #e5c07b; }
+.post-container pre .hljs-title,
+.post-container pre .hljs-section,
+.post-container pre .hljs-attribute { color: #61afef; }
+.post-container pre .hljs-variable,
+.post-container pre .hljs-template-variable,
+.post-container pre .hljs-class .hljs-title { color: #e06c75; }
+
+.post-container ul,
+.post-container ol {
+  margin: 0 0 22px;
+  padding-left: 24px;
+  line-height: 1.7;
+}
+.post-container li { margin-bottom: 6px; }
+
+.post-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 24px;
+  font-size: 16px;
+}
+.post-container th,
+.post-container td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid #ececec;
+  vertical-align: top;
+}
+.post-container th { font-weight: 600; color: #1a1a1a; background: #fafafa; }
+
+.post-container blockquote {
+  margin: 24px 0;
+  padding: 4px 0 4px 18px;
+  border-left: 3px solid #e3d1d5;
+  letter-spacing: 0;
+  text-align: left;
+  color: #555;
+  font-style: italic;
+}
+.post-container blockquote p {
+  display: block;
+  color: #555;
+  font-size: 100%;
+  font-weight: 400;
+}
+
+.post-container hr {
+  border: 0;
+  border-top: 1px solid #ececec;
+  margin: 36px 0;
+}
+
+@media (max-width: 768px) {
+  .post h1 { font-size: 26px; }
+  .post-container { font-size: 16px; }
+  .post-container h2 { font-size: 21px; margin: 36px 0 12px; }
+  .post-container h3 { font-size: 17px; }
+  .post-container pre { padding: 12px 14px; font-size: 13px; }
+  .post-container pre code { font-size: 13px; }
+}
