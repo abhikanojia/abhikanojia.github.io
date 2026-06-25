@@ -1,120 +1,162 @@
 ---
 layout: page
-title: Rails Upgrade Consultant for Legacy SaaS Apps
+title: "Rails Upgrade Consultant — Rails 6, 7, 8 Upgrade Planning & Audit"
 hide_page_title: true
-description: "Senior Ruby on Rails upgrade consultant. I help SaaS teams plan and execute Rails 6.x and Rails 7.x upgrades on legacy applications — gems, framework defaults, Sidekiq, Redis, ActiveStorage, caching, and production deployment risk."
+description: "Senior Rails upgrade consultant for production Ruby on Rails apps. Rails 6 to Rails 7 upgrades, Rails 7 to Rails 8 upgrades, dependency cleanup, Sidekiq, Redis and ActiveStorage risk review, and a hands-on Rails Upgrade Audit."
 permalink: /rails-upgrade-consultant/
 service_name: "Rails Upgrade Consulting"
 service_type: "Ruby on Rails upgrade consulting"
-service_description: "Rails 6.x and Rails 7.x upgrade planning and execution for legacy SaaS applications — framework defaults review, gem and dependency audit, ActiveStorage and image processing checks, Sidekiq and Redis compatibility, deployment risk, and rollback planning."
+service_description: "Rails upgrade planning, risk assessment, and hands-on upgrade execution for production Ruby on Rails applications — Rails 6 to Rails 7, Rails 7 to Rails 8, and Rails 5 to current. Gemfile and dependency review, framework defaults, Sidekiq and Redis compatibility, ActiveStorage, caching, deployment and rollback planning."
 sitemap:
   priority: 0.9
 keywords:
-  - Rails upgrade consultant
-  - Rails 6 upgrade
-  - Rails 7 upgrade
-  - Ruby on Rails upgrade
-  - legacy Rails upgrade
-  - Rails new_framework_defaults
-  - Rails upgrade plan
-  - Sidekiq Rails upgrade
-  - ActiveStorage upgrade
-  - Rails 5 to Rails 7
-  - Rails consultant
-  - production Rails upgrade
+  - rails upgrade
+  - rails upgrade consultant
+  - rails upgrade service
+  - ruby on rails upgrade
+  - ruby on rails upgrade service
+  - rails 7 upgrade
+  - rails 8 upgrade
+  - upgrade rails 6 to rails 7
+  - upgrade rails 7 to rails 8
+  - rails migration
+  - ruby on rails migration
+  - rails upgrade audit
+  - legacy rails upgrade
+  - production rails upgrade
 ---
 
 <section class="hero">
-  <h1>Rails Upgrade Consultant<br/>for Legacy SaaS Apps</h1>
+  <h1>Rails Upgrade Consultant for Production Ruby on Rails Apps</h1>
   <p class="hero-sub">
-    Upgrade your Rails application with less production risk. I help SaaS teams plan and execute Rails 6.x and Rails 7.x upgrades across older codebases, fragile dependencies, background jobs, caching, and deployment workflows.
+    Upgrading a live Rails application is rarely just a version bump. I help SaaS teams plan, de-risk, and execute Ruby on Rails upgrades — including dependency review, framework defaults, Sidekiq and Redis compatibility, deployment planning, and rollback preparation.
   </p>
   <div class="hero-ctas">
-    <a href="mailto:abhishekka3193@gmail.com?subject=Rails%20upgrade%20consultation" class="btn-primary-sr">Book a Rails upgrade consultation</a>
-    <a href="/services/index.html" class="btn-secondary-sr">View all Rails services</a>
+    <a href="mailto:abhishekka3193@gmail.com?subject=Rails%20upgrade%20consultation&body=Current%20Rails%20version%3A%0ATarget%20Rails%20version%3A%0ARuby%20version%3A%0ABiggest%20upgrade%20concern%3A%0ADoes%20the%20app%20have%20tests%3F%20%28yes%2Fno%2Fpartial%29%0AUses%20Sidekiq%2FRedis%2Fcaching%2FActiveStorage%3F%20%28yes%2Fno%29%0AShort%20description%20of%20the%20app%3A%0A" class="btn-primary-sr">Request a Rails Upgrade Audit</a>
+    <a href="#rails-upgrade-audit" class="btn-secondary-sr">See what the audit includes</a>
   </div>
   <p class="hero-availability">
-    Available for US, UK, Europe, Canada, Singapore, and remote-first teams.
+    Remote Rails upgrade consulting for teams in the US, UK, Europe, Canada, Australia, and Singapore.
   </p>
 </section>
 
 <section class="section section-tinted">
-  <h2>Rails upgrades become risky when the app has been running for years</h2>
+  <h2>This page is for teams running an older Rails app in production</h2>
   <p class="section-lead">
-    Older Rails apps usually carry old gems, custom patches, limited tests, unclear ownership, fragile background jobs, layered caching, hand-rolled deployment scripts, and production behavior that is hard to reproduce locally. Each one of those is a small upgrade risk on its own — together, they're what stalls upgrades for months.
+    Most of the Rails upgrade work I take on looks similar: a Rails 5, Rails 6, or Rails 7 app that has been running for years, carries old gems and custom patches, has uneven test coverage, and runs real customer traffic. The team knows the upgrade needs to happen — they just can't afford to break production while doing it.
   </p>
   <ul class="problem-grid">
-    <li>Rails version is behind and blocking new work</li>
-    <li>Upgrade has started but keeps breaking things</li>
-    <li>There is little or no test coverage</li>
-    <li>Old gems or dependencies are no longer maintained</li>
-    <li><code>new_framework_defaults</code> changes are unclear</li>
-    <li>Sidekiq, Redis, ActiveStorage, or caching may break</li>
-    <li>Worried about production deployment and rollback</li>
-    <li>Senior Rails developer left — nobody fully owns the upgrade</li>
+    <li>Running Rails 5, Rails 6, or Rails 7 and falling behind</li>
+    <li>Production risk is the real blocker, not the code change</li>
+    <li>Old or unmaintained gems in the Gemfile</li>
+    <li>Limited or unreliable test coverage on critical paths</li>
+    <li>Sidekiq and background jobs in the upgrade path</li>
+    <li>Redis, caching, and session/cookie concerns</li>
+    <li>Unclear deployment and rollback story</li>
+    <li>Original senior Rails developer has left the team</li>
   </ul>
 </section>
 
 <section class="section">
-  <h2>What I help with</h2>
+  <h2>Rails upgrade paths I can help with</h2>
   <p class="section-lead">
-    Four areas covered on every Rails upgrade engagement. Some projects need all of them, some need only one or two — the audit decides.
+    Most engagements fall into one of these upgrade paths. The shape of the work is similar across versions — what changes is which framework defaults, gems, and runtime behaviors carry the most risk.
   </p>
 
   <div class="help-grid">
 
     <div class="help-card">
-      <span class="help-tag">A — Planning</span>
-      <h3>Upgrade planning</h3>
+      <span class="help-tag">Rails 6 → Rails 7</span>
+      <h3>Rails 6 to Rails 7 upgrade</h3>
       <ul class="check-list check-list--single">
-        <li>Current Rails and Ruby version review</li>
-        <li>Gem and dependency audit</li>
-        <li>Risk areas identified before touching code</li>
-        <li>Upgrade path and step-by-step sequencing</li>
+        <li>Zeitwerk, Webpacker → importmaps / jsbundling / cssbundling decisions</li>
+        <li><code>new_framework_defaults</code> staged enablement across 7.0 and 7.1</li>
+        <li>ActiveStorage, ActionMailer, and ActiveRecord behavior changes</li>
+        <li>Gem dependency cleanup before crossing the version</li>
       </ul>
     </div>
 
     <div class="help-card">
-      <span class="help-tag">B — Framework</span>
-      <h3>Framework defaults &amp; config changes</h3>
+      <span class="help-tag">Rails 7 → Rails 8</span>
+      <h3>Rails 7 to Rails 8 readiness</h3>
       <ul class="check-list check-list--single">
-        <li><code>new_framework_defaults</code> review and staged enablement</li>
-        <li>Config changes between Rails versions</li>
-        <li>Digest and hash changes (sessions, cookies, signed IDs)</li>
-        <li>Mailer and ActiveSupport behavior changes</li>
+        <li>Ruby version compatibility and bump planning</li>
+        <li>Rails 8 framework defaults reviewed and staged</li>
+        <li>Solid Queue / Solid Cache / Solid Cable considerations against your existing Sidekiq and Redis setup</li>
+        <li>Deprecations and behavior changes that hit production code</li>
       </ul>
     </div>
 
     <div class="help-card">
-      <span class="help-tag">C — Production</span>
-      <h3>Production-risk review</h3>
+      <span class="help-tag">Rails 5 → Rails 6/7</span>
+      <h3>Rails 5 to Rails 6 or Rails 7 upgrade</h3>
       <ul class="check-list check-list--single">
-        <li>Deployment flow and release process</li>
-        <li>Rollback plan and recovery checklist</li>
-        <li>Logs, metrics, and monitoring coverage</li>
-        <li>Smoke checks and high-risk user flows</li>
+        <li>Ruby version path (often 2.5 / 2.6 → 3.x) sequenced before Rails</li>
+        <li>Zeitwerk autoloading migration and constant resolution issues</li>
+        <li>Long dependency chains: Devise, Sidekiq, Paperclip, Rails-Settings, etc.</li>
+        <li>Step-by-step version bumps instead of one large jump</li>
       </ul>
     </div>
 
     <div class="help-card">
-      <span class="help-tag">D — Infrastructure</span>
-      <h3>Background jobs, caching &amp; storage</h3>
+      <span class="help-tag">Cross-cutting</span>
+      <h3>Ruby, gems, and framework defaults</h3>
       <ul class="check-list check-list--single">
-        <li>Sidekiq and Redis compatibility with target version</li>
-        <li>Cache key and expiry risks under new defaults</li>
-        <li>ActiveStorage and image processing checks</li>
-        <li>Vips vs MiniMagick considerations where relevant</li>
+        <li>Ruby version compatibility across the upgrade window</li>
+        <li>Gemfile audit and dependency cleanup</li>
+        <li>Framework defaults and config changes between versions</li>
+        <li>Digest, hash, session, cookie, and signed-ID behavior changes</li>
       </ul>
     </div>
 
   </div>
 </section>
 
+<section id="rails-upgrade-audit" class="section section-tinted">
+  <h2>Start with a Rails Upgrade Audit</h2>
+  <p class="section-lead">
+    For most teams, the right first step is not the upgrade itself — it's a focused audit. The Rails Upgrade Audit gives you a clear picture of what the upgrade actually involves on your codebase, where the production risk lives, and what sequence makes sense before any code is changed.
+  </p>
+
+  <ul class="experience-list">
+    <li>Current Rails and Ruby version review, with the realistic target versions</li>
+    <li>Gemfile and dependency risk review — what is safe, what needs to be replaced, what is abandoned</li>
+    <li>Test coverage risk review on the paths that matter most in production</li>
+    <li>Deprecated APIs and framework defaults review (<code>new_framework_defaults</code> and related config)</li>
+    <li>Sidekiq and background job compatibility against the target Rails and Ruby versions</li>
+    <li>Redis, caching, session, and cookie risk areas (digest and serializer changes between versions)</li>
+    <li>Deployment and rollback plan tailored to your release process</li>
+    <li>Suggested upgrade sequence — one version at a time, or staged where it's safer</li>
+    <li>Estimated complexity, effort range, and concrete next steps</li>
+  </ul>
+
+  <p class="section-lead" style="margin-top: 1.5rem;">
+    The audit is usually the first engagement. If you decide to move forward, the same plan becomes the basis for the hands-on upgrade work.
+  </p>
+</section>
+
+<section class="section">
+  <h2>Common Rails upgrade problems I see</h2>
+  <p class="section-lead">
+    These are the patterns that come up on most Rails upgrade calls. If any of them sound familiar, an audit is usually the fastest way to get unstuck.
+  </p>
+  <ul class="problem-grid">
+    <li>The upgrade was started months ago and got stuck halfway</li>
+    <li><code>bundle update</code> keeps producing dependency conflicts</li>
+    <li>Tests are missing, slow, or no longer trusted</li>
+    <li><code>new_framework_defaults</code> changes aren't well understood</li>
+    <li>Production behavior is hard to reproduce in development</li>
+    <li>Sidekiq, Redis, caching, mailers, or ActiveStorage might break and nobody's sure where</li>
+    <li>The senior Rails developer who knew the app has left</li>
+    <li>The team is hesitant to deploy because the rollback story is weak</li>
+  </ul>
+</section>
+
 <section class="section section-tinted">
-  <h2>How a Rails upgrade engagement usually starts</h2>
+  <h2>What the engagement looks like</h2>
   <div class="process-block">
     <p style="margin: 0;">
-      Most upgrade work starts with a short technical review. I look at the Rails and Ruby versions, the Gemfile, framework defaults, background jobs, caching, deployment flow, and known production risks. After that, I provide a practical upgrade path — what to change first, what to test, what to monitor, and how to reduce deployment risk on the way through.
+      Most projects start with the Rails Upgrade Audit — a short, focused review of the codebase, Gemfile, framework defaults, background jobs, caching, and deployment flow. From there, I either hand back a written plan your team executes, or I stay on and do the upgrade work with you: staged version bumps, framework defaults enabled in order, dependency cleanup, and a deployment and rollback plan that fits how you ship.
     </p>
   </div>
 </section>
@@ -125,32 +167,42 @@ keywords:
     Concrete deliverables, not a slide deck.
   </p>
   <ul class="experience-list">
-    <li>Upgrade risk assessment for your specific app</li>
-    <li>Prioritized upgrade plan with staged steps</li>
-    <li>Gem and dependency notes — what to replace, what to keep</li>
-    <li>Framework default and config review</li>
-    <li>Deployment and rollback checklist</li>
-    <li>Hands-on help implementing the upgrade changes if needed</li>
-    <li>Written notes and clear next steps for your team</li>
+    <li>A written Rails upgrade plan specific to your app</li>
+    <li>Gem and dependency notes — what to replace, what to keep, what to drop</li>
+    <li>Framework defaults and config review with a staged enablement order</li>
+    <li>Sidekiq, Redis, caching, and ActiveStorage risk notes</li>
+    <li>Deployment and rollback checklist for the upgrade release</li>
+    <li>Hands-on upgrade work alongside your team where it's useful</li>
+    <li>Clear next steps your team can own after the engagement</li>
   </ul>
 </section>
 
 <section class="section section-tinted">
   <h2>This is a good fit if</h2>
   <ul class="experience-list">
-    <li>You have an existing Rails SaaS app running in production</li>
-    <li>You are on Rails 5, 6, or early Rails 7 and need to move forward</li>
-    <li>You have limited test coverage on the critical paths</li>
+    <li>You run an existing Ruby on Rails app in production</li>
+    <li>You're on Rails 5, Rails 6, or Rails 7 and need to move forward</li>
+    <li>Test coverage on critical paths is partial or unreliable</li>
     <li>You use Sidekiq, Redis, caching, or ActiveStorage</li>
-    <li>Your team needs senior Rails help without hiring full-time</li>
-    <li>You want a practical upgrade plan — not a rewrite</li>
+    <li>You need senior Rails upgrade help without hiring full-time</li>
+    <li>You want a practical Rails upgrade — not a rewrite</li>
   </ul>
+</section>
+
+<section class="section">
+  <h2>Why work with SparkRails?</h2>
+  <p class="section-lead">
+    I work directly on production Rails codebases, not just audit slides. My focus is reducing upgrade risk before touching the main branch — dependencies, framework defaults, background jobs, caching, deployment, rollback, and the parts of the app that are hardest to test locally.
+  </p>
+  <p class="section-lead">
+    Senior, independent, remote. No team to staff, no hand-offs — the person scoping the upgrade is the person writing the code.
+  </p>
 </section>
 
 <div class="cta-band">
   <h2>Planning a Rails upgrade?</h2>
   <p>
-    Send me a short description of your current Rails version, target version, and biggest concern. I'll reply with the most sensible next step.
+    Send a short note with your current Rails version, target Rails version, Ruby version, the biggest concern on your mind, whether the app has tests, and whether it uses Sidekiq, Redis, caching, or ActiveStorage. I'll reply with the most sensible next step — usually whether a Rails Upgrade Audit makes sense first.
   </p>
-  <a href="mailto:abhishekka3193@gmail.com?subject=Rails%20upgrade%20consultation" class="btn-primary-sr">Book a Rails upgrade consultation</a>
+  <a href="mailto:abhishekka3193@gmail.com?subject=Rails%20upgrade%20consultation&body=Current%20Rails%20version%3A%0ATarget%20Rails%20version%3A%0ARuby%20version%3A%0ABiggest%20upgrade%20concern%3A%0ADoes%20the%20app%20have%20tests%3F%20%28yes%2Fno%2Fpartial%29%0AUses%20Sidekiq%2FRedis%2Fcaching%2FActiveStorage%3F%20%28yes%2Fno%29%0AShort%20description%20of%20the%20app%3A%0A" class="btn-primary-sr">Request a Rails Upgrade Audit</a>
 </div>
