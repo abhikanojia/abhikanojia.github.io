@@ -56,22 +56,22 @@ sitemap:
   </aside>
 
   <main class="gh-main">
-    <nav class="gh-tabs" role="tablist">
-      <button class="gh-tab gh-tab-active" type="button" role="tab" data-tab="overview" aria-selected="true">
+    <nav class="gh-tabs">
+      <a class="gh-tab gh-tab-active" href="#overview" data-target="overview">
         <i class="fa fa-book"></i> Overview
-      </button>
-      <button class="gh-tab" type="button" role="tab" data-tab="experience" aria-selected="false">
+      </a>
+      <a class="gh-tab" href="#experience" data-target="experience">
         <i class="fa fa-cubes"></i> Experience <span class="gh-count">4</span>
-      </button>
-      <button class="gh-tab" type="button" role="tab" data-tab="opensource" aria-selected="false">
+      </a>
+      <a class="gh-tab" href="#opensource" data-target="opensource">
         <i class="fa fa-code"></i> Open Source <span class="gh-count">3</span>
-      </button>
-      <button class="gh-tab" type="button" role="tab" data-tab="education" aria-selected="false">
+      </a>
+      <a class="gh-tab" href="#education" data-target="education">
         <i class="fa fa-graduation-cap"></i> Education
-      </button>
+      </a>
     </nav>
 
-    <div class="gh-panel gh-panel-active" data-panel="overview" role="tabpanel">
+    <div class="gh-panel" id="overview">
       <section class="gh-readme">
         <div class="gh-readme-header">
           <i class="fa fa-book"></i>
@@ -149,7 +149,7 @@ sitemap:
       </section>
     </div>
 
-    <div class="gh-panel" data-panel="experience" role="tabpanel" hidden>
+    <div class="gh-panel" id="experience">
       <section class="gh-pinned">
         <h2 class="gh-section-heading">Pinned <span class="gh-section-sub">— Experience</span></h2>
         <div class="gh-pin-grid">
@@ -222,7 +222,7 @@ sitemap:
       </section>
     </div>
 
-    <div class="gh-panel" data-panel="opensource" role="tabpanel" hidden>
+    <div class="gh-panel" id="opensource">
       <section class="gh-pinned">
         <h2 class="gh-section-heading">Open-source gems <span class="gh-section-sub">— Pinned repositories</span></h2>
         <div class="gh-pin-grid">
@@ -279,7 +279,7 @@ sitemap:
       </section>
     </div>
 
-    <div class="gh-panel" data-panel="education" role="tabpanel" hidden>
+    <div class="gh-panel" id="education">
       <section class="gh-education">
         <h2 class="gh-section-heading">Education</h2>
         <article class="gh-edu-item">
@@ -306,26 +306,32 @@ sitemap:
 
 <script>
 (function () {
-  var tabs = document.querySelectorAll('.gh-tab');
-  var panels = document.querySelectorAll('.gh-panel');
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.gh-tab'));
+  var byId = {};
   tabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      var target = tab.getAttribute('data-tab');
-      tabs.forEach(function (t) {
-        var active = t === tab;
-        t.classList.toggle('gh-tab-active', active);
-        t.setAttribute('aria-selected', active ? 'true' : 'false');
-      });
-      panels.forEach(function (p) {
-        var match = p.getAttribute('data-panel') === target;
-        p.classList.toggle('gh-panel-active', match);
-        if (match) {
-          p.removeAttribute('hidden');
-        } else {
-          p.setAttribute('hidden', '');
-        }
-      });
-    });
+    var id = tab.getAttribute('data-target');
+    var panel = document.getElementById(id);
+    if (panel) byId[id] = { tab: tab, panel: panel };
   });
+
+  function setActive(id) {
+    tabs.forEach(function (t) {
+      var active = t.getAttribute('data-target') === id;
+      t.classList.toggle('gh-tab-active', active);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, {
+      // Trigger when section crosses just below the sticky tab bar
+      rootMargin: '-120px 0px -55% 0px',
+      threshold: 0
+    });
+    Object.keys(byId).forEach(function (id) { observer.observe(byId[id].panel); });
+  }
 })();
 </script>

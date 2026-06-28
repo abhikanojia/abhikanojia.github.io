@@ -3,6 +3,8 @@
 /* Hide site header banner on the CV page only — this stylesheet is only loaded here */
 .header { display: none !important; }
 
+html { scroll-behavior: smooth; }
+
 .gh-profile {
   display: grid;
   grid-template-columns: 296px 1fr;
@@ -179,6 +181,11 @@
   border-bottom: 1px solid #d0d7de;
   margin-bottom: 24px;
   overflow-x: auto;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+  padding-top: 8px;
 }
 .gh-tab {
   display: inline-flex;
@@ -205,8 +212,10 @@
 }
 .gh-tab-active:hover { background: transparent; }
 
-.gh-panel { display: none; }
-.gh-panel-active { display: block; }
+.gh-panel {
+  scroll-margin-top: 72px;
+  margin-bottom: 8px;
+}
 .gh-count {
   background: #eaeef2;
   color: #1f2328;
