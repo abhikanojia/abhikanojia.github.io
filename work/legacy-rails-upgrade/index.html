@@ -1,0 +1,164 @@
+---
+layout: page
+title: "Safely Upgrading a Legacy Rails Application — Case Study"
+hide_page_title: true
+description: "Case study on incrementally upgrading a production Ruby on Rails application across major framework versions — Rails 6.1 to Rails 7.1 — with limited test coverage and a focus on reducing upgrade risk."
+permalink: /work/legacy-rails-upgrade/
+sitemap:
+  priority: 0.7
+keywords:
+  - Rails upgrade case study
+  - legacy Rails upgrade
+  - Rails 6.1 to Rails 7
+  - Rails 7.0 to 7.1 upgrade
+  - production Rails upgrade
+  - incremental Rails upgrade
+  - Ruby on Rails consulting case study
+---
+
+<section class="hero">
+  <h1>Safely Upgrading a Legacy Rails Application</h1>
+  <p class="hero-sub">
+    How a staged upgrade approach reduced risk when moving a production Ruby on Rails application across major framework versions.
+  </p>
+  <p class="case-study-meta">
+    Case study &middot; Rails upgrade &middot; Production system
+  </p>
+</section>
+
+<article class="case-study post-container">
+
+  <p class="case-study-lead">
+    Client identity, business details and proprietary code have been omitted. The sequence of versions, the kinds of issues encountered, and the reasoning behind the approach reflect the actual engagement.
+  </p>
+
+  <h2>Background</h2>
+  <p>
+    This application had been running in production for several years. It had a steady stream of real users, the kind of integrations a long-lived SaaS accumulates, and a codebase shaped by many hands over time. Nothing dramatic — just a mature Rails app doing useful work.
+  </p>
+  <p>
+    Automated test coverage was limited. Some parts of the codebase had reasonable specs; others had almost none. That alone meant any framework upgrade carried more risk than it would in a well-tested codebase, because the safety net you would normally lean on during a Rails upgrade — running the full suite and trusting it — was not fully available.
+  </p>
+  <p>
+    The starting version was Rails 6.1, and the goal was to move the application onto a current, supported Rails version. The natural temptation in that situation is to jump straight to the newest release. We chose not to.
+  </p>
+
+  <h2>The Upgrade Path</h2>
+  <p>
+    The upgrade was performed as a sequence of smaller, independently shippable steps:
+  </p>
+  <ol>
+    <li>Rails 6.1 → latest stable Rails 6.1 patch release</li>
+    <li>Rails 6.1 → Rails 7.0</li>
+    <li>Rails 7.0 → latest stable Rails 7.0 patch release</li>
+    <li>Rails 7.0 → Rails 7.1</li>
+  </ol>
+  <p>
+    Each step had the same structure: resolve gem compatibility, work through deprecation warnings, review framework defaults, verify the app boots cleanly, validate background jobs, look at deployment concerns, and only then move on. The pattern is unremarkable on its own — what mattered was applying it consistently rather than collapsing several steps into one.
+  </p>
+
+  <h3>Step 1: Latest patch release of Rails 6.1</h3>
+  <p>
+    Before changing the major version at all, the app was moved to the latest patch release of its current Rails line. This is the cheapest, lowest-risk change in any upgrade plan: same framework defaults, same APIs, mostly bug and security fixes. It also surfaces the gems that aren't keeping up with their own patch releases, which is useful information for the steps that follow.
+  </p>
+
+  <h3>Step 2: Rails 6.1 → Rails 7.0</h3>
+  <p>
+    This was the largest functional jump. Rails 7.0 introduced changes that touch areas almost every app cares about — Zeitwerk-only autoloading, changes around <code>ActiveSupport::Cache</code>, the new asset pipeline story, and a long list of <code>new_framework_defaults</code> entries. The point of doing this jump on its own, rather than bundled with a 7.1 jump, was to keep the diff and the review surface focused on one set of upstream changes.
+  </p>
+  <p>
+    A handful of gems needed to be updated, replaced, or pinned. A few initializers needed adjustments. The new framework defaults were not switched on wholesale — they were reviewed entry by entry and enabled deliberately, with the ability to defer any that were not safe to flip immediately.
+  </p>
+
+  <h3>Step 3: Latest patch release of Rails 7.0</h3>
+  <p>
+    Once the app was running on 7.0 in production and behaving well, moving to the latest 7.0 patch release was again a small, low-risk step. It also picked up small fixes that made the 7.1 jump cleaner. Doing this as its own step kept the next change focused on the 7.1 differences, not "everything that changed in 7.0.x plus everything that changed in 7.1."
+  </p>
+
+  <h3>Step 4: Rails 7.0 → Rails 7.1</h3>
+  <p>
+    By the time the 7.1 upgrade happened, most of the moving parts — gem versions, autoloading, framework defaults — had already been brought up to date. The remaining work was the genuine 7.0 → 7.1 surface: a smaller set of deprecations, a few new defaults to review, and a handful of gem version bumps. With the rest of the noise already cleared, this step was much easier to reason about than it would have been as part of one large jump.
+  </p>
+
+  <h2>Why Incremental, Not One Big Jump</h2>
+  <p>
+    The most common question on a project like this is whether all of that staging is really worth it. Going from 6.1 to 7.1 in a single branch is technically possible, and on a well-tested app it can be reasonable. On this codebase, with limited test coverage, it would have meant accepting all of the following at once:
+  </p>
+  <ul>
+    <li><strong>A compatibility surface that spans two major versions.</strong> If something breaks, it could be a 6.1 → 7.0 change, a 7.0 → 7.1 change, or a gem that updated across the same window. Each step we collapsed made root-cause analysis harder.</li>
+    <li><strong>A review diff that is hard for anyone else to evaluate.</strong> Smaller steps produced PRs that another engineer on the team could actually review with attention. A single mega-PR tends to get a quick scroll and a thumbs-up.</li>
+    <li><strong>Rollback that is all-or-nothing.</strong> If a problem only became visible in production days after the deploy, rolling back a single combined upgrade reverts every change made along the way. Rolling back one stage at a time keeps the safe ground from the previous stage intact.</li>
+    <li><strong>Less confidence after each shipped stage.</strong> With each successful deploy on the new version, the team learned something about how the app behaves on it — caching, mailers, background jobs, edge cases in real user traffic. That accumulated confidence is hard to get from a single large jump.</li>
+  </ul>
+  <p>
+    The trade-off is honest: an incremental upgrade is more deploys, more coordination, and more elapsed time. On a production system with limited tests, that's usually the right trade.
+  </p>
+
+  <h2>Technical Challenges</h2>
+  <p>
+    Nothing here is exotic — most of these come up on almost any non-trivial Rails upgrade, and the value is in working through them deliberately rather than in any single trick.
+  </p>
+
+  <h3>Gem compatibility</h3>
+  <p>
+    Older apps tend to depend on at least a few gems whose own release cadence has slowed down. Some have new releases that support the target Rails version, some need to be replaced with a maintained alternative, and a small number can be carefully pinned for now and revisited later. Doing this work in stages, rather than across two major Rails versions at once, kept the Gemfile changes per step small enough to reason about.
+  </p>
+
+  <h3>Deprecation warnings</h3>
+  <p>
+    Each step was treated as the right time to address that version's deprecations — not the next one's. Deprecations from 6.1 were resolved before moving to 7.0; deprecations introduced in 7.0 were resolved before moving to 7.1. Carrying deprecation noise forward makes it harder to see when something genuinely new is wrong.
+  </p>
+
+  <h3>Framework defaults</h3>
+  <p>
+    <code>config.load_defaults</code> and the <code>new_framework_defaults_*.rb</code> initializers are easy to skim over and easy to break things with. Each entry was reviewed individually, with a conscious choice about whether to enable it at the same time as the upgrade, defer it, or roll it out on its own afterwards. This separates "running on Rails 7.x" from "running on Rails 7.x's defaults" — two things that don't have to ship together.
+  </p>
+
+  <h3>Initializers and configuration</h3>
+  <p>
+    Long-lived apps tend to accumulate initializers that quietly depend on internal Rails behavior. Some of these needed adjustments; a few were no longer necessary and could be removed. Doing this cleanup as part of the upgrade rather than separately reduced the chance of a config drifting back into a broken state.
+  </p>
+
+  <h3>Background jobs and Sidekiq</h3>
+  <p>
+    Background jobs are easy to leave for last and then regret. Sidekiq and the ActiveJob adapter were checked against each target Rails version, the job classes were exercised in a non-production environment, and the queue and retry behavior was watched on the first production deploy of each stage. Background-job regressions are often silent — no exception in the request cycle, just work that quietly does not happen — so they deserve explicit attention.
+  </p>
+
+  <h3>Ruby version</h3>
+  <p>
+    Ruby upgrades were treated as their own steps, sequenced alongside the Rails work rather than bundled into the same change. Conflating a Ruby upgrade with a Rails upgrade is a good way to spend a long time bisecting an issue that could have been caught in either layer independently.
+  </p>
+
+  <h2>Lessons</h2>
+  <p>
+    Some of these are obvious in hindsight and worth restating anyway:
+  </p>
+  <ul>
+    <li><strong>Small upgrades are easier to reason about than large ones.</strong> Not just to write, but to review, to roll back, and to debug a week later when a subtle behavior change shows up in production.</li>
+    <li><strong>Release notes are worth reading carefully.</strong> Most of the time spent on an upgrade is on the issues you didn't anticipate. Anything the Rails team has already documented is the cheapest possible debugging.</li>
+    <li><strong>Dependencies want to be kept current.</strong> Catching up after several years of skipped upgrades is significantly more expensive than upgrading along the way. The cost compounds quietly.</li>
+    <li><strong>Framework defaults deserve a deliberate decision, not a default one.</strong> Accepting the new defaults wholesale, on the same deploy that changes the framework version, mixes two unrelated risks together.</li>
+    <li><strong>Deployment strategy matters as much as the code.</strong> A clean upgrade branch that goes out in a high-risk deploy is still a high-risk change. Time of day, rollback plan, and what to watch in the logs are part of the upgrade, not separate from it.</li>
+  </ul>
+
+  <h2>Key Takeaways</h2>
+  <p>
+    For an engineering manager or CTO evaluating an upcoming Rails upgrade, the practical points worth carrying out of this:
+  </p>
+  <ul>
+    <li>The right question is rarely "how fast can we get to the latest Rails?" It is "how do we get there without putting the application at risk?" Those are different problems.</li>
+    <li>On apps with limited test coverage, smaller upgrade steps are not just preferable, they are the main way to keep risk manageable. Each shipped stage is a checkpoint you can stand on.</li>
+    <li>Framework upgrades, framework defaults, gem upgrades, and Ruby upgrades are separable. Treating them as separate decisions makes each one easier to reason about and easier to undo.</li>
+    <li>The cost of an upgrade is dominated by surprises. Anything that makes surprises easier to isolate — smaller diffs, smaller deploys, deliberate default changes — pays for itself.</li>
+  </ul>
+
+</article>
+
+<div class="case-study-cta">
+  <p>
+    If your Rails application is several versions behind, I help teams plan and execute upgrades while keeping production risk under control. Feel free to <a href="mailto:abhishekka3193@gmail.com?subject=Rails%20upgrade%20consultation">get in touch</a> if you're evaluating an upcoming Rails upgrade.
+  </p>
+  <p class="case-study-cta__back">
+    <a href="/work/">&larr; Back to all case studies</a>
+  </p>
+</div>
