@@ -758,3 +758,219 @@
   .post-container pre { padding: 12px 14px; font-size: 13px; }
   .post-container pre code { font-size: 13px; }
 }
+
+/* ---------- ActiveRecord Cookbook ---------- */
+
+.cookbook-hero h1 {
+  font-size: 42px;
+}
+.cookbook-intro {
+  border-top: 1px solid #f0eef0;
+  padding: 48px 0 24px;
+}
+.cookbook-prose {
+  max-width: 780px;
+  margin: 0 auto;
+  font-size: 17px;
+  line-height: 1.75;
+  color: #2a2a35;
+}
+.cookbook-prose p { margin: 0 0 16px; }
+.cookbook-prose p:last-child { margin-bottom: 0; }
+
+.cookbook-toc {
+  padding: 40px 0 48px;
+  border-top: 1px solid #f0eef0;
+}
+.cookbook-toc h2 {
+  font-size: 24px;
+  text-align: center;
+  margin: 0 0 28px;
+  color: #0a0a14;
+}
+.toc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 40px;
+  max-width: 960px;
+  margin: 0 auto;
+  background: #fbf8f9;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  padding: 28px 32px;
+}
+.toc-column h3 {
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #873d48;
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+.toc-column ol {
+  list-style: decimal inside;
+  padding: 0;
+  margin: 0;
+  color: #4a4a55;
+}
+.toc-column li {
+  padding: 4px 0;
+  font-size: 15px;
+}
+.toc-column a {
+  color: #2a2a35;
+  text-decoration: none;
+}
+.toc-column a:hover {
+  color: #873d48;
+  text-decoration: underline;
+}
+
+.cookbook-section {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+.cookbook-section > h2 {
+  font-size: 30px;
+  margin: 0 0 8px;
+}
+
+.recipe {
+  max-width: 880px;
+  margin: 40px auto 0;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  padding: 28px 32px 24px;
+  box-shadow: 0 1px 2px rgba(10,10,20,0.02);
+}
+.recipe:first-of-type {
+  margin-top: 24px;
+}
+.recipe-head {
+  border-bottom: 1px solid #f0eef0;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
+.recipe-head h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0a0a14;
+  margin: 0;
+  letter-spacing: -0.2px;
+  font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+}
+.anchor-link {
+  color: #d9c1c5;
+  text-decoration: none;
+  margin-right: 6px;
+}
+.anchor-link:hover {
+  color: #873d48;
+}
+.recipe h4 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #873d48;
+  margin: 22px 0 8px;
+  font-weight: 700;
+}
+.recipe p {
+  color: #2a2a35;
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0 0 10px;
+}
+.recipe ul {
+  margin: 0 0 6px;
+  padding-left: 22px;
+  color: #2a2a35;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.recipe ul li { margin: 4px 0; }
+.recipe code {
+  background: #f4eef0;
+  color: #6d2f39;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+.code-wrap {
+  position: relative;
+  margin: 6px 0 4px;
+}
+.code-wrap--models {
+  max-width: 880px;
+  margin: 0 auto 24px;
+}
+.code-wrap pre {
+  background: #0f1220;
+  color: #e6e6ef;
+  border-radius: 8px;
+  padding: 16px 18px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+.code-wrap pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: 14px;
+  font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255,255,255,0.08);
+  color: #f0e4e7;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.copy-btn:hover {
+  background: rgba(255,255,255,0.16);
+  color: #fff;
+}
+
+.cookbook-conclusion {
+  padding-top: 56px;
+  padding-bottom: 24px;
+}
+.cookbook-conclusion h2 {
+  font-size: 26px;
+  text-align: center;
+  margin: 0 0 20px;
+}
+.cookbook-cta {
+  max-width: 880px;
+  margin: 40px auto 0;
+}
+
+@media (max-width: 768px) {
+  .cookbook-hero h1 { font-size: 30px; }
+  .toc-grid {
+    grid-template-columns: 1fr;
+    padding: 22px 20px;
+  }
+  .recipe {
+    padding: 22px 20px 18px;
+    border-radius: 8px;
+  }
+  .recipe-head h3 { font-size: 19px; }
+  .recipe h4 { font-size: 12px; }
+  .code-wrap pre { font-size: 13px; padding: 14px 14px; }
+  .copy-btn { top: 6px; right: 6px; font-size: 11px; padding: 3px 8px; }
+  .cookbook-section > h2 { font-size: 24px; }
+}

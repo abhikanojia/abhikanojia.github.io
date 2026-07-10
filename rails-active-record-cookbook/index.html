@@ -1,0 +1,1335 @@
+---
+layout: page
+title: Ruby on Rails ActiveRecord Cookbook
+hide_page_title: true
+description: "A practical, growing ActiveRecord cookbook for production Rails apps. Finder methods, association queries, generated SQL, performance notes, and common mistakes — tested against Rails 7+."
+permalink: /rails-active-record-cookbook/
+sitemap:
+  priority: 0.9
+keywords:
+  - ActiveRecord cookbook
+  - Rails ActiveRecord
+  - Rails 7 ActiveRecord
+  - ActiveRecord finder methods
+  - ActiveRecord association queries
+  - Rails query performance
+  - find_each
+  - find_in_batches
+  - pluck
+  - joins vs left_joins
+  - Rails N+1
+---
+
+<section class="hero cookbook-hero">
+  <h1>Ruby on Rails<br/>ActiveRecord Cookbook</h1>
+  <p class="hero-sub">
+    A practical, growing reference of ActiveRecord recipes for production Rails apps — with generated SQL, performance notes, and the mistakes that keep showing up in code review.
+  </p>
+  <div class="hero-ctas">
+    <a href="#toc" class="btn-primary-sr">Jump to recipes</a>
+    <a href="/blog/index.html" class="btn-secondary-sr">Read the blog</a>
+  </div>
+  <p class="hero-availability">
+    Tested against modern Rails (7+). Updated as the codebase catches new patterns.
+  </p>
+</section>
+
+<section class="section cookbook-intro">
+  <div class="cookbook-prose">
+    <p>
+      This is a living ActiveRecord cookbook. Instead of a full API reference, it collects the exact recipes that come up while shipping and maintaining Rails applications — the ones that usually send developers to Stack Overflow or the Rails guides in the middle of a task.
+    </p>
+    <p>
+      Every example is written the way it would look in a production codebase. Where the generated SQL clarifies behavior, it is included. Where a query has a common misuse or a faster alternative, that is called out as well.
+    </p>
+    <p>
+      Phase 1 covers <strong>finder methods</strong> and <strong>association queries</strong>. More sections — filtering, ordering, aggregations, updates, deletes, performance, scopes, PostgreSQL, JSONB, and advanced queries — will be added over time.
+    </p>
+  </div>
+</section>
+
+<nav class="section cookbook-toc" id="toc" aria-label="Cookbook table of contents">
+  <h2>Table of Contents</h2>
+  <div class="toc-grid">
+    <div class="toc-column">
+      <h3>1. Finder Methods</h3>
+      <ol>
+        <li><a href="#find">find</a></li>
+        <li><a href="#find_by">find_by</a></li>
+        <li><a href="#find_by_bang">find_by!</a></li>
+        <li><a href="#first">first</a></li>
+        <li><a href="#last">last</a></li>
+        <li><a href="#take">take</a></li>
+        <li><a href="#sole">sole</a></li>
+        <li><a href="#exists">exists?</a></li>
+        <li><a href="#ids">ids</a></li>
+        <li><a href="#pick">pick</a></li>
+        <li><a href="#pluck">pluck</a></li>
+        <li><a href="#select">select</a></li>
+        <li><a href="#find_each">find_each</a></li>
+        <li><a href="#find_in_batches">find_in_batches</a></li>
+      </ol>
+    </div>
+    <div class="toc-column">
+      <h3>2. Association Queries</h3>
+      <ol>
+        <li><a href="#parents-without-children">Parents without children</a></li>
+        <li><a href="#parents-with-children">Parents with children</a></li>
+        <li><a href="#parents-with-one-child">Parents with exactly one child</a></li>
+        <li><a href="#parents-with-more-than-one-child">Parents with more than one child</a></li>
+        <li><a href="#parents-with-more-than-n">Parents with more than N children</a></li>
+        <li><a href="#parents-with-fewer-than-n">Parents with fewer than N children</a></li>
+        <li><a href="#parents-ordered-by-child-count">Parents ordered by child count</a></li>
+        <li><a href="#parents-ordered-by-recent-child">Parents ordered by most recent child</a></li>
+        <li><a href="#parents-with-children-today">Parents with children created today</a></li>
+        <li><a href="#parents-with-matching-children">Parents whose children match a condition</a></li>
+        <li><a href="#orphan-children">Orphan children (no parent)</a></li>
+        <li><a href="#duplicate-associations">Find duplicate associations</a></li>
+        <li><a href="#count-children-per-parent">Count children per parent</a></li>
+        <li><a href="#no-active-children">Parents with no active children</a></li>
+        <li><a href="#any-active-children">Parents with at least one active child</a></li>
+        <li><a href="#every-child-matches">Parents where every child matches a condition</a></li>
+        <li><a href="#distinct-parents">Distinct parents through joins</a></li>
+        <li><a href="#joins-vs-left-joins">left_joins vs joins</a></li>
+      </ol>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     SECTION 1 — FINDER METHODS
+     ============================================================ -->
+<section class="section cookbook-section" id="finder-methods">
+  <h2>1. Finder Methods</h2>
+  <p class="section-lead">
+    The everyday query methods that show up in almost every Rails codebase — what they do, what SQL they generate, and where they trip people up.
+  </p>
+
+  <!-- find -->
+  <article class="recipe" id="find">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#find" aria-label="Link to find">#</a> find</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Load a record by primary key, and fail loudly when it is missing.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-find" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-find">User.find(42)
+User.find(1, 2, 3) # returns an array</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-find" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-find">SELECT "users".* FROM "users" WHERE "users"."id" = 42 LIMIT 1;
+SELECT "users".* FROM "users" WHERE "users"."id" IN (1, 2, 3);</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p><code>find</code> is optimized for primary-key lookups and raises <code>ActiveRecord::RecordNotFound</code> when a record is missing, which Rails converts to a 404 in controllers.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Uses the primary key index — always fast.</li>
+      <li>The array form issues a single <code>IN</code> query, not one query per id.</li>
+      <li>Order of records in the array form is not guaranteed to match the input.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Rescuing <code>RecordNotFound</code> to fall back to <code>find_by</code>. Use <code>find_by</code> directly when a nil result is acceptable.</li>
+      <li>Assuming <code>User.find([1, 2, 3])</code> preserves order — sort explicitly if you need it.</li>
+    </ul>
+
+    <h4>Alternative</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-find-alt" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-find-alt">User.find_by(id: 42) # returns nil instead of raising</code></pre>
+    </div>
+  </article>
+
+  <!-- find_by -->
+  <article class="recipe" id="find_by">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#find_by" aria-label="Link to find_by">#</a> find_by</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Fetch the first record matching a condition, or <code>nil</code> if none exists.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-findby" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-findby">User.find_by(email: "jane@example.com")
+User.find_by(email: "jane@example.com", active: true)</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-findby" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-findby">SELECT "users".* FROM "users"
+WHERE "users"."email" = 'jane@example.com'
+LIMIT 1;</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p><code>find_by</code> is a shortcut for <code>where(...).first</code> — one query, single record, no exception.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Ensure the lookup column is indexed. On columns like <code>email</code>, add a unique index.</li>
+      <li>For case-insensitive lookups, prefer a functional index (<code>lower(email)</code>) or a <code>citext</code> column over <code>where("LOWER(email) = ?", ...)</code>.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Chaining <code>.first</code> after <code>find_by</code> — <code>find_by</code> already returns a single record.</li>
+      <li>Using <code>find_by</code> inside a loop instead of a single <code>where(id: ids)</code> query — that is an N+1.</li>
+    </ul>
+  </article>
+
+  <!-- find_by! -->
+  <article class="recipe" id="find_by_bang">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#find_by_bang" aria-label="Link to find_by!">#</a> find_by!</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Fetch a record by attributes and raise if it does not exist.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-findbybang" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-findbybang">User.find_by!(email: params[:email])</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p>Identical to <code>find_by</code>, but raises <code>ActiveRecord::RecordNotFound</code> when nothing is found — which Rails renders as a 404 in controllers, matching the behavior of <code>find</code>.</p>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Using <code>find_by!</code> where a nil result is a valid business outcome — the raised exception becomes a noisy 404 in error trackers.</li>
+    </ul>
+
+    <h4>Alternative</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-findbybang-alt" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-findbybang-alt">user = User.find_by(email: params[:email])
+return head :not_found unless user</code></pre>
+    </div>
+  </article>
+
+  <!-- first -->
+  <article class="recipe" id="first">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#first" aria-label="Link to first">#</a> first</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Return the first record from a relation, ordered by primary key by default.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-first" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-first">User.first
+User.where(active: true).first
+User.order(:created_at).first(3) # returns an array of 3</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-first" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-first">SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1;</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p>When no <code>order</code> is set, <code>first</code> adds <code>ORDER BY primary_key ASC</code> to make the result deterministic.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>The implicit <code>ORDER BY id</code> uses the primary key index and stays fast.</li>
+      <li>If you already applied an <code>order</code>, that ordering is respected instead.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Assuming <code>first</code> respects insertion order without an explicit <code>order</code>. It orders by primary key, which usually — but not always — matches insertion order.</li>
+    </ul>
+  </article>
+
+  <!-- last -->
+  <article class="recipe" id="last">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#last" aria-label="Link to last">#</a> last</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Return the last record of a relation.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-last" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-last">User.last
+User.order(:created_at).last</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-last" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-last">SELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT 1;</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p>Without an explicit <code>order</code>, ActiveRecord reverses <code>ORDER BY id ASC</code> to <code>DESC</code> and takes one row. If you have an <code>order</code> clause, it inverts that instead.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Cheap on the default ordering thanks to the primary key index.</li>
+      <li>Loading <code>last</code> against a large ordered scope may load everything in memory if the relation has already been loaded — call <code>last</code> before <code>.to_a</code>, not after.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Using <code>last</code> to mean "most recently created". If IDs aren't strictly monotonic (UUIDs, sharded ids), that assumption breaks. Use <code>order(created_at: :desc).first</code> when the intent is temporal.</li>
+    </ul>
+  </article>
+
+  <!-- take -->
+  <article class="recipe" id="take">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#take" aria-label="Link to take">#</a> take</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Return a single record without imposing an order.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-take" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-take">User.take
+User.where(active: true).take
+User.take(5) # array of up to 5</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-take" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-take">SELECT "users".* FROM "users" LIMIT 1;</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p><code>take</code> issues a plain <code>LIMIT 1</code> — no <code>ORDER BY</code>. Use it when you only need <em>any</em> matching row.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Slightly faster than <code>first</code> when order does not matter, because the database can return the first row it finds.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Using <code>take</code> where consistent ordering matters (pagination, "first" record semantics). Results can vary between runs.</li>
+    </ul>
+  </article>
+
+  <!-- sole -->
+  <article class="recipe" id="sole">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#sole" aria-label="Link to sole">#</a> sole</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Fetch exactly one record and raise if zero or more than one matches.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-sole" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-sole">User.where(email: "jane@example.com").sole</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p>Available on Rails 7+. Raises <code>ActiveRecord::RecordNotFound</code> when nothing matches and <code>ActiveRecord::SoleRecordExceeded</code> when more than one row matches. Useful for enforcing uniqueness invariants at query time.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Issues a <code>LIMIT 2</code> internally to detect the "more than one" case without pulling every row.</li>
+      <li>Back the lookup column with a unique index so duplicates are impossible in the first place.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Using <code>sole</code> on data that is not guaranteed unique — the exception will fire in production the moment a duplicate slips in.</li>
+    </ul>
+  </article>
+
+  <!-- exists? -->
+  <article class="recipe" id="exists">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#exists" aria-label="Link to exists?">#</a> exists?</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Check whether any record matches a condition without loading it.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-exists" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-exists">User.exists?(42)
+User.exists?(email: "jane@example.com")
+User.where(active: true).exists?</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-exists" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-exists">SELECT 1 AS one FROM "users"
+WHERE "users"."email" = 'jane@example.com'
+LIMIT 1;</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p>The database returns a single constant, not the row, so no columns are read and no ActiveRecord object is instantiated.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Much cheaper than <code>.any?</code> or <code>.count &gt; 0</code> when the relation is not already loaded.</li>
+      <li><code>.any?</code> on an unloaded relation issues a <code>COUNT(*)</code> — <code>exists?</code> is the right primitive.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Using <code>User.where(...).count.positive?</code>. That performs a full <code>COUNT(*)</code> when a <code>LIMIT 1</code> would do.</li>
+    </ul>
+
+    <h4>Alternative</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-exists-alt" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-exists-alt">users.load if needed_later
+users.any? # OK after the relation is already loaded</code></pre>
+    </div>
+  </article>
+
+  <!-- ids -->
+  <article class="recipe" id="ids">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#ids" aria-label="Link to ids">#</a> ids</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Get an array of primary keys for a relation.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-ids" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-ids">User.where(active: true).ids
+# => [1, 4, 7, 9, ...]</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-ids" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-ids">SELECT "users"."id" FROM "users" WHERE "users"."active" = TRUE;</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p>Equivalent to <code>pluck(primary_key)</code>. Returns a plain Ruby array of IDs, skipping model instantiation entirely.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Only reads the primary key column — the smallest possible payload.</li>
+      <li>Good for feeding into <code>where(id: ids)</code>, <code>delete_all</code>, or background jobs.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Pulling millions of ids into memory. Use <code>find_each(:pluck) { ... }</code> or batched deletes instead.</li>
+    </ul>
+  </article>
+
+  <!-- pick -->
+  <article class="recipe" id="pick">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#pick" aria-label="Link to pick">#</a> pick</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Pull one or more column values from a single row.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-pick" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-pick">User.where(email: "jane@example.com").pick(:id)
+User.where(active: true).pick(:id, :name)</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-pick" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-pick">SELECT "users"."id", "users"."name" FROM "users"
+WHERE "users"."active" = TRUE
+LIMIT 1;</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p><code>pick</code> is <code>limit(1).pluck(...).first</code> in one call — one row, only the columns you asked for.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Cheaper than <code>find_by(...).id</code>: no model instantiation, only the requested columns are read.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Using <code>pluck(...).first</code> instead of <code>pick(...)</code>. Without <code>limit(1)</code>, the database returns every matching row before Ruby throws them away.</li>
+    </ul>
+  </article>
+
+  <!-- pluck -->
+  <article class="recipe" id="pluck">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#pluck" aria-label="Link to pluck">#</a> pluck</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Load an array of raw column values without instantiating models.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-pluck" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-pluck">User.where(active: true).pluck(:email)
+User.pluck(:id, :email)
+# => [[1, "jane@example.com"], [2, "john@example.com"]]</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-pluck" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-pluck">SELECT "users"."email" FROM "users" WHERE "users"."active" = TRUE;</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p><code>pluck</code> bypasses model instantiation, casting only the columns you asked for. It is the fastest way to get raw values.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Reads only the selected columns — huge win on wide tables.</li>
+      <li>Loads the entire result set into memory. For large sets, combine with <code>in_batches</code>.</li>
+      <li>Type casting still runs, so decimals and times return as the expected Ruby type.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li><code>User.all.map(&amp;:email)</code> — instantiates every user just to read one column.</li>
+      <li>Plucking after an <code>includes</code> — the eager-loaded associations are thrown away.</li>
+    </ul>
+  </article>
+
+  <!-- select -->
+  <article class="recipe" id="select">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#select" aria-label="Link to select">#</a> select</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Return ActiveRecord objects containing only a subset of columns, or computed columns.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-select" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-select">User.select(:id, :email)
+User.select("users.*, COUNT(orders.id) AS orders_count")
+    .left_joins(:orders)
+    .group("users.id")</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-select" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-select">SELECT "users"."id", "users"."email" FROM "users";</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p>Unlike <code>pluck</code>, <code>select</code> returns real model instances. Attributes that were not selected are missing — accessing them raises <code>ActiveModel::MissingAttributeError</code>.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Useful for wide tables where you only need a couple of columns but still want model behavior (methods, scopes).</li>
+      <li>Combine with computed aggregates to expose values that don't exist as columns.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Selecting a subset and later calling an accessor for a missing column — production surprise waiting to happen.</li>
+      <li>Using <code>select</code> when you actually want <code>pluck</code>. If you don't need model instances, <code>pluck</code> is faster.</li>
+    </ul>
+  </article>
+
+  <!-- find_each -->
+  <article class="recipe" id="find_each">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#find_each" aria-label="Link to find_each">#</a> find_each</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Iterate over a large set of records without loading them all into memory.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-findeach" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-findeach">User.where(active: true).find_each(batch_size: 500) do |user|
+  UserSyncJob.perform_later(user.id)
+end</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-findeach" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-findeach">SELECT "users".* FROM "users"
+WHERE "users"."active" = TRUE
+ORDER BY "users"."id" ASC
+LIMIT 500;
+-- next batch:
+SELECT "users".* FROM "users"
+WHERE "users"."active" = TRUE
+  AND "users"."id" &gt; 500
+ORDER BY "users"."id" ASC
+LIMIT 500;</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p><code>find_each</code> paginates through records by primary key using keyset pagination, yielding one at a time. Memory stays flat regardless of table size.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Always keyset-paginated by primary key — that's why the ordering is enforced.</li>
+      <li>Default batch size is 1,000. Tune it against memory versus round-trip count.</li>
+      <li>Custom <code>order</code> clauses are ignored (and warn) — this is intentional to keep pagination consistent.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Using <code>.each</code> on a giant table — loads everything into memory.</li>
+      <li>Expecting a custom <code>order</code> to be respected. Use <code>in_batches</code> with an explicit key if you need different ordering.</li>
+    </ul>
+  </article>
+
+  <!-- find_in_batches -->
+  <article class="recipe" id="find_in_batches">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#find_in_batches" aria-label="Link to find_in_batches">#</a> find_in_batches</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Process large tables in chunks — for example, sending a batch to an external API.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-findinbatches" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-findinbatches">User.where(active: true).find_in_batches(batch_size: 1_000) do |batch|
+  BillingApi.upsert_batch(batch.map { |u| u.slice(:id, :email) })
+end</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p>Same keyset pagination as <code>find_each</code>, but yields the batch itself. Ideal for bulk APIs, bulk inserts, or writing to a file per chunk.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Prefer <code>in_batches</code> (returns a relation per batch) when you want to chain <code>update_all</code>, <code>delete_all</code>, or <code>pluck</code> without instantiating models.</li>
+      <li>Batch size is a memory-versus-throughput trade — larger batches mean more RAM per iteration but fewer round trips.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Using <code>find_in_batches</code> when you only need <code>update_all</code>. <code>in_batches.update_all(...)</code> skips model instantiation entirely.</li>
+    </ul>
+
+    <h4>Alternative</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-findinbatches-alt" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-findinbatches-alt">User.where(active: false).in_batches(of: 5_000).update_all(archived_at: Time.current)</code></pre>
+    </div>
+  </article>
+</section>
+
+<!-- ============================================================
+     SECTION 2 — ASSOCIATION QUERIES
+     ============================================================ -->
+<section class="section section-tinted cookbook-section" id="association-queries">
+  <h2>2. Association Queries</h2>
+  <p class="section-lead">
+    Recipes that come up whenever you have a parent/child relationship. The examples below assume this pair of models.
+  </p>
+
+  <div class="code-wrap code-wrap--models">
+    <button type="button" class="copy-btn" data-copy="ruby-models" aria-label="Copy code">Copy</button>
+    <pre><code class="language-ruby" id="ruby-models">class Parent &lt; ApplicationRecord
+  has_many :children
+end
+
+class Child &lt; ApplicationRecord
+  belongs_to :parent
+end</code></pre>
+  </div>
+
+  <!-- Parents without children -->
+  <article class="recipe" id="parents-without-children">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#parents-without-children" aria-label="Link">#</a> Parents without children</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Find every parent that has zero associated children.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r1" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r1">Parent.where.missing(:children)</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-r1" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-r1">SELECT "parents".*
+FROM "parents"
+LEFT OUTER JOIN "children" ON "children"."parent_id" = "parents"."id"
+WHERE "children"."id" IS NULL;</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p><code>where.missing(:children)</code> is the Rails 6.1+ shorthand for a LEFT OUTER JOIN with an <code>IS NULL</code> filter on the joined side.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Requires an index on <code>children.parent_id</code> — this is the default with <code>t.references :parent</code>.</li>
+      <li>On very large child tables, <code>NOT EXISTS</code> can outperform the LEFT JOIN. Benchmark both against real data.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Using <code>Parent.where.not(id: Child.select(:parent_id))</code> — this is fine but <em>can</em> misbehave if <code>parent_id</code> is nullable and contains <code>NULL</code> rows (SQL <code>NOT IN</code> semantics).</li>
+    </ul>
+
+    <h4>Alternative</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r1-alt" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r1-alt">Parent.where("NOT EXISTS (SELECT 1 FROM children WHERE children.parent_id = parents.id)")</code></pre>
+    </div>
+  </article>
+
+  <!-- Parents with children -->
+  <article class="recipe" id="parents-with-children">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#parents-with-children" aria-label="Link">#</a> Parents with children</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Return only parents that have at least one child.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r2" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r2">Parent.where.associated(:children)</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-r2" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-r2">SELECT "parents".*
+FROM "parents"
+INNER JOIN "children" ON "children"."parent_id" = "parents"."id";</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p><code>where.associated(:children)</code> (Rails 7+) is the counterpart to <code>where.missing</code> — inner join, no extra condition.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>The inner join can duplicate parent rows when a parent has multiple children. Use <code>distinct</code> or <code>select("DISTINCT parents.*")</code> if you're rendering a list.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Forgetting <code>distinct</code> and rendering the same parent multiple times.</li>
+      <li>Using <code>Parent.joins(:children)</code> without realizing it silently drops parents with no children — sometimes intentional, often not.</li>
+    </ul>
+  </article>
+
+  <!-- Parents with exactly one child -->
+  <article class="recipe" id="parents-with-one-child">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#parents-with-one-child" aria-label="Link">#</a> Parents with exactly one child</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Return parents that have exactly one associated child.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r3" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r3">Parent.joins(:children)
+      .group("parents.id")
+      .having("COUNT(children.id) = 1")</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-r3" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-r3">SELECT "parents".*
+FROM "parents"
+INNER JOIN "children" ON "children"."parent_id" = "parents"."id"
+GROUP BY "parents"."id"
+HAVING COUNT("children"."id") = 1;</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p><code>GROUP BY</code> collapses per parent, <code>HAVING</code> filters aggregates — the correct place to compare counts, not <code>WHERE</code>.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Composite index on <code>(children.parent_id)</code> keeps the join and group fast.</li>
+      <li>Consider a counter cache (<code>children_count</code>) if this query runs on every page load.</li>
+    </ul>
+  </article>
+
+  <!-- Parents with more than one child -->
+  <article class="recipe" id="parents-with-more-than-one-child">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#parents-with-more-than-one-child" aria-label="Link">#</a> Parents with more than one child</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Return parents whose child count is greater than one.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r4" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r4">Parent.joins(:children)
+      .group("parents.id")
+      .having("COUNT(children.id) &gt; 1")</code></pre>
+    </div>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Filtering the count in <code>WHERE</code> — SQL rejects aggregates in <code>WHERE</code>, they belong in <code>HAVING</code>.</li>
+    </ul>
+  </article>
+
+  <!-- Parents with more than N children -->
+  <article class="recipe" id="parents-with-more-than-n">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#parents-with-more-than-n" aria-label="Link">#</a> Parents with more than N children</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Parameterize the threshold, e.g. "parents with more than 5 children".</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r5" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r5">n = 5
+Parent.joins(:children)
+      .group("parents.id")
+      .having("COUNT(children.id) &gt; ?", n)</code></pre>
+    </div>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>String-interpolating <code>n</code> directly — always parameterize, even in <code>HAVING</code>.</li>
+    </ul>
+  </article>
+
+  <!-- Parents with fewer than N children -->
+  <article class="recipe" id="parents-with-fewer-than-n">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#parents-with-fewer-than-n" aria-label="Link">#</a> Parents with fewer than N children</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Include parents with zero children in the "fewer than N" count.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r6" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r6">n = 3
+Parent.left_joins(:children)
+      .group("parents.id")
+      .having("COUNT(children.id) &lt; ?", n)</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p><code>left_joins</code> keeps parents with no children in the result. With <code>joins</code> (inner), zero-child parents would be excluded.</p>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Using <code>joins</code> instead of <code>left_joins</code>. Silently drops the zero-child parents, which are often the ones you care about.</li>
+    </ul>
+  </article>
+
+  <!-- Ordered by child count -->
+  <article class="recipe" id="parents-ordered-by-child-count">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#parents-ordered-by-child-count" aria-label="Link">#</a> Parents ordered by child count</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Order parents by how many children they have, most first.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r7" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r7">Parent.left_joins(:children)
+      .group("parents.id")
+      .order(Arel.sql("COUNT(children.id) DESC"))</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-r7" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-r7">SELECT "parents".*
+FROM "parents"
+LEFT OUTER JOIN "children" ON "children"."parent_id" = "parents"."id"
+GROUP BY "parents"."id"
+ORDER BY COUNT("children"."id") DESC;</code></pre>
+    </div>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>A <code>children_count</code> counter cache makes this a plain <code>ORDER BY parents.children_count DESC</code> — one index scan, no join, no group.</li>
+      <li><code>Arel.sql</code> is required to bypass Rails' unsafe-order protection when passing an expression.</li>
+    </ul>
+  </article>
+
+  <!-- Ordered by most recent child -->
+  <article class="recipe" id="parents-ordered-by-recent-child">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#parents-ordered-by-recent-child" aria-label="Link">#</a> Parents ordered by most recent child</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Show parents whose most recent child was created latest, first.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r8" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r8">Parent.left_joins(:children)
+      .group("parents.id")
+      .order(Arel.sql("MAX(children.created_at) DESC NULLS LAST"))</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p><code>MAX(children.created_at)</code> per parent gives the timestamp of the newest child. <code>NULLS LAST</code> sends parents with no children to the bottom.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Index <code>children (parent_id, created_at)</code> lets the planner grab the max per group efficiently.</li>
+      <li><code>NULLS LAST</code> is PostgreSQL / Oracle syntax; MySQL uses <code>ORDER BY ... IS NULL, ...</code>.</li>
+    </ul>
+  </article>
+
+  <!-- Children created today -->
+  <article class="recipe" id="parents-with-children-today">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#parents-with-children-today" aria-label="Link">#</a> Parents having children created today</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Return parents that received a new child today.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r9" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r9">Parent.joins(:children)
+      .where(children: { created_at: Time.current.all_day })
+      .distinct</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-r9" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-r9">SELECT DISTINCT "parents".*
+FROM "parents"
+INNER JOIN "children" ON "children"."parent_id" = "parents"."id"
+WHERE "children"."created_at" BETWEEN '...' AND '...';</code></pre>
+    </div>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li><code>Time.current.all_day</code> produces a range in the app time zone — safer than string interpolation.</li>
+      <li>Index <code>children (created_at)</code> or <code>(parent_id, created_at)</code> for common filters.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Comparing against <code>Date.today</code> — mixes <code>Date</code> and <code>Timestamp</code> semantics and can miss rows near midnight in different zones.</li>
+    </ul>
+  </article>
+
+  <!-- Children match a condition -->
+  <article class="recipe" id="parents-with-matching-children">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#parents-with-matching-children" aria-label="Link">#</a> Parents whose children match a condition</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Find parents that have at least one child with a given status.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r10" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r10">Parent.joins(:children).where(children: { status: "flagged" }).distinct</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p>The inner join restricts to matching child rows, and <code>distinct</code> collapses duplicated parents.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>An <code>EXISTS</code> subquery is often faster than <code>JOIN ... DISTINCT</code> on large child tables.</li>
+    </ul>
+
+    <h4>Alternative</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r10-alt" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r10-alt">Parent.where(id: Child.where(status: "flagged").select(:parent_id))</code></pre>
+    </div>
+  </article>
+
+  <!-- Orphan children -->
+  <article class="recipe" id="orphan-children">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#orphan-children" aria-label="Link">#</a> Orphan children (no parent)</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Find children whose parent no longer exists — usually a data-integrity check.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r11" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r11">Child.where.missing(:parent)</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-r11" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-r11">SELECT "children".*
+FROM "children"
+LEFT OUTER JOIN "parents" ON "parents"."id" = "children"."parent_id"
+WHERE "parents"."id" IS NULL;</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p><code>belongs_to</code> is required by default in Rails 5+, so an orphan means either a missing foreign key or a deletion that skipped <code>dependent:</code>.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Add a real foreign key constraint (<code>add_foreign_key</code>) so orphans can't exist in the first place.</li>
+    </ul>
+  </article>
+
+  <!-- Duplicate associations -->
+  <article class="recipe" id="duplicate-associations">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#duplicate-associations" aria-label="Link">#</a> Find duplicate associations</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Detect duplicates — for example, children that share a <code>(parent_id, name)</code> pair.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r12" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r12">Child.group(:parent_id, :name)
+     .having("COUNT(*) &gt; 1")
+     .pluck(:parent_id, :name, Arel.sql("COUNT(*)"))</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-r12" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-r12">SELECT "children"."parent_id", "children"."name", COUNT(*)
+FROM "children"
+GROUP BY "children"."parent_id", "children"."name"
+HAVING COUNT(*) &gt; 1;</code></pre>
+    </div>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Add a partial/unique index on <code>(parent_id, name)</code> to prevent new duplicates once the existing ones are cleaned up.</li>
+    </ul>
+  </article>
+
+  <!-- Count children per parent -->
+  <article class="recipe" id="count-children-per-parent">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#count-children-per-parent" aria-label="Link">#</a> Count children per parent</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Return a hash of <code>parent_id =&gt; children_count</code>.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r13" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r13">Child.group(:parent_id).count
+# => { 1 =&gt; 4, 2 =&gt; 1, 5 =&gt; 12 }</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-r13" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-r13">SELECT "children"."parent_id", COUNT(*)
+FROM "children"
+GROUP BY "children"."parent_id";</code></pre>
+    </div>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Parents with zero children are missing from the hash — merge with <code>Parent.pluck(:id)</code> if you need them.</li>
+      <li>For hot paths, a counter cache turns this into a single indexed column read.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li><code>Parent.all.map { |p| [p.id, p.children.count] }.to_h</code> — classic N+1.</li>
+    </ul>
+  </article>
+
+  <!-- No active children -->
+  <article class="recipe" id="no-active-children">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#no-active-children" aria-label="Link">#</a> Parents with no active children</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Return parents that have zero children matching <code>active: true</code>. Parents with no children at all should also be included.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r14" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r14">Parent.where.not(id: Child.where(active: true).select(:parent_id))</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-r14" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-r14">SELECT "parents".*
+FROM "parents"
+WHERE "parents"."id" NOT IN (
+  SELECT "children"."parent_id" FROM "children" WHERE "children"."active" = TRUE
+);</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p>The subquery returns every parent that <em>does</em> have an active child. <code>NOT IN</code> gives the complement.</p>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>If <code>children.parent_id</code> is nullable and the subquery could return <code>NULL</code>, <code>NOT IN</code> yields unknown for every row. Use <code>NOT EXISTS</code> when nullability is uncertain.</li>
+    </ul>
+
+    <h4>Alternative</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r14-alt" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r14-alt">Parent.where(
+  "NOT EXISTS (SELECT 1 FROM children WHERE children.parent_id = parents.id AND children.active = TRUE)"
+)</code></pre>
+    </div>
+  </article>
+
+  <!-- At least one active child -->
+  <article class="recipe" id="any-active-children">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#any-active-children" aria-label="Link">#</a> Parents with at least one active child</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Return parents that have one or more active children.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r15" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r15">Parent.where(id: Child.where(active: true).select(:parent_id))</code></pre>
+    </div>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>An <code>IN (subquery)</code> is typically as fast as an <code>EXISTS</code> subquery on modern PostgreSQL.</li>
+      <li>Index <code>children (parent_id, active)</code> when this condition runs often.</li>
+    </ul>
+
+    <h4>Alternative</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r15-alt" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r15-alt">Parent.joins(:children).where(children: { active: true }).distinct</code></pre>
+    </div>
+  </article>
+
+  <!-- Every child matches -->
+  <article class="recipe" id="every-child-matches">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#every-child-matches" aria-label="Link">#</a> Parents where every child matches a condition</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Find parents where <em>every</em> child is active — and the parent has at least one child.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r16" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r16">Parent.joins(:children)
+      .group("parents.id")
+      .having("COUNT(*) = COUNT(CASE WHEN children.active THEN 1 END)")</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p>Total child count equals the number of active children only when there are no inactive children. The inner join guarantees at least one row per parent.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li>Use <code>COUNT(*) FILTER (WHERE children.active)</code> on PostgreSQL for a cleaner and slightly faster expression.</li>
+    </ul>
+
+    <h4>Alternative</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r16-alt" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r16-alt"># Parents with at least one child AND no inactive children
+Parent.where.associated(:children)
+      .where.not(id: Child.where(active: false).select(:parent_id))</code></pre>
+    </div>
+  </article>
+
+  <!-- Distinct parents through joins -->
+  <article class="recipe" id="distinct-parents">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#distinct-parents" aria-label="Link">#</a> Distinct parents through joins</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Return each matching parent once, even when the join multiplies rows.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r17" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r17">Parent.joins(:children).where(children: { active: true }).distinct</code></pre>
+    </div>
+
+    <h4>SQL</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="sql-r17" aria-label="Copy code">Copy</button>
+      <pre><code class="language-sql" id="sql-r17">SELECT DISTINCT "parents".*
+FROM "parents"
+INNER JOIN "children" ON "children"."parent_id" = "parents"."id"
+WHERE "children"."active" = TRUE;</code></pre>
+    </div>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li><code>DISTINCT parents.*</code> forces a sort/hash. On big result sets, an <code>EXISTS</code> subquery avoids that cost entirely.</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Combining <code>distinct</code> with an <code>order</code> on a non-selected column — PostgreSQL rejects it. Add the column to the <code>SELECT</code> list or restructure the query.</li>
+    </ul>
+  </article>
+
+  <!-- left_joins vs joins -->
+  <article class="recipe" id="joins-vs-left-joins">
+    <header class="recipe-head">
+      <h3><a class="anchor-link" href="#joins-vs-left-joins" aria-label="Link">#</a> left_joins vs joins</h3>
+    </header>
+
+    <h4>Problem</h4>
+    <p>Pick between <code>joins</code> (INNER) and <code>left_joins</code> (LEFT OUTER) — the wrong pick silently drops rows or bloats them.</p>
+
+    <h4>ActiveRecord</h4>
+    <div class="code-wrap">
+      <button type="button" class="copy-btn" data-copy="ruby-r18" aria-label="Copy code">Copy</button>
+      <pre><code class="language-ruby" id="ruby-r18"># INNER JOIN: only parents that have at least one matching child
+Parent.joins(:children).where(children: { active: true })
+
+# LEFT OUTER JOIN: all parents, matched or not
+Parent.left_joins(:children).where("children.id IS NULL OR children.active = TRUE")
+
+# Aggregating including zero-child parents
+Parent.left_joins(:children)
+      .group("parents.id")
+      .select("parents.*, COUNT(children.id) AS children_count")</code></pre>
+    </div>
+
+    <h4>Why This Works</h4>
+    <p>Inner joins filter parents to those with matching children. Left joins keep every parent and expose child columns as <code>NULL</code> when there is no match. When you aggregate or count children, <code>left_joins</code> is almost always the right default.</p>
+
+    <h4>Performance Notes</h4>
+    <ul>
+      <li><code>joins</code> tends to be cheaper than <code>left_joins</code> because the planner can drop rows earlier.</li>
+      <li>Both need indexes on the foreign key column (<code>children.parent_id</code>).</li>
+    </ul>
+
+    <h4>Common Mistakes</h4>
+    <ul>
+      <li>Using <code>joins</code> when the intent is "all parents, optionally with children" — the parents without children silently vanish.</li>
+      <li>Using <code>left_joins</code> everywhere without a filter — you can end up scanning the full child table for nothing.</li>
+    </ul>
+  </article>
+</section>
+
+<!-- ============================================================
+     CONCLUSION + CTA
+     ============================================================ -->
+<section class="section cookbook-conclusion">
+  <h2>Conclusion</h2>
+  <div class="cookbook-prose">
+    <p>
+      This is Phase 1 of the SparkRails ActiveRecord cookbook — finders and association queries, the two areas that show up in almost every code review. Upcoming sections will cover filtering, ordering, aggregations, updates and deletes, scopes, performance patterns, and PostgreSQL-specific queries including JSONB.
+    </p>
+    <p>
+      If a recipe you rely on is missing, or a query in your codebase deserves a better version, that is exactly the kind of thing that will feed the next update.
+    </p>
+  </div>
+</section>
+
+<div class="cta-band cookbook-cta">
+  <h2>Need help with real ActiveRecord problems?</h2>
+  <p>
+    SparkRails helps SaaS teams debug complex ActiveRecord queries, optimize Rails performance, and maintain production Ruby on Rails applications.
+  </p>
+  <a href="mailto:abhishekka3193@gmail.com?subject=ActiveRecord%20consultation" class="btn-primary-sr">Talk to SparkRails</a>
+</div>
+
+<script>
+  (function () {
+    document.querySelectorAll(".copy-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var targetId = btn.getAttribute("data-copy");
+        var el = targetId && document.getElementById(targetId);
+        if (!el) return;
+        var text = el.innerText;
+        var restore = function () {
+          setTimeout(function () { btn.textContent = "Copy"; }, 1400);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            btn.textContent = "Copied";
+            restore();
+          }).catch(function () {
+            btn.textContent = "Press Ctrl+C";
+            restore();
+          });
+        } else {
+          var range = document.createRange();
+          range.selectNodeContents(el);
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          btn.textContent = "Selected";
+          restore();
+        }
+      });
+    });
+  })();
+</script>
