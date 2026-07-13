@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 620" role="img" aria-labelledby="healthy-title healthy-desc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <title id="healthy-title">Healthy Rails SaaS billing architecture</title>
+  <desc id="healthy-desc">A single linear flow from Stripe through webhook processing, subscription state, authorization, and finally the Rails application.</desc>
+
+  <defs>
+    <marker id="arrow-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2d3748"/>
+    </marker>
+    <style>
+      .node { fill: #f7fafc; stroke: #2d3748; stroke-width: 1.5; }
+      .node-primary { fill: #edf2f7; stroke: #1a202c; stroke-width: 2; }
+      .label { fill: #1a202c; font-size: 16px; font-weight: 600; text-anchor: middle; }
+      .sublabel { fill: #4a5568; font-size: 13px; font-style: italic; text-anchor: middle; }
+      .edge { stroke: #2d3748; stroke-width: 2; fill: none; }
+      .edge-label { fill: #4a5568; font-size: 12px; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Stripe -->
+  <rect class="node" x="220" y="20"  width="280" height="60" rx="8"/>
+  <text class="label" x="360" y="56">Stripe</text>
+
+  <!-- edge 1 -->
+  <path class="edge" d="M360,80 L360,130" marker-end="url(#arrow-h)"/>
+  <text class="edge-label" x="420" y="108">webhook events</text>
+
+  <!-- Webhook Processing -->
+  <rect class="node" x="220" y="135" width="280" height="60" rx="8"/>
+  <text class="label" x="360" y="171">Webhook Processing</text>
+
+  <!-- edge 2 -->
+  <path class="edge" d="M360,195 L360,245" marker-end="url(#arrow-h)"/>
+
+  <!-- Subscription State -->
+  <rect class="node-primary" x="200" y="250" width="320" height="80" rx="8"/>
+  <text class="label" x="360" y="282">Subscription State</text>
+  <text class="sublabel" x="360" y="306">single source of truth</text>
+
+  <!-- edge 3 -->
+  <path class="edge" d="M360,330 L360,380" marker-end="url(#arrow-h)"/>
+
+  <!-- Authorization -->
+  <rect class="node" x="220" y="385" width="280" height="60" rx="8"/>
+  <text class="label" x="360" y="421">Authorization / Feature Access</text>
+
+  <!-- edge 4 -->
+  <path class="edge" d="M360,445 L360,495" marker-end="url(#arrow-h)"/>
+
+  <!-- Rails Application -->
+  <rect class="node" x="220" y="500" width="280" height="60" rx="8"/>
+  <text class="label" x="360" y="536">Rails Application</text>
+</svg>
