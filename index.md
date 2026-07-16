@@ -88,6 +88,27 @@ sitemap:
   </div>
 </section>
 
+<section class="section about-sr">
+  <div class="about-sr__inner">
+    <div class="about-sr__image">
+      <img src="/assets/img/avatar.jpg" alt="Abhishek Kanojia, Ruby on Rails consultant" width="220" height="272">
+    </div>
+    <div class="about-sr__content">
+      <span class="about-sr__eyebrow">THE PERSON BEHIND SPARKRAILS</span>
+      <h2 class="about-sr__heading">Hi, I&rsquo;m Abhishek Kanojia.</h2>
+      <p>I&rsquo;m a senior Ruby on Rails developer and consultant based in Delhi, India, working remotely with SaaS and product teams.</p>
+      <p>I help teams upgrade legacy Rails applications, investigate difficult production issues, improve Sidekiq, Redis and caching reliability, and complete backend work that has remained stuck because of technical complexity.</p>
+      <p>When you work with SparkRails, you work directly with me &mdash; from understanding the problem and reviewing the codebase to implementation and production validation.</p>
+      <div class="about-sr__ctas">
+        <a href="https://in.linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="noopener noreferrer" class="btn-secondary-sr about-sr__linkedin">
+          <i class="fa fa-linkedin"></i> View my LinkedIn profile
+        </a>
+        <a href="/work/" class="about-sr__link">View my work <i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="cta-band">
   <h2>Have a Rails app that needs help?</h2>
   <p>
@@ -106,12 +127,13 @@ sitemap:
   </div>
 </section>
 
-<footer>
-  <div id="describe-text">
-    <div class='justify para'>
-      <div class='text-center'>
-      <strong>#RubyOnRails</strong> <strong>#RailsConsulting</strong> <strong>#RailsUpgrade</strong> <strong>#Sidekiq</strong> <strong>#Redis</strong> <strong>#SparkRails</strong>
-      </div>
-    </div>
+<footer class="home-footer">
+  <div class="home-footer__inner">
+    <p class="home-footer__tagline">
+      SparkRails &mdash; Senior Ruby on Rails consulting for production SaaS teams.
+    </p>
+    <p class="home-footer__specialties">
+      Rails Upgrades &nbsp;&middot;&nbsp; Legacy App Rescue &nbsp;&middot;&nbsp; Sidekiq &amp; Redis &nbsp;&middot;&nbsp; Performance &amp; Caching &nbsp;&middot;&nbsp; Fractional Backend Support
+    </p>
   </div>
 </footer>
