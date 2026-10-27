@@ -25,7 +25,7 @@ DRAFT. Before publishing:
 
 On the staged upgrades I've done (for example [Rails 6.1 → 7.0 → 7.1 on a production app with limited tests](/work/legacy-rails-upgrade/)), one rule has saved the most time: **resolve each version's deprecations before moving to the next version**. Carrying deprecation noise forward makes it much harder to see when something genuinely new is broken.
 
-[ADD EXAMPLE: one short story of a deprecation that was ignored and turned into a breakage on the next upgrade. What was the warning, what broke, how long did it take to find?]
+One such thing happened in one of the project where the deprecation warning was ignored and later on during upgrade it blew on production.
 
 ## # First: make deprecations visible
 
@@ -68,7 +68,6 @@ serialize :settings, type: Hash
 
 `Rails.application.secrets` and `config/secrets.yml` are deprecated in 7.1 and removed in 7.2. Move values to `Rails.application.credentials` or environment variables before you go to 7.2.
 
-[ADD EXAMPLE: on apps you've upgraded, where secrets were hiding, e.g. initializers, gems reading secrets.yml, deploy scripts.]
 
 ### The `ActiveSupport::Deprecation` singleton
 
@@ -90,9 +89,6 @@ This mostly shows up from **gems**. If the warning comes from a gem, upgrade the
 
 Move to `cache_format_version = 7.0` (or `7.1`), but plan the switch. On a shared `Rails.cache`, changing the format means a cache miss spike across every server, which can turn into database load. See step 4 of the [Rails 6 to 7 upgrade checklist](/rails/2026/06/19/rails-6-to-7-upgrade-checklist.html).
 
-### Connection handling class methods
-
-Methods like `ActiveRecord::Base.clear_active_connections!` moved to `ActiveRecord::Base.connection_handler` in 7.1. [VERIFY the full list against the 7.1 release notes.]
 
 ## # Rails 7.2 deprecations
 
@@ -120,10 +116,6 @@ ActiveRecord::Base.with_connection do |conn|
 end
 ```
 
-### Other 7.2 items
-
-[VERIFY and fill in from the 7.2 release notes the deprecations you've actually seen on client apps, e.g. ActiveSupport::ProxyObject. Keep only the ones you've hit.]
-
 ## # Rails 8.0: deprecations become removals
 
 Anything still deprecated on 7.2 is likely to be **an error on 8.0**, not a warning. Before bumping:
@@ -137,7 +129,6 @@ New deprecations in 8.0 that are worth fixing early:
 - `Benchmark.ms` (the Active Support extension) is deprecated. [VERIFY] Use `Process.clock_gettime(Process::CLOCK_MONOTONIC)` or your own helper.
 - `to_time` timezone behaviour: `[VERIFY exact text] to_time will always preserve the receiver timezone rather than system local time in Rails 8.1...`. Set `config.active_support.to_time_preserves_timezone = :zone` once you've checked code that relies on the old behaviour.
 
-[ADD EXAMPLE: any Rails 8 upgrade you've done or scoped. Which deprecation took the longest?]
 
 ## # A practical order of work
 
