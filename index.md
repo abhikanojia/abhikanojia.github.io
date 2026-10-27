@@ -1,8 +1,9 @@
 ---
 layout: page
-title: SparkRails
+title: Ruby on Rails Consultant for Legacy SaaS Apps
+display_title: SparkRails
 home: true
-description: "Senior Ruby on Rails consultant helping remote SaaS teams in the US, UK, Europe, Canada, and Singapore upgrade, debug, and stabilize legacy Rails applications — including Rails upgrades, Sidekiq, Redis, caching, and production performance issues."
+description: "Senior Ruby on Rails consultant for legacy SaaS apps: Rails upgrades, production debugging, Sidekiq and Redis fixes, and fractional backend support."
 sitemap:
   priority: 0.9
 ---
