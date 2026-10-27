@@ -17,15 +17,21 @@ twitter:
 social:
   name: SparkRails
   links:
-    - https://twitter.com/spark_rails
+    - https://x.com/spark_rails
+    - https://www.youtube.com/@sparkrails
+    - https://www.linkedin.com/in/abhishek-kanojia
     - https://www.facebook.com/sparkrails
 
 author:
+  name: Abhishek Kanojia
   fullname: Abhishek Kanojia
+  url: https://sparkrails.com/author/
   twitter: "@spark_rails"
-  email: abhishekka3193+sparkrails@gmail.com
+  email: abhishek.kanojia3193@gmail.com
   youtube: "@sparkrails"
   facebook: "@sparkrails"
+  linkedin: abhishek-kanojia
+  github: abhikanojia
 
 
 # Syntax highlighting
