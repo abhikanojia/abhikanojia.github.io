@@ -1,0 +1,9 @@
+{%- comment -%}
+Short consultation CTA for blog posts.
+Params: title, text, url (relevant service page), label, service (used for GA4 event params).
+{%- endcomment -%}
+<aside class="post-cta">
+  <p class="post-cta__title">{{ include.title | default: "Stuck on a Rails upgrade?" }}</p>
+  <p class="post-cta__text">{{ include.text | default: "I help SaaS teams upgrade production Rails apps without a risky long-running branch." }}</p>
+  <a href="{{ include.url | default: '/rails-upgrade-consultant/' }}" class="btn-primary-sr post-cta__btn" data-cta="post_cta" data-service="{{ include.service | default: 'rails_upgrade' }}">{{ include.label | default: "Book a consultation" }}</a>
+</aside>

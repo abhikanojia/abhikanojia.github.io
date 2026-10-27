@@ -974,3 +974,26 @@
   .copy-btn { top: 6px; right: 6px; font-size: 11px; padding: 3px 8px; }
   .cookbook-section > h2 { font-size: 24px; }
 }
+
+/* Blog post: quick answer + consultation CTA */
+.quick-answer {
+  background: #f7eaec;
+  border-left: 4px solid #873d48;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 0 0 28px;
+}
+.quick-answer p:last-child { margin-bottom: 0; }
+.post-cta {
+  border: 1px solid #e3c9cd;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 36px 0;
+  text-align: center;
+}
+.post-cta__title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+.post-cta__text { margin: 0 0 16px; }
