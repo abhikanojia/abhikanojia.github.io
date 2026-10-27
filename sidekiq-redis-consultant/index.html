@@ -1,0 +1,137 @@
+---
+layout: page
+title: "Sidekiq & Redis Debugging Consultant for Rails Apps"
+hide_page_title: true
+description: "Senior Sidekiq and Redis consultant for production Rails apps. Stuck or retrying jobs, queue latency, Redis memory growth, duplicate jobs and slow background work."
+permalink: /sidekiq-redis-consultant/
+service_name: "Sidekiq & Redis Debugging"
+service_type: "Sidekiq and Redis consulting for Ruby on Rails"
+service_description: "Investigation and fixes for Sidekiq and Redis problems in production Rails apps — stuck and retrying jobs, queue latency, duplicate jobs, Redis memory growth and eviction, connection pool exhaustion, and Sidekiq version upgrades."
+sitemap:
+  priority: 0.9
+keywords:
+  - sidekiq consultant
+  - sidekiq debugging
+  - redis consultant rails
+  - sidekiq jobs stuck
+  - sidekiq retries
+  - redis memory rails
+  - rails background jobs performance
+  - sidekiq upgrade
+faqs:
+  - q: "What Sidekiq and Redis problems do you help with?"
+    a: "Jobs that are stuck, retrying repeatedly or piling up in the dead set; queues with growing latency; duplicate or out-of-order jobs; Redis memory growth and evictions; connection pool timeouts; long-running jobs killed during deploys; and Sidekiq or Redis version upgrades."
+  - q: "Why are my Sidekiq jobs stuck or retrying?"
+    a: "The usual causes are an exception the job keeps hitting (Sidekiq retries with backoff for up to about 21 days by default), a job enqueued before its database transaction committed so the record isn't found yet, too few database or Redis connections for the configured concurrency, a slow external API without timeouts, or a busy queue starving others. The fix depends on which one it is, which is why the work starts with logs, the Sidekiq Web UI and metrics."
+  - q: "Can you fix Redis memory problems without losing jobs?"
+    a: "Usually, yes. Redis memory problems often come from cache data and Sidekiq sharing one Redis instance, large job payloads, or a retry and dead set that has grown unchecked. Sidekiq needs a Redis instance that doesn't evict keys (maxmemory-policy noeviction), so a common fix is separating cache and job Redis and cleaning up what's using the space, planned so queued jobs are kept."
+  - q: "Should we move from Sidekiq to Solid Queue?"
+    a: "Not automatically. Solid Queue, the Rails 8 default, is a good fit for many apps and removes Redis from the stack, but Sidekiq is mature and fast, and a working Sidekiq setup isn't a reason to migrate on its own. I can review your job volume, features you rely on and operational setup, and give a recommendation either way."
+  - q: "What access do you need to start?"
+    a: "Access to the codebase, plus read access to whatever shows production behaviour: error tracker, logs, APM or metrics, and the Sidekiq Web UI. Production write access isn't needed for the investigation."
+  - q: "How is the work priced?"
+    a: "Most Sidekiq and Redis work is a focused project with a defined scope and a fixed price or capped budget. If background jobs are an ongoing source of incidents, it can also be part of monthly fractional Rails support."
+---
+
+<section class="hero">
+  <h1>Sidekiq &amp; Redis Debugging Consultant for Production Rails Apps</h1>
+  <p class="hero-sub">
+    When background jobs get stuck, retry forever, or Redis memory keeps climbing, the symptom is obvious and the root cause usually isn't. I investigate Sidekiq and Redis issues in production Rails apps and ship targeted fixes, not rewrites.
+  </p>
+  <div class="hero-ctas">
+    <a href="mailto:{{ site.author.email }}?subject=Sidekiq%20%2F%20Redis%20consultation&body=Rails%20version%3A%0ASidekiq%20version%3A%0ARedis%20version%20%2F%20host%3A%0AWhat%20is%20going%20wrong%3A%0ASince%20when%3A%0A" class="btn-primary-sr" data-cta="service_hero" data-service="sidekiq_redis">Book a Sidekiq consultation</a>
+    <a href="#faq" class="btn-secondary-sr">Read the FAQ</a>
+  </div>
+  <p class="hero-availability">
+    Remote consulting for teams in the US, UK, Europe, Canada, and Singapore.
+  </p>
+</section>
+
+<section class="section section-tinted">
+  <h2>Signs your background jobs need attention</h2>
+  <ul class="problem-grid">
+    <li>Jobs stuck in "busy" or queues that never drain</li>
+    <li>The retry set and dead set keep growing</li>
+    <li>Queue latency spikes during traffic peaks</li>
+    <li>Duplicate emails, charges or webhooks from jobs running twice</li>
+    <li><code>ActiveRecord::RecordNotFound</code> in jobs right after a record is created</li>
+    <li>Redis memory climbing, evictions, or OOM errors</li>
+    <li><code>ConnectionPool::TimeoutError</code> or database pool exhaustion</li>
+    <li>Long jobs killed or lost during deploys</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>What I look at</h2>
+  <div class="help-grid">
+    <div class="help-card">
+      <span class="help-tag">Sidekiq</span>
+      <h3>Jobs, queues and retries</h3>
+      <ul class="check-list check-list--single">
+        <li>Retry and dead set analysis: which errors, which jobs</li>
+        <li>Queue layout, weights and concurrency settings</li>
+        <li>Idempotency and safe retries for jobs with side effects</li>
+        <li>Jobs enqueued inside transactions</li>
+        <li>Shutdown timeouts and long-running jobs during deploys</li>
+      </ul>
+    </div>
+    <div class="help-card">
+      <span class="help-tag">Redis</span>
+      <h3>Memory, eviction and connections</h3>
+      <ul class="check-list check-list--single">
+        <li>What's actually using memory: jobs, cache, sessions, other keys</li>
+        <li><code>maxmemory</code> and eviction policy for job vs cache Redis</li>
+        <li>Connection pool sizing across Puma and Sidekiq</li>
+        <li>Large job payloads and long-lived keys</li>
+      </ul>
+    </div>
+    <div class="help-card">
+      <span class="help-tag">Performance</span>
+      <h3>Slow background work</h3>
+      <ul class="check-list check-list--single">
+        <li>N+1 queries and slow SQL inside jobs</li>
+        <li>External API calls without timeouts</li>
+        <li>Batching and splitting oversized jobs</li>
+        <li>Process memory growth in Sidekiq workers</li>
+      </ul>
+    </div>
+    <div class="help-card">
+      <span class="help-tag">Upgrades</span>
+      <h3>Sidekiq, Redis and Rails versions</h3>
+      <ul class="check-list check-list--single">
+        <li>Sidekiq major version upgrades and their Redis requirements</li>
+        <li>Rails upgrades that change job enqueue behaviour</li>
+        <li>Sidekiq vs Solid Queue decision for Rails 8 apps</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tinted">
+  <h2>How it usually goes</h2>
+  <div class="process-block">
+    <p style="margin: 0;">
+      We start with a short call about the symptoms and when they began. I review the code paths involved, the Sidekiq Web UI, error tracker data, logs and Redis metrics, then write up the likely root causes in priority order. From there I either ship the fixes with your team or hand over a clear plan, plus monitoring so the next regression shows up in a dashboard and not in a customer email.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Related reading</h2>
+  <ul class="experience-list">
+    <li><a href="/rails-8/2024/02/16/solid-queue-an-overview.html">Solid Queue: an overview</a></li>
+    <li><a href="/legacy-rails-maintenance/">Legacy Rails maintenance</a> for ongoing support beyond a single issue</li>
+    <li><a href="/fractional-rails-developer/">Fractional Rails backend developer</a> for monthly senior capacity</li>
+    <li><a href="/services/">All Rails consulting services</a></li>
+  </ul>
+</section>
+
+{% include elements/faq.html %}
+
+<div class="cta-band">
+  <h2>Background jobs misbehaving?</h2>
+  <p>
+    Send your Rails, Sidekiq and Redis versions and a short description of what's going wrong. I'll reply with the most likely causes and a sensible next step.
+  </p>
+  <a href="mailto:{{ site.author.email }}?subject=Sidekiq%20%2F%20Redis%20consultation&body=Rails%20version%3A%0ASidekiq%20version%3A%0ARedis%20version%20%2F%20host%3A%0AWhat%20is%20going%20wrong%3A%0ASince%20when%3A%0A" class="btn-primary-sr" data-cta="service_footer" data-service="sidekiq_redis">Book a Sidekiq consultation</a>
+</div>

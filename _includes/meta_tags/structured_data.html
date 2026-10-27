@@ -116,8 +116,8 @@ This complements the WebSite/BlogPosting JSON-LD already emitted by jekyll-seo-t
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Performance, Caching & Sidekiq Debugging",
-              "url": "{{ site.url }}/services/",
+              "name": "Sidekiq & Redis Debugging",
+              "url": "{{ site.url }}/sidekiq-redis-consultant/",
               "description": "Investigate and fix slow endpoints, database bottlenecks, cache memory pressure, Sidekiq queues, and Redis usage issues in production."
             }
           },
@@ -125,8 +125,8 @@ This complements the WebSite/BlogPosting JSON-LD already emitted by jekyll-seo-t
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Fractional Rails Backend Support",
-              "url": "{{ site.url }}/services/",
+              "name": "Fractional Rails Backend Developer",
+              "url": "{{ site.url }}/fractional-rails-developer/",
               "description": "Ongoing part-time senior Rails support — code review, bug fixes, upgrade work, architecture decisions, production debugging, and backlog execution."
             }
           }
@@ -152,6 +152,23 @@ This complements the WebSite/BlogPosting JSON-LD already emitted by jekyll-seo-t
     { "@type": "Country", "name": "Canada" },
     { "@type": "Country", "name": "Singapore" },
     { "@type": "Place", "name": "European Union" }
+  ]
+}
+</script>
+{%- endif -%}
+{%- if page.faqs -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for item in page.faqs %}
+    {
+      "@type": "Question",
+      "name": {{ item.q | jsonify }},
+      "acceptedAnswer": { "@type": "Answer", "text": {{ item.a | jsonify }} }
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
   ]
 }
 </script>
