@@ -1,0 +1,43 @@
+<script>
+  // GA4 conversion events. Mark email_click, calendly_click and newsletter_signup
+  // as key events in GA4 (Admin > Events) to see them as conversions.
+  (function() {
+    function ctaLocation(el) {
+      if (el.dataset.cta) return el.dataset.cta;
+      var block = el.closest('.hero, .cta-band, .post-cta, header, .service-card, .about-sr, section');
+      return block ? (block.id || block.className.split(' ')[0] || block.tagName.toLowerCase()) : 'unknown';
+    }
+
+    function track(name, params) {
+      if (typeof gtag === 'function') gtag('event', name, params);
+    }
+
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href]');
+      if (!link) return;
+
+      var href = link.getAttribute('href');
+      var params = {
+        cta_location: ctaLocation(link),
+        cta_text: link.textContent.trim().slice(0, 100),
+        service: link.dataset.service || '',
+        link_url: href.split('?')[0]
+      };
+
+      if (href.indexOf('mailto:') === 0) {
+        track('email_click', params);
+      } else if (href.indexOf('calendly.com') !== -1) {
+        track('calendly_click', params);
+      } else if (link.matches('[data-cta], .btn-primary-sr')) {
+        track('consultation_cta_click', params);
+      }
+    });
+
+    // MailerLite embedded newsletter form (only rendered in production)
+    document.addEventListener('submit', function(e) {
+      if (e.target.closest('.ml-embedded, .ml-form-embedContainer')) {
+        track('newsletter_signup', { form_location: 'post_footer' });
+      }
+    }, true);
+  })();
+</script>

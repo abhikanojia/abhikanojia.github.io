@@ -6,10 +6,10 @@
   {% seo %}
   {% include meta_tags/structured_data.html %}
   {% include externals/mailerlite_script.html %}
+  {% if site.ga_tracking_id and jekyll.environment == 'production' %}
+    {% include gtag.html %}
+  {% endif %}
 </head>
-{% if site.ga_tracking_id and jekyll.environment == 'production' %}
-  {% include gtag.html %}
-{% endif %}
 
 <body>
 <div class="wrapper">
