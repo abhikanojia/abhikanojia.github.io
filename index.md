@@ -14,7 +14,7 @@ sitemap:
     I help remote SaaS teams upgrade, debug, stabilize, and maintain production Rails applications — especially older Rails apps with performance, Sidekiq, Redis, caching, or upgrade problems.
   </p>
   <div class="hero-ctas">
-    <a href="mailto:abhishekka3193@gmail.com?subject=Rails%20consultation%20request" class="btn-primary-sr">Book a Rails consultation</a>
+    <a href="mailto:abhishek.kanojia3193@gmail.com?subject=Rails%20consultation%20request" class="btn-primary-sr">Book a Rails consultation</a>
     <a href="/services/index.html" class="btn-secondary-sr">View Rails services</a>
   </div>
   <p class="hero-availability">
@@ -94,7 +94,7 @@ sitemap:
   <p>
     Send me a short description of the issue. I'll reply with possible next steps.
   </p>
-  <a href="mailto:abhishekka3193@gmail.com?subject=Rails%20consultation%20request" class="btn-primary-sr">Book a Rails consultation</a>
+  <a href="mailto:abhishek.kanojia3193@gmail.com?subject=Rails%20consultation%20request" class="btn-primary-sr">Book a Rails consultation</a>
 </div>
 
 <section class="section home-blog">

@@ -21,7 +21,7 @@ keywords:
     Senior Ruby on Rails consultant. Founder of SparkRails. I help SaaS teams keep production Rails apps stable, upgradable, and maintainable.
   </p>
   <div class="hero-ctas">
-    <a href="mailto:abhishekka3193@gmail.com?subject=Rails%20consultation" class="btn-primary-sr">Book a consultation</a>
+    <a href="mailto:abhishek.kanojia3193@gmail.com?subject=Rails%20consultation" class="btn-primary-sr">Book a consultation</a>
     <a href="https://github.com/abhikanojia" class="btn-secondary-sr" target="_blank" rel="noopener">View GitHub</a>
   </div>
   <p class="hero-availability">
@@ -73,7 +73,7 @@ keywords:
 <section class="section section-tinted">
   <h2>Where to find me</h2>
   <ul class="experience-list">
-    <li><strong>Email</strong> — <a href="mailto:abhishekka3193@gmail.com">abhishekka3193@gmail.com</a></li>
+    <li><strong>Email</strong> — <a href="mailto:abhishek.kanojia3193@gmail.com">abhishek.kanojia3193@gmail.com</a></li>
     <li><strong>GitHub</strong> — <a href="https://github.com/abhikanojia" target="_blank" rel="noopener">github.com/abhikanojia</a></li>
     <li><strong>SparkRails</strong> — <a href="/">sparkrails.com</a></li>
   </ul>
@@ -84,5 +84,5 @@ keywords:
   <p>
     Send a short description of the app, current Rails version, and the problem you are trying to solve. I will reply with the most sensible next step.
   </p>
-  <a href="mailto:abhishekka3193@gmail.com?subject=Rails%20consultation" class="btn-primary-sr">Book a consultation</a>
+  <a href="mailto:abhishek.kanojia3193@gmail.com?subject=Rails%20consultation" class="btn-primary-sr">Book a consultation</a>
 </div>
