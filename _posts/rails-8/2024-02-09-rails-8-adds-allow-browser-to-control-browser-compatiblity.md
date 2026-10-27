@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rails allow_browser: Fix the 406 Unsupported Browser Page (7.2 & 8)"
+title: "Rails allow_browser: Fix the 406 Unsupported Browser Page"
 categories: "rails-8"
 tags: rails rails-8 rails-7
 description: "allow_browser (Rails 7.2+, on by default in new Rails 8 apps) blocks old browsers with a 406 page. What versions: :modern means and how to relax or remove it."

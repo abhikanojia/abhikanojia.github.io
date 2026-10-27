@@ -1,36 +1,28 @@
 ---
 layout: post
-title: "Enhance Your Rails App Security with Request Rate Limiting in Rails 8"
+title: "Rails rate_limit: Built-in Rate Limiting in Rails 7.2 & 8"
 categories: "rails-8"
-tags: rails rails-8
-description: "Learn how to limit requests rate using Rails 8 in 2 minutes and make it secure from DDOS attacks"
+tags: rails rails-8 rails-7 security
+description: "Rails 7.2 added rate_limit to controllers and Rails 8 adds named limits. Usage, options, the cache store gotcha, and when you still need rack-attack."
+last_modified_at: 2026-10-27
 keywords:
-  - rails ruby reactjs rails-8 engineering technology
-  - whats new in rails, Request rate limiting, rate limiter in rails
+  - rails rate_limit
+  - rails 8 rate limiting
+  - rails 7.2 rate limit
+  - rate_limit to within
+  - rails rate limiting without rack-attack
 ---
 
-In today's digital landscape, the security of APIs is paramount. With the advent of Rails 8, developers now have a powerful tool at their disposal to bolster API security: rate limiting.
+<div class="quick-answer" markdown="1">
+**Quick answer:** add `rate_limit to: 10, within: 3.minutes, only: :create` to a controller. Requests over the limit get **429 Too Many Requests**. It was added in **Rails 7.2**, and counts are stored in your cache store (`Rails.cache` by default), so it only works if that cache is shared across processes, such as Redis, Memcached or Solid Cache.
+</div>
 
-Rate limiting is a fundamental technique for controlling the rate of requests to a server within a specified timeframe. By implementing rate limiting, Rails applications can effectively prevent abuse, mitigate the risk of denial-of-service (DoS) attacks, and ensure fair usage of server resources.
+> **Version note:** this post originally said rate limiting arrived in Rails 8. `rate_limit` actually shipped in Rails 7.2. Rails 8.0 added the `name:` option for multiple limits, and the Rails 8 authentication generator uses it on the sessions controller.
 
 ## # What is Rate Limiting?
-Rate limiting is a technique used to control the number of requests a client can make to a server within a specified timeframe. By implementing rate limiting, Rails applications can prevent abuse, protect against denial-of-service (DoS) attacks, and ensure fair usage of server resources.
+Rate limiting controls how many requests a client can make to a server within a set time. It protects login and signup forms from brute-force attempts, keeps expensive endpoints from being hammered, and limits the impact of a single misbehaving client.
 
-## # Understanding the Importance of Rate Limiting
-APIs are susceptible to various forms of abuse, including brute-force attacks, excessive usage, and scraping. Without rate limiting, attackers can overwhelm your server with a barrage of requests, leading to performance degradation and potential downtime. Moreover, abusive usage can incur unnecessary costs and strain on infrastructure resources.
-
-By enforcing rate limits, you can mitigate these risks and maintain the stability and availability of your API. Rate limiting enables you to:
-
-- Control the rate of requests from individual clients or IP addresses.
-- Protect sensitive endpoints from abuse and unauthorized access.
-- Preserve server resources and optimize performance for legitimate users.
-- Mitigate the impact of DoS attacks and malicious behavior.
-
-## # Implementing Rate Limiting in Rails 8
-
-Rails 8 brings in rate limiting feature to action controller, so that you don't have to rely on external libraries such as `rack_attack` a very popular rate limiting tool.
-
-## # How to Use?
+## # How to Use `rate_limit`
 
 ```ruby
 class SessionsController < ApplicationController
@@ -42,23 +34,36 @@ class SessionsController < ApplicationController
 end
 ```
 
-`rate_limit` accepts following parameters:
+`rate_limit` accepts the following options:
 
 `to:`
-The maximum number of requests allowed in a given time frame.
+The maximum number of requests allowed in the time window.
 
 `within:`
-Specify the time frame for the number of requests that we defined using `to:` option.
+The length of the time window.
 
-`only: and except:`
-Just like any other callback method in controller you can define for which action you want this rate limiting.
+`only:` and `except:`
+Like any controller callback, choose which actions the limit applies to.
 
-You can also check the request per domain basis, with `by:` option and also give out tailored responses as well. For example:
+`by:`
+What to count requests by. Defaults to the client IP (`request.remote_ip`).
+
+`with:`
+What to do when the limit is hit. Defaults to `head :too_many_requests`.
+
+`store:`
+Where to keep the counters. Defaults to `config.action_controller.cache_store`, which falls back to `Rails.cache`.
+
+`name:` (Rails 8.0+)
+Lets you define more than one limit in the same controller.
+
+A custom key and response:
 
 ```ruby
 class SessionsController < ApplicationController
-  rate_limit to: 4, within: 1.minute, 
-    by: -> { request.domain }, with: -> { redirect_to busy_controller_url, alert: "Too many login requests" }
+  rate_limit to: 4, within: 1.minute,
+    by: -> { request.domain },
+    with: -> { redirect_to new_session_url, alert: "Too many login attempts. Try again later." },
     only: :create
 
   def create
@@ -67,16 +72,31 @@ class SessionsController < ApplicationController
 end
 ```
 
-## # The Impact of Rate Limiting on API Security
+Two limits on one action (Rails 8.0+):
 
-Integrating rate limiting into your Rails API can yield significant benefits for security and performance. By enforcing sensible rate limits, you can:
+```ruby
+class SignupsController < ApplicationController
+  rate_limit to: 3, within: 2.seconds, name: "short-term", only: :create
+  rate_limit to: 10, within: 5.minutes, name: "long-term", only: :create
+end
+```
 
-- Safeguard sensitive endpoints and protect against unauthorized access.
-- Prevent abuse and misuse of your API by limiting the frequency of requests.
-- Improve overall system reliability and availability by reducing the risk of overload.
-- Enhance the user experience by ensuring fair usage and consistent performance.
+## # The cache store gotcha
 
->
-> ### 💡 Did You Know?
-> [Rails 8.0 integrates Brakeman for Vulnerability Checks](/rails-8/2024/02/14/rails-8-adds-brakeman-as-default-to-new-apps.html){:target="_blank"}
->
+The counters live in the cache, so the store you use decides whether the limit works:
+
+- **`:null_store`** (the development default unless you run `bin/rails dev:cache`) stores nothing, so the limit never triggers. This is why it "doesn't work" locally.
+- **`:memory_store`** keeps a separate count per process. With several Puma workers or servers, each one has its own counter, and the real limit becomes `to:` × the number of processes.
+- **Redis, Memcached or Solid Cache** are shared, so counts are accurate across processes.
+
+## # Do you still need rack-attack?
+
+`rate_limit` covers the common case: throttling specific controller actions. [rack-attack](https://github.com/rack/rack-attack){:target="_blank"} still makes sense when you need to block or throttle **before** a request reaches the Rails router (for example, bad IPs across the whole app), use allow and block lists, or apply rules to requests that don't hit a controller.
+
+{% include elements/post_cta.html text="Adopting new Rails defaults is easier on a current Rails version. I help SaaS teams upgrade production Rails apps to Rails 7.2 and Rails 8." %}
+
+## # Related
+
+- [Rails `allow_browser` and the 406 unsupported browser page](/rails-8/2024/02/09/rails-8-adds-allow-browser-to-control-browser-compatiblity.html)
+- [Brakeman is included by default in new Rails apps](/rails-8/2024/02/14/rails-8-adds-brakeman-as-default-to-new-apps.html)
+- [Solid Queue: an overview](/rails-8/2024/02/16/solid-queue-an-overview.html)

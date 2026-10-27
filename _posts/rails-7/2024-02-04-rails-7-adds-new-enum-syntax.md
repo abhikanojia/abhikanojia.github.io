@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Why Rails 7 Changed the Enum Syntax (and What It Means in Rails 8)"
+title: "Why Rails Changed the Enum Syntax (Rails 7 to Rails 8)"
 categories: "rails"
 description: "What a Rails enum is, why Rails 7 moved to enum :name, values, and the timeline: new syntax in 7.0, old syntax deprecated in 7.2 and removed in Rails 8.0."
 tags: rails rails-7 rails-8 enums
