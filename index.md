@@ -61,13 +61,13 @@ sitemap:
       <span class="service-num">03 — Debugging</span>
       <h3>Performance, Caching &amp; Sidekiq Debugging</h3>
       <p>Slow endpoints, ballooning Redis memory, stuck Sidekiq queues, cache stampedes. Investigation with profiling, logs, and metrics — then targeted fixes, not rewrites.</p>
-      <a href="/services/index.html" class="card-link">Learn more <i class="fa fa-arrow-right"></i></a>
+      <a href="/sidekiq-redis-consultant/" class="card-link">Learn more <i class="fa fa-arrow-right"></i></a>
     </div>
     <div class="service-card">
       <span class="service-num">04 — Ongoing</span>
       <h3>Fractional Rails Backend Support</h3>
       <p>Ongoing senior Rails capacity for teams without a dedicated backend lead. Code review, architecture input, on-call backup, and steady progress on the backlog you keep deprioritizing.</p>
-      <a href="/services/index.html" class="card-link">Learn more <i class="fa fa-arrow-right"></i></a>
+      <a href="/fractional-rails-developer/" class="card-link">Learn more <i class="fa fa-arrow-right"></i></a>
     </div>
   </div>
 </section>

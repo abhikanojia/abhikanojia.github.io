@@ -16,6 +16,8 @@ Primary contact: abhishek.kanojia3193@gmail.com
 
 - [Rails Upgrade Consultant](https://sparkrails.com/rails-upgrade-consultant/): Rails 6.x and 7.x upgrade planning and execution for legacy SaaS apps. Covers `new_framework_defaults` review, gem and dependency audit, config changes, ActiveStorage and image processing checks, Sidekiq/Redis compatibility, deployment risk, and rollback planning.
 - [Legacy Rails Maintenance](https://sparkrails.com/legacy-rails-maintenance/): Ongoing maintenance and stabilization for older production Rails apps. Bug fixes, production debugging, dependency updates, code review, performance work, Sidekiq and Redis support, and steady technical-backlog execution.
+- [Sidekiq & Redis Debugging Consultant](https://sparkrails.com/sidekiq-redis-consultant/): Production Sidekiq and Redis problems in Rails apps — stuck or retrying jobs, queue latency, duplicate jobs, Redis memory growth and eviction, connection pool exhaustion, Sidekiq upgrades, and Sidekiq vs Solid Queue decisions.
+- [Fractional Rails Backend Developer](https://sparkrails.com/fractional-rails-developer/): Part-time senior Rails backend support billed monthly — code review, bug fixes, production debugging, upgrades, Sidekiq/Redis work, architecture input, and backlog execution.
 - [All Rails Consulting Services](https://sparkrails.com/services/): Full overview of engagement types — Rails Upgrade Support, Production Debugging & App Rescue, Performance/Caching/Sidekiq, and Fractional Rails Backend Support. Engagement formats: one-time audit, focused project, monthly fractional support.
 
 ## Site
