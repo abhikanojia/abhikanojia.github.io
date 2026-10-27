@@ -1,22 +1,29 @@
 ---
 layout: post
-title: "Rails 7 Introduces a New Syntax for Enum"
+title: "Why Rails 7 Changed the Enum Syntax (and What It Means in Rails 8)"
 categories: "rails"
-description: "Rails 7 new introduces a new syntax to define enum, lets see what has changed since older versions of rails"
-tags: rails enums
+description: "What a Rails enum is, why Rails 7 moved to enum :name, values, and the timeline: new syntax in 7.0, old syntax deprecated in 7.2 and removed in Rails 8.0."
+tags: rails rails-7 rails-8 enums
+last_modified_at: 2026-10-27
 keywords:
-  - Rails 7 Enums Syntax, Ruby on Rails Tips
-  - Rail 7 new enum syntax, whats new in rails 7
+  - rails 7 new enum syntax
+  - why did rails change enum syntax
+  - whats new in rails 7 enum
+  - rails enum history
 ---
 
-Rails 7 introduces a new syntax for defining enum. Lets take a look what has changed.
+<div class="quick-answer" markdown="1">
+**Quick answer:** Rails 7.0 added `enum :status, [...]` because the old `enum status: [...]` packed enum definitions and options into the same Hash. Options needed awkward leading underscores (`_prefix:`) so Rails could tell them apart. The old form was deprecated in **Rails 7.2** and **removed in Rails 8.0**.
+</div>
 
 ## What is enum in Rails?
-Enum ( Enumeration ) is a datatype available in Rails, which can be used to map values to integral values in the database, which means it takes less space and provides the efficiency requires. It allows the flexiblity to query it by name, makes it even better candidate to use where you want to define multiple values of same attribute. For example, post status can be `draft` or `published`.
+An enum (enumeration) maps a set of names to values stored in the database, usually integers. Integers take less space than strings, and you still query and read values by name. It's a good fit for an attribute with a small, fixed set of values. For example, a post's status can be `draft` or `published`.
 
-## Old vs. New: A Quick Look
+For a practical walkthrough of the methods Rails generates, see the [Rails 8 enums quick guide](/rails/2024/02/01/rails-enum-quick-guide.html).
 
-In the old days, defining enum involved a key-value pair, but not anymore! Rails 7 separates enum names and values, making your code more straightforward:
+## What changed
+
+Rails 7 separates the enum name and its values:
 
 ```ruby
 # Before
@@ -24,44 +31,36 @@ enum status: [ :draft, :published, :archived ], _prefix: true, _scopes: false
 
 # After
 enum :status, [ :draft, :published, :archived ], prefix: true, scopes: false
-
 ```
 
-## Defining enum with hash syntax
-
-The changes in rails are seamlessly extends the use of hash syntax as well, lets take a look in folowing example.
+The same applies to the Hash syntax:
 
 ```ruby
-# Hash syntax
 enum :status, { draft: 0, published: 1, archived: 2 }, prefix: true, scopes: false
-
 ```
 
-## Why did they changed the enum syntax in Rails 7?
+## Why did they change the enum syntax in Rails 7?
 
-Based on the discussion on this [PR#41328](https://github.com/rails/rails/pull/41328), that is due to enum takes on hash argument only, which contains both enum definitions and reserved options. To avoid leading an underscore from reserved options as in `_prefix` for example. This new syntax was introduced.
+The discussion on [PR #41328](https://github.com/rails/rails/pull/41328){:target="_blank"} explains it:
 
-<br/>
+>
+> That is due to enum takes one hash argument only, which contains both
+> enum definitions and reserved options.
+> I propose new syntax for enum to avoid leading _ from reserved
+> options, by allowing enum(attr_name, ..., **options) more Attribute
+> API like syntax.
+
+In other words, `enum` took a single Hash. Any key could be either an enum name (`status:`) or an option (`_prefix:`), so options needed an underscore to avoid clashing with column names. The positional form, `enum(attr_name, values, **options)`, works like the Attributes API (`attribute :name, :type, **options`) and removes the ambiguity.
 
 ## Is the old enum syntax deprecated?
 
-The old way of defining an enum is not yet deprecated. Following way of defining is still valid as of Rails 7.1.3.
+Yes, as of Rails 7.2. This post originally said the old syntax was still valid, which was true up to Rails 7.1. The timeline is now:
 
-```ruby
-class Post < ApplicationRecord
-  enum status: [:draft, :published]
-end
-```
-<br/>
+- **Rails 7.0** — new positional syntax added; both forms work.
+- **Rails 7.1** — new options `validate:` and `instance_methods:`, which only work with the new syntax.
+- **Rails 7.2** — the keyword form prints `DEPRECATION WARNING: Defining enums with keyword arguments is deprecated and will be removed in Rails 8.0`.
+- **Rails 8.0** — the keyword form is removed.
 
-<mark>** Please note that the new `enum` validation options as mentioned in the</mark> [Article](/rails/2024/02/03/rails-7.1-enum-validation.html) <mark>will result in error if you try to use it with old syntax.</mark>
+If you still have old-style enums, here's [how to fix the deprecation warning](/rails-7/2024/02/13/rails-7-deprecated-enum-with-keywords-args.html). For every option in the new syntax, see the [Rails enum syntax cheat sheet](/rails/2024/02/04/rails-7-enum-syntax.html).
 
-```ruby
-class Post < ApplicationRecord
-  enum status: [:draft, :published], validate: true
-end
-
-post = Post.new
-#
-# => `raise_conflict_error`: You tried to define an enum named "status" on the model "Post", but this will generate a instance method "draft?", which is already defined by another enum. (ArgumentError)
-```
+{% include elements/post_cta.html text="Changes like this pile up when an app sits on an old Rails version. I help SaaS teams plan and ship Rails upgrades without stalling feature work." %}
